@@ -1,14 +1,9 @@
 import logo from "./logo.svg";
 import "./App.css";
-import {
-  Nav,
-  Navbar,
-  NavDropdown,
-  Form,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 import { Shop } from "react-bootstrap-icons";
+import Home from "./pages/Home";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -34,7 +29,7 @@ function App() {
           </Nav.Item>
         </Nav> */}
 
-        <Navbar bg="light" expand="lg">
+        <Navbar bg="success" expand="lg">
           <Navbar.Brand href="#">
             <Shop></Shop> Six Eleven
           </Navbar.Brand>
@@ -68,6 +63,10 @@ function App() {
           </Navbar.Collapse>
         </Navbar>
       </>
+
+      <Home></Home>
+      <Footer></Footer>
+
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
