@@ -1,5 +1,6 @@
 import React from "react";
-import { Carousel } from "react-bootstrap";
+import { Carousel, Container, Row, Col } from "react-bootstrap";
+import { Bag, ExclamationCircle } from "react-bootstrap-icons";
 
 function Home() {
   return (
@@ -8,7 +9,7 @@ function Home() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="holder.js/800x400?text=First slide&bg=f5f5f5"
+            src="/images/example1.webp"
             alt="First slide"
           />
           <Carousel.Caption>
@@ -19,7 +20,7 @@ function Home() {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="holder.js/800x400?text=Second slide&bg=eee"
+            src="/images/example2.jpeg"
             alt="Second slide"
           />
           <Carousel.Caption>
@@ -27,7 +28,7 @@ function Home() {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </Carousel.Caption>
         </Carousel.Item>
-        <Carousel.Item>
+        {/* <Carousel.Item>
           <img
             className="d-block w-100"
             src="holder.js/800x400?text=Third slide&bg=e5e5e5"
@@ -39,9 +40,28 @@ function Home() {
               Praesent commodo cursus magna, vel scelerisque nisl consectetur.
             </p>
           </Carousel.Caption>
-        </Carousel.Item>
+        </Carousel.Item> */}
       </Carousel>
       Weekly Deals
+      <Container>
+        <Row className="justify-content-md-center">
+          <Col>
+            <p>
+              <Bag></Bag>
+              <h1>Pick Up Options</h1>
+              You can choose the products online then choose a time for picking
+              products
+            </p>
+          </Col>
+          <Col>
+            <p>
+              <ExclamationCircle></ExclamationCircle>
+              <h1>Health & Safety Rules</h1>
+              Be careful, if you are sick, please wearing a mask
+            </p>
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }
