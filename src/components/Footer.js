@@ -1,10 +1,11 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import "./footer.css";
 
 function Footer() {
   return (
     <>
-      <Container>
+      <Container className="footer-container margin-top common-container">
         <Row className="justify-content-md-center">
           <Col>
             <p>

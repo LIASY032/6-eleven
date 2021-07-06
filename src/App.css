@@ -1,6 +1,20 @@
 .logo {
   display: inline-block;
 }
+.App {
+  color: rgb(101, 151, 27);
+  background-color: #f9fafa;
+  text-align: center;
+}
+
+.margin-top {
+  margin-top: 5vh;
+}
+
+.common-container {
+  padding: 5vh 5vw 5vh 5vw;
+  background-color: white;
+}
 
 /* .App {
   text-align: center;

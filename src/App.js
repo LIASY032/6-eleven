@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 import { Shop } from "react-bootstrap-icons";
@@ -29,7 +28,7 @@ function App() {
           </Nav.Item>
         </Nav> */}
 
-        <Navbar bg="success" expand="lg">
+        <Navbar bg="success" expand="lg" sticky="top">
           <Navbar.Brand href="#">
             <Shop></Shop> Six Eleven
           </Navbar.Brand>
