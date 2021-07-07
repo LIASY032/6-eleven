@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
+import { Fade } from "react-reveal";
 
 function Item() {
   const [count, setCount] = useState(1);
   return (
     <>
-      <Card style={{ width: "18rem" }} className="text-center margin-top">
+      <Card
+        style={{ width: "18vw", minWidth: "14rem" }}
+        className="text-center margin-top"
+      >
         <Card.Img
           variant="top"
           src="https://cdn.mos.cms.futurecdn.net/42E9as7NaTaAi4A6JcuFwG-1200-80.jpg"

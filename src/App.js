@@ -28,7 +28,7 @@ function App() {
           </Nav.Item>
         </Nav> */}
 
-        <Navbar bg="success" expand="lg" sticky="top">
+        <Navbar bg="success" expand="lg" sticky="top" variant="dark">
           <Navbar.Brand href="#">
             <Shop></Shop> Six Eleven
           </Navbar.Brand>
@@ -36,17 +36,17 @@ function App() {
           <Navbar.Collapse id="navbarScroll" className="justify-content-end">
             <Nav activeKey="/home">
               <Nav.Item>
-                <Nav.Link href="/home">Active</Nav.Link>
+                <Nav.Link href="/home">Home</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="link-1">Link</Nav.Link>
+                <Nav.Link eventKey="link-1">Shop</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="link-2">Link</Nav.Link>
+                <Nav.Link eventKey="link-2">About</Nav.Link>
               </Nav.Item>
               <Nav.Item>
                 <Nav.Link eventKey="disabled" disabled>
-                  Disabled
+                  Contect
                 </Nav.Link>
               </Nav.Item>
             </Nav>
