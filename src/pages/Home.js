@@ -52,7 +52,7 @@ function Home() {
       </Fade>
 
       <Flip left>
-        <Container>
+        <Container className="bottom-gap common-container">
           <h1>Weekly Deals</h1>
           <Carousel>
             <Carousel.Item>
@@ -74,7 +74,10 @@ function Home() {
         </Container>
       </Flip>
 
-      <Container className="margin-top common-container">
+      <Container
+        className="margin-top common-container"
+        style={{ backgroundColor: "white" }}
+      >
         <Fade bottom cascade={true}>
           <Row>
             <Col>

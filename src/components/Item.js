@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
-import { Fade } from "react-reveal";
 
 function Item() {
   const [count, setCount] = useState(1);

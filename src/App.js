@@ -1,8 +1,10 @@
 import "./App.css";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
-import { Shop } from "react-bootstrap-icons";
+import ShopPage from "./pages/ShopPage";
+import { Cart, Shop } from "react-bootstrap-icons";
 import Home from "./pages/Home";
 import Footer from "./components/Footer";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
   return (
@@ -28,42 +30,49 @@ function App() {
           </Nav.Item>
         </Nav> */}
 
-        <Navbar bg="success" expand="lg" sticky="top" variant="dark">
-          <Navbar.Brand href="#">
-            <Shop></Shop> Six Eleven
-          </Navbar.Brand>
-          <Navbar.Toggle aria-controls="navbarScroll" />
-          <Navbar.Collapse id="navbarScroll" className="justify-content-end">
-            <Nav activeKey="/home">
-              <Nav.Item>
-                <Nav.Link href="/home">Home</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="link-1">Shop</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="link-2">About</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link eventKey="disabled" disabled>
-                  Contect
-                </Nav.Link>
-              </Nav.Item>
-            </Nav>
-            <Form className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search"
-                className="mr-2"
-                aria-label="Search"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
-          </Navbar.Collapse>
-        </Navbar>
+        <Router>
+          <Navbar bg="success" expand="lg" sticky="top" variant="dark">
+            <Navbar.Brand href="#">
+              <Shop></Shop> Six Eleven
+            </Navbar.Brand>
+            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Collapse id="navbarScroll" className="justify-content-end">
+              <Nav activeKey="/home">
+                <Nav.Item>
+                  <Nav.Link href="/">Home</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link href="/shop">Shop</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="link-2">About</Nav.Link>
+                </Nav.Item>
+                <Nav.Item>
+                  <Nav.Link eventKey="disabled" disabled>
+                    Contact
+                  </Nav.Link>
+                </Nav.Item>
+              </Nav>
+              <Form className="d-flex">
+                <FormControl
+                  type="search"
+                  placeholder="Search"
+                  className="mr-2"
+                  aria-label="Search"
+                />
+                <Button variant="primary">Search</Button>
+              </Form>
+              <Cart></Cart>
+            </Navbar.Collapse>
+          </Navbar>
+
+          <Switch>
+            <Route path="/" exact component={Home}></Route>
+            <Route path="/shop" component={ShopPage}></Route>
+          </Switch>
+        </Router>
       </>
 
-      <Home></Home>
       <Footer></Footer>
 
       {/* <header className="App-header">

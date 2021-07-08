@@ -13,12 +13,17 @@
 
 .common-container {
   padding: 5vh 5vw 5vh 5vw;
-  background-color: white;
+ 
 }
 
 .right-gap {
   /* border-right: rgb(101, 151, 27); */
   border-right-style: solid;
+}
+
+
+.bottom-gap{
+  border-bottom-style: solid;
 }
 
 /* .App {
