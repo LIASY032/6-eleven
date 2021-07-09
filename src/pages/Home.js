@@ -2,7 +2,8 @@ import React from "react";
 import { Carousel, Container, Row, Col } from "react-bootstrap";
 import { Bag, ExclamationCircle } from "react-bootstrap-icons";
 import Item from "../components/Item";
-import { Fade, Flip } from "react-reveal";
+import { Fade } from "react-reveal";
+import WeeklyDeal from "../components/WeeklyDeal";
 
 function Home() {
   return (
@@ -15,6 +16,7 @@ function Home() {
                 className="d-block w-100"
                 src="/images/example1.webp"
                 alt="First slide"
+                style={{ height: "70vh" }}
               />
               <Carousel.Caption>
                 <h5>First slide label</h5>
@@ -28,6 +30,7 @@ function Home() {
                 className="d-block w-100"
                 src="/images/example2.jpeg"
                 alt="Second slide"
+                style={{ height: "70vh" }}
               />
               <Carousel.Caption>
                 <h5>Second slide label</h5>
@@ -51,28 +54,7 @@ function Home() {
         </Container>
       </Fade>
 
-      <Flip left>
-        <Container className="bottom-gap common-container">
-          <h1>Weekly Deals</h1>
-          <Carousel>
-            <Carousel.Item>
-              <Item></Item>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Item></Item>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Item></Item>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Item></Item>
-            </Carousel.Item>
-            <Carousel.Item>
-              <Item></Item>
-            </Carousel.Item>
-          </Carousel>
-        </Container>
-      </Flip>
+      <WeeklyDeal></WeeklyDeal>
 
       <Container
         className="margin-top common-container"
