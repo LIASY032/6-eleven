@@ -35,26 +35,26 @@ function ThreeDCarousel() {
   ].map((slide, index) => {
     return {
       ...slide,
-      onClick: () => {
-        console.log(index);
+      onClick: ( ) => {
+        setSilderState({ ...slideState, goToSlide: index });
       },
     };
   });
 
-  useEffect(() => {
-    setTimeout(
-      () =>
-        setSilderState({ ...slideState, goToSlide: slideState.goToSlide + 1 }),
-      3000
-    );
-  }, [slideState]);
+//   useEffect(() => {
+//     setTimeout(
+//       () =>
+//         setSilderState({ ...slideState, goToSlide: slideState.goToSlide + 1 }),
+//       3000
+//     );
+//   }, [slideState]);
 
   return (
-    <div style={{ width: "25vw", height: "40vh", margin: "0 auto" }}>
+    <div style={{ width: "80vw", height: "50vh", margin: "0 auto" }}>
       <Carousel
         slides={slides}
         goToSlide={slideState.goToSlide}
-        offsetRadius={8}
+        offsetRadius={2}
         showNavigation={true}
         animationConfig={slideState.config}
       />

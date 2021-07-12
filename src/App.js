@@ -1,4 +1,5 @@
 import "./App.css";
+import React, {useState} from "react";
 import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
 import ShopPage from "./pages/ShopPage";
 import { Cart, Shop } from "react-bootstrap-icons";
@@ -7,32 +8,16 @@ import Footer from "./components/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 function App() {
+  const [cart, setCart] = useState(0);
+
+  
   return (
     <div className="App">
       <>
-        {/* <div className="logo">
-          <Shop></Shop> Six Eleven
-        </div> */}
-        {/* <Nav className="justify-content-end" activeKey="/home">
-          <Nav.Item>
-            <Nav.Link href="/home">Active</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="link-1">Link</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="link-2">Link</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link eventKey="disabled" disabled>
-              Disabled
-            </Nav.Link>
-          </Nav.Item>
-        </Nav> */}
-
+       
         <Router>
           <Navbar bg="success" expand="lg" sticky="top" variant="dark">
-            <Navbar.Brand href="#">
+            <Navbar.Brand href="/">
               <Shop></Shop> Six Eleven
             </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarScroll" />
@@ -45,10 +30,10 @@ function App() {
                   <Nav.Link href="/shop">Shop</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="link-2">About</Nav.Link>
+                  <Nav.Link href="/about">About</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link eventKey="disabled" disabled>
+                  <Nav.Link href="/contace">
                     Contact
                   </Nav.Link>
                 </Nav.Item>
@@ -62,8 +47,9 @@ function App() {
                 />
                 <Button variant="primary">Search</Button>
               </Form>
-              <Cart></Cart>
+            <Nav.Item> <Nav.Link href="/cart"> <Cart></Cart>{cart}</Nav.Link> </Nav.Item>
             </Navbar.Collapse>
+           
           </Navbar>
 
           <Switch>
@@ -75,20 +61,7 @@ function App() {
 
       <Footer></Footer>
 
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
+     
     </div>
   );
 }

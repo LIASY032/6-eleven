@@ -27,6 +27,10 @@
   border-bottom-style: solid;
 }
 
+.extra-padding-bottom{
+  padding-bottom: 10vh;
+}
+
 .padding-topAnddown{
   padding-top: 5vh ;
   padding-bottom: 2vh
