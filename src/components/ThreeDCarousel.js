@@ -7,7 +7,7 @@ import Item from "./Item";
 function ThreeDCarousel() {
   const [slideState, setSilderState] = useState({
     goToSlide: 0,
-    offsetRadius: 8,
+    offsetRadius: 2,
     showNavigation: true,
     config: config.gentle,
   });
@@ -54,8 +54,8 @@ function ThreeDCarousel() {
       <Carousel
         slides={slides}
         goToSlide={slideState.goToSlide}
-        offsetRadius={slideState.offsetRadius}
-        showNavigation={false}
+        offsetRadius={8}
+        showNavigation={true}
         animationConfig={slideState.config}
       />
     </div>
