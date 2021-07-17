@@ -11,9 +11,7 @@ function WeeklyDeal() {
           <Row>
             <h1>Weekly Deals</h1>
           </Row>
-          <Row>
-            <ThreeDCarousel></ThreeDCarousel>
-          </Row>
+          <Row>updating</Row>
         </Container>
       </Flip>
     </>
