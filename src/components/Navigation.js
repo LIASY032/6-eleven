@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { Nav, Navbar, Form, FormControl, Button } from "react-bootstrap";
-import { Cart, Shop } from "react-bootstrap-icons";
+import {
+  Nav,
+  Navbar,
+  Form,
+  FormControl,
+  Button,
+  InputGroup,
+} from "react-bootstrap";
+import { Cart, PersonCircle, Search, Shop } from "react-bootstrap-icons";
 import { useIsLogin } from "../contexts/LoginContext";
-import Logging from "./Logging";
+
 function Navigation() {
   const [cart, setCart] = useState(0);
   const { setIsChange } = useIsLogin();
@@ -10,7 +17,7 @@ function Navigation() {
     <>
       <Navbar bg="success" expand="lg" sticky="top" variant="dark">
         <Navbar.Brand href="/">
-          <Shop></Shop> Six Eleven
+          <Shop size={30}></Shop> Six Eleven
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarScroll" />
         <Navbar.Collapse id="navbarScroll" className="justify-content-end">
@@ -29,13 +36,17 @@ function Navigation() {
             </Nav.Item>
           </Nav>
           <Form className="d-flex">
-            <FormControl
-              type="search"
-              placeholder="Search"
-              className="mr-2"
-              aria-label="Search"
-            />
-            <Button variant="primary">Search</Button>
+            <InputGroup>
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="mr-2"
+                aria-label="Search"
+              />
+              <InputGroup.Text>
+                <Search></Search>
+              </InputGroup.Text>
+            </InputGroup>
           </Form>
           <Nav.Item>
             {" "}
@@ -50,7 +61,7 @@ function Navigation() {
               setIsChange(1);
             }}
           >
-            Login
+            <PersonCircle size={20}></PersonCircle> Login in
           </Button>
         </Navbar.Collapse>
       </Navbar>
