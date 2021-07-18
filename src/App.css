@@ -36,6 +36,32 @@
   padding-bottom: 2vh
 }
 
+/* products */
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.products li {
+  
+  padding: 1rem;
+}
+
+
+/* MyButton */
+
+.my-button{
+  width: 100%;
+   display: flex;
+   justify-content: space-between;
+   padding: 1rem;
+}
+
 
 /* .App {
   text-align: center;

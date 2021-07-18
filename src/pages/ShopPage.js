@@ -1,8 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { Fade } from "react-reveal";
 import Filter from "../components/Filter";
 import Item from "../components/Item";
-import Sort from "../components/Sort"
+import Sort from "../components/Sort";
+import data from "../data.json";
 
 function ShopPage() {
   return (
@@ -13,12 +15,23 @@ function ShopPage() {
         </Row>
         <Row>
           <Col xs={3}>
-           
             <Filter></Filter>
           </Col>
           <Col>
-          <Sort/>
-            <Item></Item>
+            <Sort />
+            <Fade bottom cascade>
+              <ul className="products">
+                {data.items.map((item, index) => (
+                  <li key={index}>
+                    <Item
+                      price={item.price}
+                      image={item.image}
+                      title={item.title}
+                    ></Item>
+                  </li>
+                ))}
+              </ul>
+            </Fade>
           </Col>
         </Row>
       </Container>

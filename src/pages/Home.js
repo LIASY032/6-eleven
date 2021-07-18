@@ -43,7 +43,7 @@ function Home() {
 
       <WeeklyDeal></WeeklyDeal>
 
-      <Container
+      {/* <Container
         className="margin-top common-container"
         style={{ backgroundColor: "white" }}
       >
@@ -63,7 +63,7 @@ function Home() {
             </Col>
           </Row>
         </Fade>
-      </Container>
+      </Container> */}
 
       <Container className="margin-top">
         <Row className="justify-content-md-center">

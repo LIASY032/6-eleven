@@ -1,6 +1,7 @@
 {
     "items": [
         {
+            "id": 1,
             "image": "images/banana.webp",
             "title": "banana",
             "price": 3,
@@ -8,6 +9,7 @@
             "collection": "produce"
         },
          {
+              "id": 2,
             "image": "images/bread.webp",
             "title": "bread",
             "price": 1.99,
@@ -15,73 +17,74 @@
             "collection": "bread"
         },
         {
+             "id": 3,
             "image": "images/cauliflower.webp",
             "title": "cauliflower",
             "price": 2,
             "info": "This is a cauliflower",
             "collection": "produce"
-        },{
+        },{ "id": 4,
             "image": "images/cheese.webp",
             "title": "cheese",
             "price": 5,
             "info": "This is a cheese",
             "collection": "dairy"
-        }, {
+        }, { "id": 5,
             "image": "images/cucumber.webp",
             "title": "cucumber",
             "price": 1.5,
             "info": "This is a cucumber",
             "collection": "produce"
-        },{
+        },{ "id": 6,
             "image": "images/egg.webp",
             "title": "egg",
             "price": 1.99,
             "info": "This is a box of eggs",
             "collection": "dairy"
         },
-        {
+        { "id": 7,
             "image": "images/macaroni.webp",
             "title": "macaroni",
             "price": 3,
             "info": "This is a macaroni",
             "collection": "bread"
-        },{
+        },{ "id": 8,
             "image": "images/milk.webp",
             "title": "milk",
             "price": 2.99,
             "info": "This is a milk",
             "collection": "dairy"
-        },{
+        },{ "id": 9,
             "image": "images/pear.webp",
             "title": "pear",
             "price": 6,
             "info": "This is a pear",
             "collection": "produce"
-        },{
+        },{ "id": 10,
             "image": "images/potato.webp",
             "title": "potato",
             "price": 3.99,
             "info": "This is a potato",
             "collection": "produce"
-        },{
+        },{ "id": 11,
             "image": "images/toiletpaper.webp",
             "title": "toilet paper",
             "price": 2.5,
             "info": "This is a toiletpaper",
             "collection": "goods"
-        },{
+        },{ "id": 12,
             "image": "images/tomato.webp",
             "title": "tomato",
             "price": 2.99,
             "info": "This is a tomato",
             "collection": "produce"
-        },{
+        },{ "id": 13,
             "image": "images/vege.webp",
             "title": "Vegetable",
             "price": 2.99,
             "info": "I don't know what kinds of this vegetable",
             "collection": "produce"
-        }, {
+        }, { "id": 14,
             "image": "images/wash.webp",
             "title": "wash",
             "price": 10.99,
