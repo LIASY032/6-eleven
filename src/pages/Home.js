@@ -1,7 +1,7 @@
 import React from "react";
 import { Carousel, Container, Row, Col } from "react-bootstrap";
 import { Bag, ExclamationCircle } from "react-bootstrap-icons";
-import Item from "../components/Item";
+
 import { Fade } from "react-reveal";
 import WeeklyDeal from "../components/WeeklyDeal";
 
