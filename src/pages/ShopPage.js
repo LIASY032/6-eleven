@@ -30,19 +30,15 @@ function ShopPage() {
               <ul className="products">
                 {data.items.map((item, index) => (
                   <li key={index}>
-                    <Item
-                      price={item.price}
-                      image={item.image}
-                      title={item.title}
-                    ></Item>
+                    <Item item={item}></Item>
                   </li>
                 ))}
               </ul>
             </Fade>
-            <ItemDetails
+            {/* <ItemDetails
               isShow={isShow}
               handleClose={handleClose}
-            ></ItemDetails>
+            ></ItemDetails> */}
           </Col>
         </Row>
       </Container>

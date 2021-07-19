@@ -10,8 +10,11 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import LoginContext from "./contexts/LoginContext";
 import Logging from "./components/Logging";
+import { useItemDetails } from "./contexts/ItemDetailsContext";
+import ItemDetails from "./components/ItemDetails";
 
 function App() {
+  const { isOpenModal, handleCloseModal } = useItemDetails();
   return (
     <div className="App">
       <LoginContext>
@@ -23,9 +26,13 @@ function App() {
             <Route path="/shop" component={ShopPage}></Route>
           </Switch>
         </Router>
+        <ItemDetails
+          isShow={isOpenModal.isOpen}
+          handleClose={handleCloseModal}
+          item={isOpenModal.item}
+        ></ItemDetails>
+        <Footer></Footer>
       </LoginContext>
-
-      <Footer></Footer>
     </div>
   );
 }
