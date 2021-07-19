@@ -1,19 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Fade } from "react-reveal";
 import Filter from "../components/Filter";
 import Item from "../components/Item";
-import ItemDetails from "../components/ItemDetails";
+
 import Sort from "../components/Sort";
 import data from "../data.json";
 
 function ShopPage() {
-  const [isShow, setIsShow] = useState(true);
-
-  function handleClose() {
-    setIsShow(!isShow);
-  }
-
   return (
     <>
       <Container>
@@ -35,10 +29,6 @@ function ShopPage() {
                 ))}
               </ul>
             </Fade>
-            {/* <ItemDetails
-              isShow={isShow}
-              handleClose={handleClose}
-            ></ItemDetails> */}
           </Col>
         </Row>
       </Container>

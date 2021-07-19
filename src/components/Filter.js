@@ -65,6 +65,11 @@ function Filter() {
                 setCollectionValue("All");
                 setPrice(100);
               }}
+              style={{
+                width: "100%",
+                backgroundColor: "#385F4B",
+                borderColor: "#385F4B",
+              }}
             >
               Clear filters{" "}
             </Button>

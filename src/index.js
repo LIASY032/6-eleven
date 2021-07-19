@@ -4,10 +4,13 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import ItemDetailsContext from "./contexts/ItemDetailsContext";
+import CartContainerContext from "./contexts/CartContainerContext";
 
 ReactDOM.render(
   <ItemDetailsContext>
-    <App />
+    <CartContainerContext>
+      <App />
+    </CartContainerContext>
   </ItemDetailsContext>,
   document.getElementById("root")
 );

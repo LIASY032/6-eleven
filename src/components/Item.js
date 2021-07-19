@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
+import { useCart } from "../contexts/CartContainerContext";
 import { useItemDetails } from "../contexts/ItemDetailsContext";
 
 function Item({ item }) {
   const [count, setCount] = useState(1);
   const { handleOpenModal } = useItemDetails();
+  const { addItem } = useCart();
   return (
     <>
       <Card
@@ -52,7 +54,16 @@ function Item({ item }) {
             </InputGroup.Text>
           </InputGroup>
 
-          <Button variant="primary">Add to Cart</Button>
+          <Button
+            style={{ backgroundColor: "#385F4B", width: "100%" }}
+            onClick={function () {
+              if (item !== undefined || item != null) {
+                addItem(item);
+              }
+            }}
+          >
+            Add to Cart
+          </Button>
         </Card.Body>
       </Card>
     </>

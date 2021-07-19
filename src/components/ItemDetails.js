@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import { Button, Modal } from "react-bootstrap";
+import { useCart } from "../contexts/CartContainerContext";
 import MyButton from "./MyButton";
 
 function ItemDetails({ isShow, handleClose, item }) {
   const [showContent, setShowContent] = useState(false);
   const [showContent1, setShowContent1] = useState(false);
   const [showContent2, setShowContent2] = useState(false);
+  const { addItem } = useCart();
   return (
     <>
       <Modal show={isShow} onHide={handleClose} dialogClassName="modal-xl">
@@ -42,6 +44,7 @@ function ItemDetails({ isShow, handleClose, item }) {
                   backgroundColor: "#385F4B",
                   borderColor: "#385F4B",
                 }}
+                onClick={() => addItem(item)}
               >
                 Buy Now
               </Button>
@@ -66,7 +69,7 @@ function ItemDetails({ isShow, handleClose, item }) {
                 can buy with confidence.
               </MyButton>
               <MyButton
-                buttonContent="SHPPING INFO"
+                buttonContent="SHIPPING INFO"
                 showContent={showContent2}
                 setShowContent={setShowContent2}
                 showUnderline={false}

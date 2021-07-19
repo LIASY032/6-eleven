@@ -1,10 +1,8 @@
-import React, { useRef } from "react";
+import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import { useIsLogin } from "../contexts/LoginContext";
 
 function Logging() {
-  const idRef = useRef();
-
   const { islogin, setIsChange } = useIsLogin();
   function handleClose() {
     setIsChange(0);

@@ -7,11 +7,12 @@ import {
   Button,
   InputGroup,
 } from "react-bootstrap";
-import { Cart, PersonCircle, Search, Shop } from "react-bootstrap-icons";
+import { CartFill, PersonCircle, Search, Shop } from "react-bootstrap-icons";
+import { useCart } from "../contexts/CartContainerContext";
 import { useIsLogin } from "../contexts/LoginContext";
 
 function Navigation() {
-  const [cart, setCart] = useState(0);
+  const { carts } = useCart();
   const { setIsChange } = useIsLogin();
   return (
     <>
@@ -49,12 +50,14 @@ function Navigation() {
             </InputGroup>
           </Form>
           <Nav.Item>
-            {" "}
             <Nav.Link href="/cart">
-              {" "}
-              <Cart size={30} style={{ color: "yellow" }}></Cart>
-              {cart}
-            </Nav.Link>{" "}
+              <div className="cart-logo-container">
+                <div className="cart-logo-label">
+                  {carts.length > 10 ? "9+" : carts.length}
+                </div>
+                <CartFill size={30} style={{ color: "#FF9900" }}></CartFill>
+              </div>
+            </Nav.Link>
           </Nav.Item>
           <Button
             onClick={function () {
