@@ -6,7 +6,7 @@ import { useItemDetails } from "../contexts/ItemDetailsContext";
 function Item({ item }) {
   const [count, setCount] = useState(1);
   const { handleOpenModal } = useItemDetails();
-  const { addItem } = useCart();
+  const { addItem, addAmount, deleteAmount } = useCart();
   return (
     <>
       <Card
@@ -27,6 +27,7 @@ function Item({ item }) {
               <Button
                 onClick={() => {
                   if (count > 1) {
+                    deleteAmount(item.id, count);
                     setCount((count) => count - 1);
                   }
                 }}
@@ -46,6 +47,7 @@ function Item({ item }) {
               <Button
                 onClick={() => {
                   setCount((count) => count + 1);
+                  addAmount(count);
                 }}
                 variant="outline-secondary"
               >
@@ -58,7 +60,7 @@ function Item({ item }) {
             style={{ backgroundColor: "#385F4B", width: "100%" }}
             onClick={function () {
               if (item !== undefined || item != null) {
-                addItem(item);
+                addItem(item, count);
               }
             }}
           >

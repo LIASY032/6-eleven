@@ -7,7 +7,7 @@ function ItemDetails({ isShow, handleClose, item }) {
   const [showContent, setShowContent] = useState(false);
   const [showContent1, setShowContent1] = useState(false);
   const [showContent2, setShowContent2] = useState(false);
-  const { addItem } = useCart();
+  const { addItem, removeItem } = useCart();
   return (
     <>
       <Modal show={isShow} onHide={handleClose} dialogClassName="modal-xl">
@@ -34,6 +34,11 @@ function ItemDetails({ isShow, handleClose, item }) {
                   backgroundColor: "#385F4B",
                   borderColor: "#385F4B",
                 }}
+                onClick={function () {
+                  if (item !== undefined || item != null) {
+                    addItem(item);
+                  }
+                }}
               >
                 Add to Cart
               </Button>
@@ -44,7 +49,9 @@ function ItemDetails({ isShow, handleClose, item }) {
                   backgroundColor: "#385F4B",
                   borderColor: "#385F4B",
                 }}
-                onClick={() => addItem(item)}
+                onClick={function () {
+                  removeItem(item.id);
+                }}
               >
                 Buy Now
               </Button>
