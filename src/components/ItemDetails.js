@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Modal } from "react-bootstrap";
+import { Button, FormControl, Modal } from "react-bootstrap";
 import { useCart } from "../contexts/CartContainerContext";
 import MyButton from "./MyButton";
 
@@ -26,7 +26,11 @@ function ItemDetails({ isShow, handleClose, item }) {
             <li style={{ width: "50%", padding: "5rem" }}>
               <p>${item.price}</p>
               <p>Quantity</p>
-              <input className="mb-3"></input>
+              <FormControl
+                className="mb-3"
+                style={{ width: "100%" }}
+              ></FormControl>
+
               <Button
                 className="mb-3"
                 style={{

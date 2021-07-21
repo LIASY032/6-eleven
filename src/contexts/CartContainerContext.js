@@ -38,41 +38,19 @@ function CartContainerContext({ children }) {
     setCarts(newCarts);
   }
 
-  function addAmount(id, number) {
-    // const newCarts = carts.slice().forEach((c) => {
-    //   if (c.id === id) {
-    //     c.count = c.count + number;
-    //   }
-    // });
-
-    // setCarts(newCarts);
-    const isExist = checkExist(id);
-    if (isExist) {
-      const newCarts = carts.slice().forEach((i) => {
-        if (i.id === id) {
-          id.count = id.count - number;
-        }
-      });
-      setCarts(newCarts);
-    }
-  }
-
-  function deleteAmount(id, number) {
-    const isExist = checkExist(id);
-    if (isExist) {
-      const newCarts = carts.slice();
-      for (var i in carts) {
-        if (i.id === id) {
-          i.count = i.count + number;
-        }
+  function setAmount(item, number) {
+    const newCarts = carts.slice();
+    newCarts.forEach((x) => {
+      if (x.id === item.id) {
+        x.count = number;
       }
-      setCarts(newCarts);
-    }
+    });
+    setCarts(newCarts);
   }
 
   return (
     <CartContainerProvider.Provider
-      value={{ removeItem, addItem, carts, addAmount, deleteAmount }}
+      value={{ removeItem, addItem, carts, setAmount }}
     >
       {children}
     </CartContainerProvider.Provider>

@@ -10,6 +10,7 @@ function MyButton({
   return (
     <div
       style={{
+        width: "100%",
         padding: "0.5rem",
         borderBottomStyle: showUnderline ? "solid" : "none",
       }}

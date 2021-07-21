@@ -6,7 +6,7 @@ import { useItemDetails } from "../contexts/ItemDetailsContext";
 function Item({ item }) {
   const [count, setCount] = useState(1);
   const { handleOpenModal } = useItemDetails();
-  const { addItem, addAmount, deleteAmount } = useCart();
+  const { addItem, setAmount } = useCart();
   return (
     <>
       <Card
@@ -27,8 +27,8 @@ function Item({ item }) {
               <Button
                 onClick={() => {
                   if (count > 1) {
-                    deleteAmount(item.id, count);
                     setCount((count) => count - 1);
+                    setAmount(item, count - 1);
                   }
                 }}
                 variant="outline-secondary"
@@ -40,14 +40,18 @@ function Item({ item }) {
               aria-label="Amount (to the nearest dollar)"
               value={count}
               onChange={() => {
-                setCount(count);
+                if (count > 0) {
+                  setCount(count);
+                  setAmount(item, count);
+                }
               }}
             />
             <InputGroup.Text>
               <Button
                 onClick={() => {
                   setCount((count) => count + 1);
-                  addAmount(count);
+
+                  setAmount(item, count + 1);
                 }}
                 variant="outline-secondary"
               >
