@@ -4,14 +4,14 @@ import React from "react";
 import ShopPage from "./pages/ShopPage";
 
 import Home from "./pages/Home";
-import Footer from "./components/Footer";
+import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Navigation from "./components/Navigation";
+import Navigation from "./components/Navigation/Navigation";
 import LoginContext from "./contexts/LoginContext";
-import Logging from "./components/Logging";
+import Logging from "./components/Modal/Logging";
 import { useItemDetails } from "./contexts/ItemDetailsContext";
-import ItemDetails from "./components/ItemDetails";
+import ItemDetails from "./components/Modal/ItemDetails";
 
 function App() {
   const { isOpenModal, handleCloseModal } = useItemDetails();

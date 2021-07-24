@@ -9,8 +9,8 @@ import {
 } from "react-bootstrap";
 import { PersonCircle, Search, Shop } from "react-bootstrap-icons";
 
-import { useIsLogin } from "../contexts/LoginContext";
-import ShoppingCartLogo from "./ShoppingCartLogo";
+import { useIsLogin } from "../../contexts/LoginContext";
+import ShoppingCartLogo from "../assets/ShoppingCartLogo";
 
 function Navigation() {
   const { setIsChange } = useIsLogin();

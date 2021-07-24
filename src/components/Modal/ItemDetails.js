@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Button, FormControl, Modal } from "react-bootstrap";
-import { useCart } from "../contexts/CartContainerContext";
-import MyButton from "./MyButton";
+import { useCart } from "../../contexts/CartContainerContext";
+import BootstrapButton from "../MyButton/BootstrapButton";
+import MyButton from "../MyButton/MyButton";
 
 function ItemDetails({ isShow, handleClose, item }) {
   const [showContent, setShowContent] = useState(false);
@@ -12,7 +13,7 @@ function ItemDetails({ isShow, handleClose, item }) {
     <>
       <Modal show={isShow} onHide={handleClose} dialogClassName="modal-xl">
         <Modal.Header closeButton>
-          <Modal.Title>{item.title.toUpperCase()}</Modal.Title>
+          {/* <Modal.Title>{item.title.toUpperCase()}</Modal.Title> */}
         </Modal.Header>
         <Modal.Body>
           <ul className="products" style={{ alignItems: "flex-start" }}>
@@ -31,13 +32,7 @@ function ItemDetails({ isShow, handleClose, item }) {
                 style={{ width: "100%" }}
               ></FormControl>
 
-              <Button
-                className="mb-3"
-                style={{
-                  width: "100%",
-                  backgroundColor: "#385F4B",
-                  borderColor: "#385F4B",
-                }}
+              <BootstrapButton
                 onClick={function () {
                   if (item !== undefined || item != null) {
                     addItem(item);
@@ -45,7 +40,18 @@ function ItemDetails({ isShow, handleClose, item }) {
                 }}
               >
                 Add to Cart
-              </Button>
+              </BootstrapButton>
+              {/* <Button
+                className="mb-3"
+                style={{
+                  width: "100%",
+                  backgroundColor: "#385F4B",
+                  borderColor: "#385F4B",
+                }}
+                onClick={}
+              >
+               
+              </Button> */}
               <Button
                 className="mb-3"
                 style={{
@@ -60,36 +66,25 @@ function ItemDetails({ isShow, handleClose, item }) {
                 Buy Now
               </Button>
               <MyButton
-                buttonContent="PRODUCT INFO"
                 showContent={showContent}
                 setShowContent={setShowContent}
                 showUnderline={true}
               >
-                {item.info}
+                PRODUCT INFO
               </MyButton>
               <MyButton
-                buttonContent="REFUND POLICY"
                 showContent={showContent1}
                 setShowContent={setShowContent1}
                 showUnderline={true}
               >
-                I’m a Refund policy. I’m a great place to let your customers
-                know what to do in case they are dissatisfied with their
-                purchase. Having a straightforward refund or exchange policy is
-                a great way to build trust and reassure your customers that they
-                can buy with confidence.
+                REFUND POLICY
               </MyButton>
               <MyButton
-                buttonContent="SHIPPING INFO"
                 showContent={showContent2}
                 setShowContent={setShowContent2}
                 showUnderline={false}
               >
-                I'm a shipping policy. I'm a great place to add more information
-                about your shipping methods, packaging and cost. Providing
-                straightforward information about your shipping policy is a
-                great way to build trust and reassure your customers that they
-                can buy from you with confidence.
+                SHIPPING INFO
               </MyButton>
             </li>
           </ul>

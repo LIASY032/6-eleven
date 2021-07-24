@@ -1,10 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Fade } from "react-reveal";
-import Filter from "../components/Filter";
-import Item from "../components/Item";
+import Filter from "../statics/Filter";
+import Item from "../components/Item/Item";
 
-import Sort from "../components/Sort";
+import Sort from "../components/Filter/Sort";
 import data from "../data.json";
 
 function ShopPage() {

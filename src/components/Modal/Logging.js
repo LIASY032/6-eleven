@@ -1,6 +1,6 @@
 import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
-import { useIsLogin } from "../contexts/LoginContext";
+import { useIsLogin } from "../../contexts/LoginContext";
 
 function Logging() {
   const { islogin, setIsChange } = useIsLogin();

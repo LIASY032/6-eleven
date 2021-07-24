@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import {} from "react-bootstrap";
 import { Container, Row, Button } from "react-bootstrap";
-import MyButton from "./MyButton";
+import MyButton from "../components/MyButton/MyButton";
+import Selector from "../components/Filter/Selector";
 
 function Filter() {
   const [isFilter, setIsFilter] = useState(false);
-  const [collectionValue, setCollectionValue] = useState("All");
+  const [collectionValue, setCollectionValue] = useState(0);
   const [price, setPrice] = useState(100);
   const [showContent, setShowContent] = useState(false);
 
+  const sortingList = ["All", "Produce", "daily", "bread", "goods"];
+
+  function sortOnChange(e) {
+    setCollectionValue(e.target.value);
+  }
   return (
     <>
       <Container>
@@ -17,34 +23,24 @@ function Filter() {
         </Row>
         <Row>
           <MyButton
-            buttonContent="Collection"
             showContent={showContent}
             setShowContent={setShowContent}
             showUnderline={true}
           >
-            <select
-              value={collectionValue}
-              onChange={function (e) {
-                setCollectionValue(e.target.value);
-                setIsFilter(true);
-              }}
-            >
-              <option value="All">All</option>
-              <option value="produce">Produce</option>
-              <option value="dairy">Dairy & Eggs</option>
-              <option value="bread">Bread & Grains</option>
-              <option value="goods">Household Goods</option>
-            </select>
+            Collection
+            {/* <Selector value={collectionValue} onChange={sortOnChange}>
+              {sortingList}
+            </Selector> */}
           </MyButton>
         </Row>
         <Row>
           <MyButton
-            buttonContent="Price"
             showContent={showContent}
             setShowContent={setShowContent}
             showUnderline={true}
           >
-            <input
+            Price
+            {/* <input
               type="range"
               min="1"
               max="100"
@@ -52,11 +48,11 @@ function Filter() {
               onChange={function (e) {
                 setPrice(e.target.value);
                 setIsFilter(true);
-              }}
-            />
-            <p>${price}</p>
+              }} */}
+            {/* /> */}
           </MyButton>
         </Row>
+
         <Row className="padding-topAnddown">
           {isFilter ? (
             <Button

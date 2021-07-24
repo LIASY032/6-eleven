@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
-import { useCart } from "../contexts/CartContainerContext";
-import { useItemDetails } from "../contexts/ItemDetailsContext";
+import { useCart } from "../../contexts/CartContainerContext";
+import { useItemDetails } from "../../contexts/ItemDetailsContext";
 
 function Item({ item }) {
   const [count, setCount] = useState(1);

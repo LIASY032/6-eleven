@@ -1,7 +1,7 @@
 import React from "react";
 import { OverlayTrigger, Popover } from "react-bootstrap";
 import { CartFill } from "react-bootstrap-icons";
-import { useCart } from "../contexts/CartContainerContext";
+import { useCart } from "../../contexts/CartContainerContext";
 import { Fade } from "react-reveal";
 
 function ShoppingCartLogo() {

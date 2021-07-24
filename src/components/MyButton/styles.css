@@ -1,0 +1,40 @@
+
+
+/* MyButton */
+
+.my-button{
+  font-size: 1.2rem;
+  width: 100%;
+   display: flex;
+   justify-content: space-between;
+   padding: 1rem;
+   /* min-width: fit-content; */
+   border: none;
+   outline: inherit;
+   background: inherit;
+
+
+}
+
+.padding-underline{
+    padding-bottom: 2rem;
+    border-bottom-style: solid;
+}
+.my-button span{
+display: block;
+  
+}
+
+
+/* BootstrapButton */
+
+.bootstrapButton{
+
+    background-color: #385F4B;
+    width: 100%;
+}
+
+.bootstrapButton:hover{
+     background-color: #385F4B;
+     opacity: 0.5;
+}
