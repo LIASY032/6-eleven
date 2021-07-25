@@ -3,15 +3,12 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import ItemDetailsContext from "./contexts/ItemDetailsContext";
-import CartContainerContext from "./contexts/CartContainerContext";
+import AllContexts from "./contexts";
 
 ReactDOM.render(
-  <ItemDetailsContext>
-    <CartContainerContext>
-      <App />
-    </CartContainerContext>
-  </ItemDetailsContext>,
+  <AllContexts>
+    <App />
+  </AllContexts>,
   document.getElementById("root")
 );
 
