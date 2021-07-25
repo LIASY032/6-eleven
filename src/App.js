@@ -7,7 +7,7 @@ import Home from "./pages/Home";
 import Footer from "./components/Footer/Footer";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-import Navigation from "./components/Navigation/Navigation";
+import Navigation from "./statics/Navigation/Navigation";
 import LoginContext from "./contexts/LoginContext";
 import Logging from "./components/Modal/Logging";
 import { useItemDetails } from "./contexts/ItemDetailsContext";

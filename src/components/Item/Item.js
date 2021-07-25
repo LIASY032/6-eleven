@@ -37,7 +37,6 @@ function Item({ item }) {
               </Button>
             </InputGroup.Text>
             <FormControl
-              aria-label="Amount (to the nearest dollar)"
               value={count}
               onChange={() => {
                 if (count > 0) {

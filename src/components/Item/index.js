@@ -1,19 +1,18 @@
 import React from "react";
 import { Button, Card, InputGroup, FormControl } from "react-bootstrap";
 import "./styles.css";
-import { BootstrapButton } from "../MyButton/BootstrapButton";
+import { BootstrapButton } from "../MyButton";
 
 function Item({
   ref,
   item,
   handleOpenModal,
-  addItem,
+
   addAmount,
   deleteAmount,
+  onClickButton,
+  buttonContent,
 }) {
-  //   const [count, setCount] = useState(1);
-  //   const { handleOpenModal } = useItemDetails();
-  //   const { addItem, setAmount } = useCart();
   return (
     <>
       <Card className="text-center margin-top each-card">
@@ -32,11 +31,7 @@ function Item({
                 -
               </Button>
             </InputGroup.Text>
-            <FormControl
-              aria-label="Amount (to the nearest dollar)"
-              value={item.count}
-              ref={ref}
-            />
+            <FormControl value={item.count} ref={ref} />
             <InputGroup.Text>
               <Button onClick={addAmount} variant="outline-secondary">
                 +
@@ -44,14 +39,9 @@ function Item({
             </InputGroup.Text>
           </InputGroup>
 
-          <BootstrapButton onClick={addItem}>Add to Cart</BootstrapButton>
-
-          {/* <Button
-            style={{ backgroundColor: "#385F4B", width: "100%" }}
-            onClick={addItem}
-          >
-            Add to Cart
-          </Button> */}
+          <BootstrapButton onClick={onClickButton}>
+            {buttonContent}
+          </BootstrapButton>
         </Card.Body>
       </Card>
     </>
