@@ -1,15 +1,35 @@
-.TwoSideContainer {
+.two-side-container {
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   justify-content: center;
-  align-items: flex-start;
+  
   padding: 0;
   margin: 0;
   list-style-type: none;
 }
 
-.products li {
+.two-side-container li {
    list-style-type: none;
   padding: 1rem;
 }
+
+.align-container-item-center{
+    align-items: center;
+}
+.align-container-item-flex-start{
+    align-items: flex-start;
+}
+
+
+.side-50{
+    width: 50%;
+}
+.side-70{
+    width: 70%;
+}
+.left-side-30{
+width: 30%;
+
+}
+

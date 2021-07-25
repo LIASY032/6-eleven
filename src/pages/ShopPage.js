@@ -4,34 +4,34 @@ import { Fade } from "react-reveal";
 import Filter from "../statics/Filter";
 import Item from "../components/Item/Item";
 
-import Sort from "../components/Filter/Sort";
+import Sort from "../components/Selector/Sort";
 import data from "../data.json";
+import { TwoSideContainer } from "../components/MyContainer";
 
 function ShopPage() {
   return (
     <>
-      <Container>
-        <Row>
-          <h1>Shop</h1>
-        </Row>
-        <Row>
-          <Col xs={3}>
-            <Filter></Filter>
-          </Col>
-          <Col>
-            <Sort />
-            <Fade bottom cascade>
-              <ul className="products">
-                {data.items.map((item, index) => (
-                  <li key={index}>
-                    <Item item={item}></Item>
-                  </li>
-                ))}
-              </ul>
-            </Fade>
-          </Col>
-        </Row>
-      </Container>
+      <h1>Shop</h1>
+
+      <TwoSideContainer flexStart={true}>
+        <TwoSideContainer.Left notHalf={true}>
+          <Filter></Filter>
+        </TwoSideContainer.Left>
+        <TwoSideContainer.Right>
+          <Sort />
+          <Fade bottom cascade>
+            <ul className="products">
+              {data.items.map((item, index) => (
+                <li key={index}>
+                  <Item item={item}></Item>
+                </li>
+              ))}
+            </ul>
+          </Fade>
+        </TwoSideContainer.Right>
+      </TwoSideContainer>
+      {/* <Col xs={3}></Col>
+          <Col></Col> */}
     </>
   );
 }

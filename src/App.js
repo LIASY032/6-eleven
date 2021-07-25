@@ -9,9 +9,9 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "./statics/Navigation/Navigation";
 
-import Logging from "./components/Modal/Logging";
+import Logging from "./statics/Modal/Logging";
 import { useItemDetails } from "./contexts";
-import ItemDetails from "./components/Modal/ItemDetails";
+import { ItemDetails } from "./statics/Modal";
 
 function App() {
   const { isOpenModal, handleCloseModal } = useItemDetails();

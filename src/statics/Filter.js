@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import {} from "react-bootstrap";
 import { Container, Row } from "react-bootstrap";
 import { MyButton, BootstrapButton } from "../components/MyButton";
-import Selector from "../components/Filter/Selector";
+import Selector from "../components/Selector/Selector";
 
 function Filter() {
   const [isFilter, setIsFilter] = useState(false);
@@ -22,11 +22,7 @@ function Filter() {
           <h3>Filter by</h3>
         </Row>
         <Row>
-          <MyButton
-            showContent={showContent}
-            setShowContent={setShowContent}
-            showUnderline={true}
-          >
+          <MyButton showContent={showContent} setShowContent={setShowContent}>
             Collection
             {/* <Selector value={collectionValue} onChange={sortOnChange}>
               {sortingList}
@@ -34,11 +30,7 @@ function Filter() {
           </MyButton>
         </Row>
         <Row>
-          <MyButton
-            showContent={showContent}
-            setShowContent={setShowContent}
-            showUnderline={true}
-          >
+          <MyButton showContent={showContent} setShowContent={setShowContent}>
             Price
             {/* <input
               type="range"
@@ -62,7 +54,7 @@ function Filter() {
                 setPrice(100);
               }}
             >
-              Clear filters{" "}
+              Clear filters
             </BootstrapButton>
           ) : (
             ""

@@ -9,7 +9,7 @@ import {
 } from "react-bootstrap";
 import { PersonCircle, Search, Shop } from "react-bootstrap-icons";
 
-import { useIsLogin } from "../../contexts/LoginContext";
+import { useIsLogin } from "../../contexts";
 import ShoppingCartLogo from "../../components/assets/ShoppingCartLogo";
 
 function Navigation() {
