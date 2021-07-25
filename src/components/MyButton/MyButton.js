@@ -6,6 +6,7 @@ function MyButton({
   setShowContent,
 
   children,
+  ...rest
 }) {
   return (
     <button
@@ -13,6 +14,7 @@ function MyButton({
       onClick={function () {
         setShowContent(!showContent);
       }}
+      {...rest}
     >
       <span>{children}</span>
 

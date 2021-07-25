@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {} from "react-bootstrap";
-import { Container, Row, Button } from "react-bootstrap";
-import MyButton from "../components/MyButton/MyButton";
+import { Container, Row } from "react-bootstrap";
+import { MyButton, BootstrapButton } from "../components/MyButton";
 import Selector from "../components/Filter/Selector";
 
 function Filter() {
@@ -55,20 +55,15 @@ function Filter() {
 
         <Row className="padding-topAnddown">
           {isFilter ? (
-            <Button
+            <BootstrapButton
               onClick={function () {
                 setIsFilter(false);
                 setCollectionValue("All");
                 setPrice(100);
               }}
-              style={{
-                width: "100%",
-                backgroundColor: "#385F4B",
-                borderColor: "#385F4B",
-              }}
             >
               Clear filters{" "}
-            </Button>
+            </BootstrapButton>
           ) : (
             ""
           )}

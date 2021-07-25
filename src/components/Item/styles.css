@@ -1,0 +1,9 @@
+.each-card{
+    width: 18vw;
+    min-width: 14rem;
+}
+
+.card-img{
+    height:25vh;
+    cursor: pointer;
+}
