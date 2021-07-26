@@ -3,6 +3,10 @@ import { OverlayTrigger, Popover } from "react-bootstrap";
 import { CartFill } from "react-bootstrap-icons";
 import { useCart } from "../../contexts/CartContainerContext";
 import { Fade } from "react-reveal";
+import {
+  ColumnContainer,
+  TwoSideContainer,
+} from "../../components/MyContainer";
 
 function ShoppingCartLogo() {
   const { carts } = useCart();
@@ -12,26 +16,24 @@ function ShoppingCartLogo() {
         placement="bottom"
         overlay={
           <Popover id="popover-positioned-bottom">
-            <div className="cart">
+            <ColumnContainer>
               <Fade left cascade>
-                <ul className="cart-items">
-                  {carts.length > 0 &&
-                    carts.map((item) => (
-                      <li key={item.id}>
-                        <div>
-                          <img src={item.image} alt={item.title}></img>
-                        </div>
-                        <div>
-                          <div className="right">{item.title}</div>
-                          <div className="right">
-                            ${item.price} x {item.count}
-                          </div>
-                        </div>
-                      </li>
-                    ))}
-                </ul>
+                {carts.length > 0 &&
+                  carts.map((item) => (
+                    <TwoSideContainer key={item.id}>
+                      <TwoSideContainer.Left>
+                        <img src={item.image} alt={item.title}></img>
+                      </TwoSideContainer.Left>
+                      <TwoSideContainer.Right>
+                        <p> {item.title}</p>
+                        <p>
+                          ${item.price} x {item.count}
+                        </p>
+                      </TwoSideContainer.Right>
+                    </TwoSideContainer>
+                  ))}
               </Fade>
-            </div>
+            </ColumnContainer>
           </Popover>
         }
       >

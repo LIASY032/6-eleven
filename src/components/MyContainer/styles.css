@@ -11,7 +11,7 @@
 
 .two-side-container li {
    list-style-type: none;
-  padding: 1rem;
+  padding: 0.5rem;
 }
 
 .align-container-item-center{
@@ -28,8 +28,41 @@
 .side-70{
     width: 70%;
 }
-.left-side-30{
+.side-30{
 width: 30%;
 
 }
 
+li img{
+    width: 100%;
+}
+
+
+
+/* ColumnContainer */
+.column-container {
+  padding: 1rem;
+  margin: 1rem;
+  display: flex;
+}
+
+.column-items {
+  padding: 0;
+  width: 100%;
+  list-style-type: none;
+}
+.column-items  img {
+  height: 5rem;
+}
+.each-column-items {
+  display: flex;
+}
+/* .column-items  li div {
+  padding: 0.5rem;
+}
+.column-items  li div:last-child {
+  flex: 1;
+} */
+/* .right {
+  text-align: right;
+} */

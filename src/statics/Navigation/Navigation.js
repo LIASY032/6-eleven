@@ -10,7 +10,7 @@ import {
 import { PersonCircle, Search, Shop } from "react-bootstrap-icons";
 
 import { useIsLogin } from "../../contexts/LoginContext";
-import ShoppingCartLogo from "../../components/assets/ShoppingCartLogo";
+import ShoppingCartLogo from "../ShoppingCartLogo";
 
 function Navigation() {
   const { setIsChange } = useIsLogin();

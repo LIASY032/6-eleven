@@ -75,10 +75,11 @@ font-size: 0.8rem;
 
 }
 
-.cart {
+/* .cart {
   padding: 1rem;
   margin: 1rem;
   display: flex;
+  flex-direction:column;
 }
 .cart-header {
   border-bottom: 0.1rem #c0c0c0 solid;
@@ -102,7 +103,7 @@ font-size: 0.8rem;
 }
 .right {
   text-align: right;
-}
+} */
 
 
 
