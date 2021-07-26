@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 (\*￣(エ)￣) add files\
 ヽ(✿ ﾟ ▽ ﾟ)ノ a great achievement\
-.....((/- -)/ fix bugs or modify files\
+.....((/- -)/ fix bugs or modify files
 
 ## Available Scripts
 
