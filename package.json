@@ -1,5 +1,6 @@
 {
   "name": "sixeleven",
+  "proxy": "http://localhost:5000",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -8,6 +9,12 @@
     "@testing-library/user-event": "^12.8.3",
     "bootstrap": "^4.6.0",
     "bootstrap-icons": "^1.5.0",
+    "config": "^3.3.6",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.4.1",
+    "lodash": "^4.17.21",
+    "mongoose": "^5.13.3",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-bootstrap-icons": "^1.5.0",
@@ -18,10 +25,13 @@
     "react-spring": "^9.2.3",
     "react-spring-3d-carousel": "^1.2.1",
     "uuid": "^8.3.2",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "winston": "^3.3.3",
+    "winston-mongodb": "^5.0.7"
   },
   "scripts": {
     "start": "react-scripts start",
+    "server": "nodemon ./backend/server.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
