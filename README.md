@@ -21,3 +21,5 @@ You will also see any lint errors in the console.
 ### `npm run server`
 
 Runs the server in [http://localhost:5000](http://localhost:5000)
+
+export sixeleven_jwtPrivateKey="privateKey"
