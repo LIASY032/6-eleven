@@ -1,3 +1,4 @@
+const { number } = require("joi");
 const Joi = require("joi");
 const mongoose = require("mongoose");
 
@@ -28,7 +29,14 @@ function validateItem(order) {
     name: Joi.string(),
     address: Joi.string(),
     total: Joi.number(),
-    //   cartItems: Joi.,
+    cartItems: Joi.array(
+      Joi.object({
+        _id: Joi.string(),
+        title: Joi.string(),
+        price: Joi.number(),
+        count: number(),
+      })
+    ),
   });
   return schema.validate(order);
 }
