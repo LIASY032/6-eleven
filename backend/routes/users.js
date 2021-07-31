@@ -7,11 +7,11 @@ const express = require("express");
 const router = express.Router();
 
 //for security reason
-// router.get("/me", async (req, res) => {
-//   const user = await User.findById(req.user._id).select("-password"); //don't want to show the password
+router.get("/me", async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password"); //don't want to show the password
 
-//   res.send(user);
-// });
+  res.send(user);
+});
 
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
