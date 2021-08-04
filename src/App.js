@@ -12,12 +12,7 @@ import Navigation from "./statics/Navigation/Navigation";
 import Logging from "./statics/Modal/Logging";
 import { useItemDetails } from "./contexts";
 import { ItemDetails } from "./statics/Modal";
-import axios from "axios";
 
-axios.get(`items`).then((res) => {
-  const persons = res.data;
-  console.log(persons);
-});
 function App() {
   const { isOpenModal, handleCloseModal } = useItemDetails();
   return (
