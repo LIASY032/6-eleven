@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Bag, ExclamationCircle } from "react-bootstrap-icons";
 
@@ -6,7 +6,15 @@ import { Fade } from "react-reveal";
 import WeeklyDeal from "../components/WeeklyDeal";
 import SlideShow from "../components/MyCarousel";
 
+import { connect } from "react-redux";
+
+import { fetchItems } from "../store/slices";
+
+import { fetchProducts } from "../store/actions/productActions";
+import { addToCart } from "../store/actions/cartActions";
+
 function Home() {
+  const [product, setProduct] = useState(fetchProducts());
   return (
     <>
       <Fade top>
@@ -16,6 +24,8 @@ function Home() {
       </Fade>
 
       <WeeklyDeal></WeeklyDeal>
+
+      {console.log(product)}
 
       {/* <Container
         className="margin-top common-container"
@@ -60,4 +70,10 @@ function Home() {
   );
 }
 
-export default Home;
+export default connect(
+  (state) => ({ products: state.products.filteredItems }),
+  {
+    fetchProducts,
+    addToCart,
+  }
+)(Home);

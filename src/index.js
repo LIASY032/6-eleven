@@ -4,11 +4,15 @@ import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import AllContexts from "./contexts";
+import { Provider } from "react-redux";
+import store from "./store";
 
 ReactDOM.render(
-  <AllContexts>
-    <App />
-  </AllContexts>,
+  <Provider store={store}>
+    <AllContexts>
+      <App />
+    </AllContexts>
+  </Provider>,
   document.getElementById("root")
 );
 
