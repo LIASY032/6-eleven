@@ -8,13 +8,11 @@ import SlideShow from "../components/MyCarousel";
 
 import { connect } from "react-redux";
 
-import { fetchItems } from "../store/slices";
-
 import { fetchProducts } from "../store/actions/productActions";
 import { addToCart } from "../store/actions/cartActions";
+import { importItems } from "../services";
 
 function Home() {
-  const [product, setProduct] = useState(fetchProducts());
   return (
     <>
       <Fade top>
@@ -24,8 +22,6 @@ function Home() {
       </Fade>
 
       <WeeklyDeal></WeeklyDeal>
-
-      {console.log(product)}
 
       {/* <Container
         className="margin-top common-container"
@@ -70,10 +66,4 @@ function Home() {
   );
 }
 
-export default connect(
-  (state) => ({ products: state.products.filteredItems }),
-  {
-    fetchProducts,
-    addToCart,
-  }
-)(Home);
+export default connect((state) => ({ items: state.items }), {})(Home);
