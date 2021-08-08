@@ -1,7 +1,7 @@
 // import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 // import { createStore, applyMiddleware, compose } from "redux";
 // import thunk from "redux-thunk";
-import reducer from "./slices";
+import reducer from "./reducers";
 
 // const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -10,9 +10,7 @@ import reducer from "./slices";
 
 import { createStore, applyMiddleware, compose } from "redux";
 import thunk from "redux-thunk";
-import { cartReducer } from "./reducers/cartReducers";
-import { orderReducer } from "./reducers/orderReducers";
-import { productsReducer } from "./reducers/productReducers";
+
 
 const initialState = {};
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

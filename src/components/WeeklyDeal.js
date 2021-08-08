@@ -1,18 +1,19 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
 import { Flip } from "react-reveal";
+import { useSelector } from "react-redux";
 
 function WeeklyDeal() {
+  const items = useSelector((state) => state.items);
   return (
     <>
-      <Flip left>
-        <Container className="bottom-gap common-container extra-padding-bottom">
-          <Row>
-            <h1>Weekly Deals</h1>
-          </Row>
-          <Row>updating</Row>
-        </Container>
-      </Flip>
+      {items && items.items}
+      <Container className="bottom-gap common-container extra-padding-bottom">
+        <Row>
+          <h1>Weekly Deals</h1>
+        </Row>
+        <Row>updating</Row>
+      </Container>
     </>
   );
 }

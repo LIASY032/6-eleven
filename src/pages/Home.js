@@ -1,16 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Bag, ExclamationCircle } from "react-bootstrap-icons";
 
 import { Fade } from "react-reveal";
 import WeeklyDeal from "../components/WeeklyDeal";
 import SlideShow from "../components/MyCarousel";
-
-import { connect } from "react-redux";
-
-import { fetchProducts } from "../store/actions/productActions";
-import { addToCart } from "../store/actions/cartActions";
-import { importItems } from "../services";
 
 function Home() {
   return (
@@ -66,4 +60,4 @@ function Home() {
   );
 }
 
-export default connect((state) => ({ items: state.items }), {})(Home);
+export default Home;

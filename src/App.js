@@ -13,7 +13,12 @@ import Logging from "./statics/Modal/Logging";
 import { useItemDetails } from "./contexts";
 import { ItemDetails } from "./statics/Modal";
 
+import { useDispatch } from "react-redux";
+import { fetchItems } from "./store/actions";
 function App() {
+  const dispatch = useDispatch();
+  dispatch(fetchItems());
+
   const { isOpenModal, handleCloseModal } = useItemDetails();
   return (
     <div className="App">
