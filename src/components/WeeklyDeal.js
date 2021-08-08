@@ -7,7 +7,7 @@ function WeeklyDeal() {
   const items = useSelector((state) => state.items);
   return (
     <>
-      {items && items.items}
+      {items.items ? items.items[0] : ""}
       <Container className="bottom-gap common-container extra-padding-bottom">
         <Row>
           <h1>Weekly Deals</h1>

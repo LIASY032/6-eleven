@@ -17,7 +17,7 @@ import { useDispatch } from "react-redux";
 import { fetchItems } from "./store/actions";
 function App() {
   const dispatch = useDispatch();
-  dispatch(fetchItems());
+  fetchItems(dispatch);
 
   const { isOpenModal, handleCloseModal } = useItemDetails();
   return (

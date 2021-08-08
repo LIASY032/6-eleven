@@ -5,6 +5,8 @@ export async function shoppingItems() {
     const response = await axios.get("/items", {
       //need a fix
       headers: { "Access-Control-Allow-Origin": "http://localhost:3000" },
+      Accept: "application/json",
+      "Content-Type": "application/json",
     });
 
     const data = await response.data;
