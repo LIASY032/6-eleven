@@ -1,5 +1,4 @@
 import axios from "axios";
-
 export async function shoppingItems() {
   try {
     const response = await axios.get("/items", {
