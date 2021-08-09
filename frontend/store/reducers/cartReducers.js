@@ -1,4 +1,4 @@
-import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants/types";
+import { ADD_TO_CART, REMOVE_FROM_CART } from "../constants";
 
 export const cartReducer = (
   state = { cartItems: JSON.parse(localStorage.getItem("cartItems") || "[]") },

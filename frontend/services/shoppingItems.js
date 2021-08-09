@@ -10,7 +10,6 @@ export async function shoppingItems() {
 
     const data = await response.data;
 
-    console.log(data);
     return data;
   } catch (ex) {
     console.log(ex);

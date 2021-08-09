@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-import { Flip } from "react-reveal";
+
 import { useSelector } from "react-redux";
 
 function WeeklyDeal() {
