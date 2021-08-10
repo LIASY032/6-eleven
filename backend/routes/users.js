@@ -31,4 +31,17 @@ router.post("/", async (req, res) => {
     .send(_.pick(user, ["_id", "name", "email"]));
 });
 
+router.get("/:email", async (req, res) => {
+  const email = req.params.email;
+  const user = await User.findOne({ email });
+
+  bcrypt.compare(req.body.password, user.password, function (error, result) {
+    if (result) {
+      res.send("success");
+    } else {
+      res.send(error);
+    }
+  });
+});
+
 module.exports = router;
