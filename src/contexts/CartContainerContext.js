@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { cartsType } from "../localStorageType/type";
+import { cartsType } from "../constants/localStorageType";
 
 const CartContainerProvider = React.createContext();
 export function useCart() {

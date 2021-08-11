@@ -1,8 +1,8 @@
-import { FETCH_ITEMS } from "../constants";
+import { FETCH_ITEMS } from "../../constants";
 import {
   FILTER_PRODUCTS_BY_SIZE,
   ORDER_PRODUCTS_BY_PRICE,
-} from "../constants/types";
+} from "../../constants/types";
 
 export const itemReducer = (state = {}, action) => {
   switch (action.type) {

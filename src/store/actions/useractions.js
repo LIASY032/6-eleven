@@ -1,4 +1,4 @@
-import { USER_LOGIN } from "../constants";
+import { USER_LOGIN } from "../../constants";
 
 export const userLogin = async (email, password, dispatch) => {
   dispatch({

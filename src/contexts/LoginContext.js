@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { isLogin } from "../localStorageType/type";
+import { isLogin } from "../constants/localStorageType";
 
 const LoginProvider = React.createContext();
 

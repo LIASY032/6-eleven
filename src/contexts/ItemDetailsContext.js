@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import useLocalStorage from "../hooks/useLocalStorage";
-import { isOpenDetailsModal } from "../localStorageType/type";
+import { isOpenDetailsModal } from "../constants/localStorageType";
 
 const ItemDetailsProvider = React.createContext();
 
