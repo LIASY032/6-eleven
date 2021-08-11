@@ -1,4 +1,4 @@
-// const auth = require("../middleware/auth");
+const auth = require("../middleware/auth");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const { User, validate, validateCartItems } = require("../models/user");
@@ -7,12 +7,13 @@ const express = require("express");
 const router = express.Router();
 
 //for security reason
-router.get("/me", async (req, res) => {
+router.get("/me", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password"); //don't want to show the password
 
   res.send(user);
 });
 
+// user registers
 router.post("/", async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -31,7 +32,8 @@ router.post("/", async (req, res) => {
     .send(_.pick(user, ["_id", "name", "email", "carts"]));
 });
 
-router.get("/:email", async (req, res) => {
+// user logins in
+router.put("/:email", async (req, res) => {
   const email = req.params.email;
   const user = await User.findOne({ email });
 
@@ -71,6 +73,21 @@ router.get("/:email", async (req, res) => {
       }
     }
   );
+});
+
+// user adds a shopping cart item
+router.put("/addItem", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  const newItems = [];
+  user.carts.forEach((item) => {
+    if (item._id === req.body._id) {
+      item.count += req.body.count;
+    }
+    newItems.push(item);
+  });
+  user.carts = newItems;
+  await user.save();
+  res.send("success");
 });
 
 module.exports = router;

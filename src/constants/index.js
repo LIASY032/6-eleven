@@ -8,3 +8,4 @@ export const FETCH_ITEMS = "FETCH_ITEMS";
 
 export const USER_LOGIN = "USER_LOGIN";
 export * from "./types";
+export * from "./localStorageType";
