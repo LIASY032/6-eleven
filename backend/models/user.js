@@ -25,6 +25,18 @@ const userSchema = new mongoose.Schema({
     maxlength: 1024,
   },
   isAdmin: { type: Boolean, required: true, default: false },
+  carts: {
+    type: [
+      {
+        _id: String,
+        title: String,
+        price: Number,
+        count: Number,
+      },
+    ],
+    require: false,
+    default: [],
+  },
 });
 
 //the methods must places on model head
@@ -45,6 +57,16 @@ function validateUser(user) {
 
     email: Joi.string().min(5).max(255).required().email(), //add email() check it is a valided email
     password: Joi.string().min(5).max(255).required(),
+    carts: Joi.array()
+      .items(
+        Joi.object({
+          _id: Joi.string(),
+          title: Joi.string(),
+          price: Joi.number(),
+          count: Joi.number(),
+        })
+      )
+      .optional(),
   });
 
   return schema.validate(user);
