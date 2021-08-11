@@ -72,5 +72,20 @@ function validateUser(user) {
   return schema.validate(user);
 }
 
+function validateCartItems(cartItems) {
+  const schema = Joi.array()
+    .items(
+      Joi.object({
+        _id: Joi.string(),
+        title: Joi.string(),
+        price: Joi.number(),
+        count: Joi.number(),
+      })
+    )
+    .optional();
+  return schema.validate(cartItems);
+}
+
 exports.User = User;
 exports.validate = validateUser;
+exports.validateCartItems = validateCartItems;
