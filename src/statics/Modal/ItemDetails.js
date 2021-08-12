@@ -51,21 +51,21 @@ function ItemDetails({ isShow, handleClose, item }) {
               <MyButton
                 // showContent={showContent}
                 // setShowContent={setShowContent}
-                showUnderline={true}
+              
               >
                 PRODUCT INFO
               </MyButton>
               <MyButton
                 // showContent={showContent1}
                 // setShowContent={setShowContent1}
-                showUnderline={true}
+               
               >
                 REFUND POLICY
               </MyButton>
               <MyButton
                 // showContent={showContent2}
                 // setShowContent={setShowContent2}
-                showUnderline={false}
+               
               >
                 SHIPPING INFO
               </MyButton>

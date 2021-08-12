@@ -3,21 +3,21 @@ import "./styles.css";
 
 function MyButton({
   showContent,
-  setShowContent,
-
+  setHandleFunction,
+  paddingUnderline,
+  className,
   children,
   ...rest
 }) {
   return (
     <button
-      className="my-button padding-underline"
-      onClick={function () {
-        setShowContent(!showContent);
-      }}
+      className={`my-button  ${
+        paddingUnderline ? "" : "padding-underline"
+      } ${className}`}
+      onClick={setHandleFunction}
       {...rest}
     >
       <span>{children}</span>
-
       <span> {showContent ? "-" : "+"}</span>
     </button>
   );

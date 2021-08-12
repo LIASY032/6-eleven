@@ -3,7 +3,7 @@ import { Form } from "react-bootstrap";
 
 const BootstrapInput = React.forwardRef((props, ref) => {
   return (
-    <Form.Group className="mb-3" controlId="formBasicEmail">
+    <Form.Group className="mb-3">
       <Form.Label>{props.childrenlabel}</Form.Label>
       <Form.Control ref={ref} type={props.type} placeholder={props.label} />
       {props.textMuted && (

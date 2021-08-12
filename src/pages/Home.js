@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { Bag, ExclamationCircle } from "react-bootstrap-icons";
 
 import { Fade } from "react-reveal";
-import WeeklyDeal from "../components/WeeklyDeal";
+import WeeklyDeal from "../statics/WeeklyDeal";
 import SlideShow from "../components/MyCarousel";
 
 function Home() {
