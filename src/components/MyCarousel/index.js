@@ -1,5 +1,7 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
+import first from "../../assets/images/first.jpg";
+import second from "../../assets/images/second.jpg";
 function SlideShow({ showItems }) {
   return (
     <>
@@ -7,7 +9,7 @@ function SlideShow({ showItems }) {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://static.wixstatic.com/media/ad420a_f2ae964f4e3d4bb8af8b6cdda0ad86bd~mv2.jpg/v1/fill/w_2220,h_1202,q_90/ad420a_f2ae964f4e3d4bb8af8b6cdda0ad86bd~mv2.webp"
+            src={first}
             alt="First slide"
             style={{ height: "70vh" }}
           />
@@ -19,7 +21,7 @@ function SlideShow({ showItems }) {
         <Carousel.Item>
           <img
             className="d-block w-100"
-            src="https://i0.wp.com/www.nomadwomen.com/wp-content/uploads/2020/01/mexican-supermarket-salsa.jpg?w=1500"
+            src={second}
             alt="Second slide"
             style={{ height: "70vh" }}
           />

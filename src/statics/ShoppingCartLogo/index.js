@@ -18,20 +18,23 @@ function ShoppingCartLogo() {
           <Popover id="popover-positioned-bottom">
             <ColumnContainer>
               <Fade left cascade>
-                {carts.length > 0 &&
-                  carts.map((item) => (
-                    <TwoSideContainer key={item.id}>
-                      <TwoSideContainer.Left>
-                        <img src={item.image} alt={item.title}></img>
-                      </TwoSideContainer.Left>
-                      <TwoSideContainer.Right>
-                        <p> {item.title}</p>
-                        <p>
-                          ${item.price} x {item.count}
-                        </p>
-                      </TwoSideContainer.Right>
-                    </TwoSideContainer>
-                  ))}
+                <>
+                  {carts.length > 0
+                    ? carts.map((item) => (
+                        <TwoSideContainer key={item._id}>
+                          <TwoSideContainer.Left>
+                            <img src={item.image} alt={item.title}></img>
+                          </TwoSideContainer.Left>
+                          <TwoSideContainer.Right>
+                            <p> {item.title}</p>
+                            <p>
+                              ${item.price} x {item.count}
+                            </p>
+                          </TwoSideContainer.Right>
+                        </TwoSideContainer>
+                      ))
+                    : ""}
+                </>
               </Fade>
             </ColumnContainer>
           </Popover>

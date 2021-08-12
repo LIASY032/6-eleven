@@ -10,10 +10,10 @@ export function useCart() {
 function CartContainerContext({ children }) {
   const [carts, setCarts] = useLocalStorage(cartsType, []);
   function addItem(item, amount) {
-    const isExist = checkExist(item.id);
+    const isExist = checkExist(item._id);
 
     if (!isExist) {
-      if (amount != null || amount !== undefined) {
+      if (amount != null && amount !== undefined) {
         setCarts(carts.concat({ ...item, count: amount }));
       } else {
         setCarts(carts.concat({ ...item, count: 1 }));
@@ -21,19 +21,18 @@ function CartContainerContext({ children }) {
     }
   }
 
-  function checkExist(id) {
+  function checkExist(_id) {
     let isExist = false;
     carts.forEach((x) => {
-      if (x.id === id) {
+      if (x._id === _id) {
         isExist = true;
       }
     });
     return isExist;
   }
 
-  function removeItem(id) {
-    const newCarts = carts.slice().filter((i) => i.id !== id);
-    console.log(newCarts);
+  function removeItem(_id) {
+    const newCarts = carts.slice().filter((i) => i._id !== _id);
 
     setCarts(newCarts);
   }
@@ -41,7 +40,7 @@ function CartContainerContext({ children }) {
   function setAmount(item, number) {
     const newCarts = carts.slice();
     newCarts.forEach((x) => {
-      if (x.id === item.id) {
+      if (x._id === item._id) {
         x.count = number;
       }
     });

@@ -1,6 +1,6 @@
 {
   "name": "sixeleven",
-  "proxy": "http://localhost:5000/api",
+  "proxy": "http://localhost:5000/api/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

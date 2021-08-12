@@ -90,4 +90,9 @@ router.put("/addItem", auth, async (req, res) => {
   res.send("success");
 });
 
+router.get("/userShoppingCartItems", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  res.send(user.carts);
+});
+
 module.exports = router;

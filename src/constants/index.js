@@ -7,5 +7,6 @@ export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
 export const FETCH_ITEMS = "FETCH_ITEMS";
 
 export const USER_LOGIN = "USER_LOGIN";
+export const USER_ADD_ITEM = "USER_ADD_ITEM";
 export * from "./types";
 export * from "./localStorageType";
