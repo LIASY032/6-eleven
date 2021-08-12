@@ -2,12 +2,15 @@ import React from "react";
 import CartContainerContext from "./CartContainerContext";
 import ItemDetailsContext from "./ItemDetailsContext";
 import LoginContext from "./LoginContext";
+import RegisterationContext from "./RegisterationContext";
 
 export default function AllContexts({ children }) {
   return (
     <CartContainerContext>
       <ItemDetailsContext>
-        <LoginContext>{children}</LoginContext>
+        <LoginContext>
+          <RegisterationContext>{children}</RegisterationContext>
+        </LoginContext>
       </ItemDetailsContext>
     </CartContainerContext>
   );
@@ -16,3 +19,4 @@ export default function AllContexts({ children }) {
 export * from "./CartContainerContext";
 export * from "./ItemDetailsContext";
 export * from "./LoginContext";
+export * from "./RegisterationContext";

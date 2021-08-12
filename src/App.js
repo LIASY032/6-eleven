@@ -9,9 +9,8 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "./statics/Navigation/Navigation";
 
-import Logging from "./statics/Modal/Logging";
 import { useItemDetails } from "./contexts";
-import { ItemDetails } from "./statics/Modal";
+import { ItemDetails, Logging, Registeration } from "./statics/Modal";
 
 import { useDispatch } from "react-redux";
 import { fetchItems } from "./store/actions";
@@ -24,6 +23,8 @@ function App() {
     <div className="App">
       <Navigation></Navigation>
       <Logging></Logging>
+      <Registeration></Registeration>
+
       <Router>
         <Switch>
           <Route path="/" exact component={Home}></Route>

@@ -2,10 +2,12 @@ import React from "react";
 import { Form, Button, Modal } from "react-bootstrap";
 import { BootstrapInput } from "../../components/Input";
 import { BootstrapButton } from "../../components/MyButton";
+import { useResigeration } from "../../contexts";
 import { useIsLogin } from "../../contexts/LoginContext";
 
 function Logging() {
   const { islogin, setIsChange } = useIsLogin();
+  const { setIsRegisteration } = useResigeration();
   function handleClose() {
     setIsChange(0);
   }
@@ -34,7 +36,10 @@ function Logging() {
         <Modal.Footer>
           <Button
             variant="warning"
-            onClick={handleClose}
+            onClick={() => {
+              handleClose();
+              setIsRegisteration(1);
+            }}
             style={{ width: "100%" }}
           >
             Create Account
