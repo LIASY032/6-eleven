@@ -11,7 +11,7 @@ function ItemDetails({ isShow, handleClose, item }) {
     <>
       <Modal show={isShow} onHide={handleClose} dialogClassName="modal-xl">
         <Modal.Header closeButton>
-          <Modal.Title>{item && item.title.toUpperCase()}</Modal.Title>
+          <Modal.Title>{item ? item.title.toUpperCase() : ""}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <TwoSideContainer flexStart={true}>
@@ -49,23 +49,20 @@ function ItemDetails({ isShow, handleClose, item }) {
               </BootstrapButton>
 
               <MyButton
-                // showContent={showContent}
-                // setShowContent={setShowContent}
-              
+              // showContent={showContent}
+              // setShowContent={setShowContent}
               >
                 PRODUCT INFO
               </MyButton>
               <MyButton
-                // showContent={showContent1}
-                // setShowContent={setShowContent1}
-               
+              // showContent={showContent1}
+              // setShowContent={setShowContent1}
               >
                 REFUND POLICY
               </MyButton>
               <MyButton
-                // showContent={showContent2}
-                // setShowContent={setShowContent2}
-               
+              // showContent={showContent2}
+              // setShowContent={setShowContent2}
               >
                 SHIPPING INFO
               </MyButton>

@@ -34,6 +34,7 @@ router.post("/", async (req, res) => {
 
 // user logins in
 router.put("/:email", async (req, res) => {
+  // console.log("dddddddddd");
   const email = req.params.email;
   const user = await User.findOne({ email });
 
@@ -43,9 +44,7 @@ router.put("/:email", async (req, res) => {
     async function (error, result) {
       if (result) {
         if (req.body.carts) {
-          const { error } = validateCartItems(req.body.carts);
-          if (error) return res.status(400).send(error.details[0].message);
-
+          console.log(req.body.carts);
           let newCarts = [];
 
           req.body.carts.forEach((item) => {
@@ -62,6 +61,7 @@ router.put("/:email", async (req, res) => {
             }
           });
           user.carts = newCarts;
+          console.log(user.carts);
           await user.save();
         }
         const token = user.generateAuthToken();

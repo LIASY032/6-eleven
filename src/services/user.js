@@ -1,20 +1,19 @@
 import axios from "axios";
+import { convertCarts } from "./shoppingCart";
 
 export async function signIn(email, password, carts = []) {
   try {
-    console.log(`/users/${email}`);
-    const { data, headers } = await axios.put(
+    const { data } = await axios.put(
       `http://localhost:5000/api/users/${email}`,
       {
         password,
-        carts,
-      },
-      { headers: { "Access-Control-Allow-Origin": "*" } }
+        carts: convertCarts(carts),
+      }
     );
 
     //need a fix for security
-    localStorage.setItem("x-auth-token", headers("x-auth-token"));
-
+    // localStorage.setItem("x-auth-token", headers("x-auth-token"));
+    alert("success");
     console.log(data);
     return data;
   } catch (ex) {
