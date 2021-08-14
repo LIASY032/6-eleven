@@ -1,11 +1,17 @@
 import { shoppingItems } from "../../services";
-import { FETCH_ITEMS } from "../../constants";
+import { FETCH_ITEMS, FETCH_ITEMS_ERROR } from "../../constants";
 
 export const fetchItems = async (dispatch) => {
   const data = await shoppingItems();
 
-  dispatch({
-    type: FETCH_ITEMS,
-    payload: data,
-  });
+  if (data !== undefined && data != null) {
+    dispatch({
+      type: FETCH_ITEMS,
+      payload: data,
+    });
+  } else {
+    dispatch({
+      type: FETCH_ITEMS_ERROR,
+    });
+  }
 };

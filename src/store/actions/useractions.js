@@ -1,4 +1,4 @@
-import { USER_LOGIN } from "../../constants";
+import { USER_LOGIN, USER_LOGIN_ERROR } from "../../constants";
 import { signIn } from "../../services";
 
 export const userLogin = async (email, password, carts, dispatch) => {
@@ -7,6 +7,10 @@ export const userLogin = async (email, password, carts, dispatch) => {
     dispatch({
       type: USER_LOGIN,
       payload: data,
+    });
+  } else {
+    dispatch({
+      type: USER_LOGIN_ERROR,
     });
   }
 };
