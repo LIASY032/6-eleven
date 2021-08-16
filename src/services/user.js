@@ -11,7 +11,7 @@ export async function signIn(email, password, carts = []) {
     //need a fix for security
     // localStorage.setItem("x-auth-token", headers("x-auth-token"));
     alert("success");
-    console.log(data);
+
     return data;
   } catch (ex) {
     console.log(ex);
@@ -25,8 +25,11 @@ export async function userAddCartItem() {
   }
 }
 
-export async function userShoppingCartItems() {
+export async function userInfo() {
   try {
+    //need to add a token header
+    const { data } = await axios.get(`/users/userInfo`);
+    return data;
   } catch (ex) {
     console.log(ex);
   }
