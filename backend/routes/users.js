@@ -5,6 +5,7 @@ const { User, validate } = require("../models/user");
 // const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
+const userToken = require("../middleware/userToken");
 
 //for security reason
 router.get("/me", auth, async (req, res) => {
@@ -33,7 +34,7 @@ router.post("/", async (req, res) => {
 });
 
 // user logins in
-router.put("/:email", async (req, res) => {
+router.put("/:email", async (req, res, next) => {
   // console.log("dddddddddd");
   const email = req.params.email;
   const user = await User.findOne({ email });
@@ -73,6 +74,7 @@ router.put("/:email", async (req, res) => {
       }
     }
   );
+  next();
 });
 
 // user adds a shopping cart item
