@@ -5,12 +5,12 @@ const { User, validate } = require("../models/user");
 // const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
-const userToken = require("../middleware/userToken");
 
 //for security reason
-router.get("/me", auth, async (req, res) => {
+router.get("/me", async (req, res) => {
   const user = await User.findById(req.user._id).select("-password"); //don't want to show the password
 
+  // console.log(req.cookies);
   res.send(user);
 });
 
@@ -28,13 +28,14 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
   const token = user.generateAuthToken();
+
   res
     .header("x-auth-token", token)
     .send(_.pick(user, ["_id", "name", "email", "carts"]));
 });
 
 // user logins in
-router.put("/:email", async (req, res, next) => {
+router.put("/:email", async (req, res) => {
   // console.log("dddddddddd");
   const email = req.params.email;
   const user = await User.findOne({ email });
@@ -66,6 +67,11 @@ router.put("/:email", async (req, res, next) => {
           await user.save();
         }
         const token = user.generateAuthToken();
+        res.cookie("x-auth-token", token, {
+          //   secure: process.env.NODE_ENV !== "development",
+          httpOnly: true,
+          //   expires: dayjs().add(30, "days").toDate(),
+        });
         res
           .header("x-auth-token", token)
           .send(_.pick(user, ["_id", "name", "email", "carts"]));
@@ -74,7 +80,6 @@ router.put("/:email", async (req, res, next) => {
       }
     }
   );
-  next();
 });
 
 // user adds a shopping cart item
