@@ -28,15 +28,16 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
   await user.save();
   const token = user.generateAuthToken();
-
-  res
-    .header("x-auth-token", token)
-    .send(_.pick(user, ["_id", "name", "email", "carts"]));
+  res.cookie("x-auth-token", token, {
+    //   secure: process.env.NODE_ENV !== "development",
+    httpOnly: true,
+    //   expires: dayjs().add(30, "days").toDate(),
+  });
+  res.send(_.pick(user, ["_id", "name", "email", "carts"]));
 });
 
 // user logins in
 router.put("/:email", async (req, res) => {
-  // console.log("dddddddddd");
   const email = req.params.email;
   const user = await User.findOne({ email });
 
@@ -46,7 +47,6 @@ router.put("/:email", async (req, res) => {
     async function (error, result) {
       if (result) {
         if (req.body.carts) {
-          console.log(req.body.carts);
           let newCarts = [];
 
           req.body.carts.forEach((item) => {
@@ -63,7 +63,7 @@ router.put("/:email", async (req, res) => {
             }
           });
           user.carts = newCarts;
-          console.log(user.carts);
+
           await user.save();
         }
         const token = user.generateAuthToken();
@@ -72,9 +72,7 @@ router.put("/:email", async (req, res) => {
           httpOnly: true,
           //   expires: dayjs().add(30, "days").toDate(),
         });
-        res
-          .header("x-auth-token", token)
-          .send(_.pick(user, ["_id", "name", "email", "carts"]));
+        res.send(_.pick(user, ["_id", "name", "email", "carts"]));
       } else {
         res.status(404).send("User Not Found");
       }
