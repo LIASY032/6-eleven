@@ -3,7 +3,7 @@ import { signIn } from "../../services";
 
 export const userLogin = async (email, password, carts, dispatch) => {
   const data = await signIn(email, password, carts);
-  if (data !== undefined && data != null) {
+  if (data !== undefined && data != null && data !== "") {
     dispatch({
       type: USER_LOGIN,
       payload: data,
@@ -13,5 +13,4 @@ export const userLogin = async (email, password, carts, dispatch) => {
       type: USER_LOGIN_ERROR,
     });
   }
-}
-
+};

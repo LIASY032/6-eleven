@@ -68,10 +68,11 @@ router.put("/:email", async (req, res) => {
         }
         const token = user.generateAuthToken();
         res.cookie("x-auth-token", token, {
-          //   secure: process.env.NODE_ENV !== "development",
+          secure: process.env.NODE_ENV !== "development",
           httpOnly: true,
           //   expires: dayjs().add(30, "days").toDate(),
         });
+
         res.send(_.pick(user, ["_id", "name", "email", "carts"]));
       } else {
         res.status(404).send("User Not Found");
