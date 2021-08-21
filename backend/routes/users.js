@@ -101,4 +101,12 @@ router.get("/userInfo", auth, async (req, res) => {
   res.send(user.carts);
 });
 
+router.delete("/clearCartItem", auth, async (req, res) => {
+  const user = await User.findById(req.user._id).select("-password");
+  user.carts = [];
+  await user.save();
+  //need to change the return message
+  res.send("success");
+});
+
 module.exports = router;
