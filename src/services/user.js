@@ -18,6 +18,22 @@ export async function signIn(email, password, carts = []) {
   }
 }
 
+export async function register(name, email, password, carts = []) {
+  try {
+    const { data } = await axios.post(`/users`, {
+      name,
+      email,
+      password,
+      carts,
+    });
+    return data;
+  } catch (ex) {
+    console.log("====================================");
+    console.log(ex);
+    console.log("====================================");
+  }
+}
+
 export async function userAddCartItem() {
   try {
   } catch (ex) {

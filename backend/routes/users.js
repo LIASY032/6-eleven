@@ -29,11 +29,11 @@ router.post("/", async (req, res) => {
   await user.save();
   const token = user.generateAuthToken();
   res.cookie("x-auth-token", token, {
-    //   secure: process.env.NODE_ENV !== "development",
+    secure: process.env.NODE_ENV !== "development",
     httpOnly: true,
     //   expires: dayjs().add(30, "days").toDate(),
   });
-  res.send(_.pick(user, ["_id", "name", "email", "carts"]));
+  res.send(_.pick(user, ["name", "email", "carts"]));
 });
 
 // user logins in
