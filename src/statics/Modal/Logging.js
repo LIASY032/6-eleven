@@ -21,6 +21,7 @@ function Logging() {
   }
 
   function handleLogin() {
+    handleClose();
     userLogin(
       emailRef.current.value,
       passwordRef.current.value,

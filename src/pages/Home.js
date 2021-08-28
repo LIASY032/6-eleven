@@ -10,7 +10,14 @@ function Home() {
   return (
     <>
       <Fade top>
-        <Container className="margin-top">
+        <Container
+          className="margin-top"
+          onScroll={(e) => {
+            console.log("====================================");
+            console.log(e);
+            console.log("====================================");
+          }}
+        >
           <SlideShow></SlideShow>
         </Container>
       </Fade>

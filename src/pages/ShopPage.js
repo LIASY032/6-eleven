@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 
 function ShopPage() {
   const items = useSelector((state) => state.items.items);
+
   return (
     <>
       <h1>Shop</h1>

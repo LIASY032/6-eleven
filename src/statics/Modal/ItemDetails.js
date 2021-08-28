@@ -11,7 +11,7 @@ function ItemDetails({ isShow, handleClose, item }) {
     <>
       <Modal show={isShow} onHide={handleClose} dialogClassName="modal-xl">
         <Modal.Header closeButton>
-          <Modal.Title>{item ? item.title.toUpperCase() : ""}</Modal.Title>
+          {/* <Modal.Title>{item ? item.title.toUpperCase() : ""}</Modal.Title> */}
         </Modal.Header>
         <Modal.Body>
           <TwoSideContainer flexStart={true}>

@@ -11,9 +11,11 @@ import { PersonCircle, Search, Shop } from "react-bootstrap-icons";
 
 import { useIsLogin } from "../../contexts/LoginContext";
 import ShoppingCartLogo from "../ShoppingCartLogo";
+import { useSelector } from "react-redux";
 
 function Navigation() {
   const { setIsChange } = useIsLogin();
+  const user = useSelector((state) => state.user);
   return (
     <>
       <Navbar bg="success" expand="lg" sticky="top" variant="dark">
@@ -59,7 +61,8 @@ function Navigation() {
               setIsChange(1);
             }}
           >
-            <PersonCircle size={20}></PersonCircle> Login in
+            <PersonCircle size={20}></PersonCircle>{" "}
+            {user ? user.name : "Login in"}
           </Button>
         </Navbar.Collapse>
       </Navbar>
