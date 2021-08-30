@@ -47,6 +47,10 @@ function CartContainerContext({ children }) {
     setCarts(newCarts);
   }
 
+  // function setItem(_id, amount){
+  //   if ()
+  // }
+
   return (
     <CartContainerProvider.Provider
       value={{ removeItem, addItem, carts, setAmount }}

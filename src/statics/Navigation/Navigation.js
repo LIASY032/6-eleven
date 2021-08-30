@@ -62,7 +62,7 @@ function Navigation() {
             }}
           >
             <PersonCircle size={20}></PersonCircle>{" "}
-            {user ? user.name : "Login in"}
+            {user.name ? user.name : "Login in"}
           </Button>
         </Navbar.Collapse>
       </Navbar>

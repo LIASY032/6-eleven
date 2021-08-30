@@ -7,9 +7,16 @@ import {
   ColumnContainer,
   TwoSideContainer,
 } from "../../components/MyContainer";
+import { useSelector } from "react-redux";
 
 function ShoppingCartLogo() {
-  const { carts } = useCart();
+  const { carts, addItem } = useCart();
+  const user = useSelector((state) => state.user);
+  if (user.carts) {
+    user.carts.forEach((item) => {
+      addItem(item, item.count);
+    });
+  }
   return (
     <>
       <OverlayTrigger
