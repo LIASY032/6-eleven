@@ -8,13 +8,15 @@ import {
   TwoSideContainer,
 } from "../../components/MyContainer";
 import { useSelector } from "react-redux";
+import { findItemById } from "../../services";
 
 function ShoppingCartLogo() {
   const { carts, addItem } = useCart();
+  const items = useSelector((state) => state.items.items);
   const user = useSelector((state) => state.user);
   if (user.carts) {
     user.carts.forEach((item) => {
-      addItem(item, item.count);
+      addItem(findItemById(items, item._id), item.count);
     });
   }
   return (

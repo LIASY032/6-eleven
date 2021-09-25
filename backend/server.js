@@ -10,6 +10,13 @@ app.use((req, res, next) => {
   res.header("Access-Control-Allow-Origin", "*");
   next();
 });
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers");
+});
+
+app.use(function (req, res, next) {
+  res.header("Access-Control-Allow-Headers", "*");
+});
 
 require("./startup/logging")();
 require("./startup/db")();

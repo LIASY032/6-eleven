@@ -15,3 +15,11 @@ export async function shoppingItems() {
     console.log(ex);
   }
 }
+
+export function findItemById(items, id) {
+  for (const item of items) {
+    if (item._id === id) {
+      return item;
+    }
+  }
+}
