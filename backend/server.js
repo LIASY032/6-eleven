@@ -6,17 +6,17 @@ const app = express();
 app.use(bodyParser.json());
 //need a fix
 app.use(cookieParser());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  next();
-});
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers");
-});
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   next();
+// });
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers");
+// });
 
-app.use(function (req, res, next) {
-  res.header("Access-Control-Allow-Headers", "*");
-});
+// app.use(function (req, res, next) {
+//   res.header("Access-Control-Allow-Headers", "*");
+// });
 
 require("./startup/logging")();
 require("./startup/db")();
@@ -26,3 +26,8 @@ require("./startup/validations")();
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => winston.info(`Listening on port ${port}...`));
+// app.listen(port, () => {
+//   console.log("====================================");
+//   console.log("port 5000");
+//   console.log("====================================");
+// });
