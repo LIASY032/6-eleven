@@ -6,10 +6,12 @@ const { User, validate } = require("../models/user");
 const express = require("express");
 const router = express.Router();
 
+const comfirmation = require("../service/confirmation");
 //for security reason
-router.get("/me", async (req, res) => {
-  const user = await User.findById(req.user._id).select("-password"); //don't want to show the password
+router.put("/me", async (req, res) => {
+  const user = await User.findById(req.body._id).select("-password"); //don't want to show the password
 
+  comfirmation();
   // console.log(req.cookies);
   res.send(user);
 });

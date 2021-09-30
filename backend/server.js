@@ -26,8 +26,3 @@ require("./startup/validations")();
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => winston.info(`Listening on port ${port}...`));
-// app.listen(port, () => {
-//   console.log("====================================");
-//   console.log("port 5000");
-//   console.log("====================================");
-// });
