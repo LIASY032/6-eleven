@@ -1,19 +1,19 @@
 var nodemailer = require("nodemailer");
 const config = require("config");
-module.exports = function (userEmail) {
+module.exports = function (userEmail, text, subject = "6-Eleven MFA code") {
   var transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: config.get("sixelevenPrivateKey"),
-      pass: "s125346e",
+      user: config.get("emailAuth").email,
+      pass: config.get("emailAuth").password,
     },
   });
 
   var mailOptions = {
-    from: "s1287673784@gmail.com",
-    to: "s1160137289@gmail.com",
-    subject: "Sending Email using Node.js",
-    text: "That was easy!",
+    from: config.get("emailAuth").email,
+    to: userEmail,
+    subject,
+    text,
   };
 
   transporter.sendMail(mailOptions, function (error, info) {

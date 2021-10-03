@@ -6,12 +6,11 @@ const { User, validate } = require("../models/user");
 const express = require("express");
 const router = express.Router();
 
-const comfirmation = require("../service/confirmation");
+const confirmation = require("../service/emailConfirmation");
 //for security reason
 router.put("/me", async (req, res) => {
   const user = await User.findById(req.body._id).select("-password"); //don't want to show the password
 
-  comfirmation();
   // console.log(req.cookies);
   res.send(user);
 });
@@ -24,18 +23,42 @@ router.post("/", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
 
-  user = new User(_.pick(req.body, ["name", "email", "password", "carts"]));
+  // user = new User(_.pick(req.body, ["name", "email", "password", "carts"]));
 
   const salt = await bcrypt.genSalt(10);
-  user.password = await bcrypt.hash(user.password, salt);
-  await user.save();
-  const token = user.generateAuthToken();
-  res.cookie("x-auth-token", token, {
-    secure: process.env.NODE_ENV !== "development",
-    httpOnly: true,
-    //   expires: dayjs().add(30, "days").toDate(),
-  });
-  res.send(_.pick(user, ["name", "email", "carts"]));
+  const hashPassword = await bcrypt.hash(user.password, salt);
+  const confirmationID = generateID();
+  res.cookie(
+    "x-user-registration",
+    JSON.stringify({
+      email: req.body.email,
+      name: req.body.name,
+      password: hashPassword,
+      carts: req.body.carts,
+      confirmationID: confirmationID,
+    }),
+    {
+      secure: process.env.NODE_ENV !== "development",
+      httpOnly: true,
+      // expires: dayjs().add(30, "days").toDate(),
+    }
+  );
+
+  confirmation(
+    req.body.email,
+    "Open this link to confirm the account http://localhost:5000/api/users/confirmation/" +
+      confirmationID
+  );
+  res.send("Open Your Email");
+  // user.password = await bcrypt.hash(user.password, salt);
+  // await user.save();
+  // const token = user.generateAuthToken();
+  // res.cookie("x-auth-token", token, {
+  //   secure: process.env.NODE_ENV !== "development",
+  //   httpOnly: true,
+  //   // expires: dayjs().add(30, "days").toDate(),
+  // });
+  // res.send(_.pick(user, ["name", "email", "carts"]));
 });
 
 // user logins in
@@ -111,4 +134,47 @@ router.delete("/clearCartItem", auth, async (req, res) => {
   res.send("success");
 });
 
+router.get("/confirmation/:id", async (req, res) => {
+  let confirmationUser = req.cookies["x-user-registration"];
+
+  confirmationUser = JSON.parse(confirmationUser);
+
+  if (confirmationUser.confirmationID !== req.params.id) {
+    res.status(400).send("Invalid Confirmation ID");
+  }
+
+  const user = new User(
+    _.pick(confirmationUser, ["name", "email", "password", "carts"])
+  );
+
+  // const salt = await bcrypt.genSalt(10);
+  // user.password = await bcrypt.hash(user.password, salt);
+  await user.save();
+  const token = user.generateAuthToken();
+  res.cookie("x-auth-token", token, {
+    secure: process.env.NODE_ENV !== "development",
+    httpOnly: true,
+    //   expires: dayjs().add(30, "days").toDate(),
+  });
+  res.send(_.pick(user, ["name", "email", "carts"]));
+});
+
+//Generate Confirmation ID
+function generateID() {
+  var key = {
+    i: "w",
+    l: "x",
+    o: "y",
+    u: "z",
+  };
+  var randomInt = Math.floor(Math.random() * 1e9);
+  console.log(
+    randomInt.toString(32).replace(/[ilou]/, function (a) {
+      return key[a];
+    })
+  );
+  return randomInt.toString(32).replace(/[ilou]/, function (a) {
+    return key[a];
+  });
+}
 module.exports = router;

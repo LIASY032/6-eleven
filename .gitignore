@@ -26,3 +26,7 @@ yarn-error.log*
 ### logs ####
 /logs/
 *.log
+
+
+/default.json
+*/default.json
