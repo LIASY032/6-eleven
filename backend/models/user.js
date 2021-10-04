@@ -38,6 +38,12 @@ const userSchema = new mongoose.Schema({
     require: false,
     default: [],
   },
+  status: {
+    type: String,
+    enum: ["Pending", "Active"],
+    default: "Pending",
+  },
+  confirmationCode: String,
 });
 
 //the methods must places on model head

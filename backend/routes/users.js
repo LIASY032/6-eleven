@@ -23,35 +23,13 @@ router.post("/", async (req, res) => {
   let user = await User.findOne({ email: req.body.email });
   if (user) return res.status(400).send("User already registered.");
 
-  // user = new User(_.pick(req.body, ["name", "email", "password", "carts"]));
+  user = new User(_.pick(req.body, ["name", "email", "password", "carts"]));
 
   const salt = await bcrypt.genSalt(10);
-  const hashPassword = await bcrypt.hash(user.password, salt);
-  const confirmationID = generateID();
-  res.cookie(
-    "x-user-registration",
-    JSON.stringify({
-      email: req.body.email,
-      name: req.body.name,
-      password: hashPassword,
-      carts: req.body.carts,
-      confirmationID: confirmationID,
-    }),
-    {
-      secure: process.env.NODE_ENV !== "development",
-      httpOnly: true,
-      // expires: dayjs().add(30, "days").toDate(),
-    }
-  );
 
-  confirmation(
-    req.body.email,
-    "Open this link to confirm the account http://localhost:5000/api/users/confirmation/" +
-      confirmationID
-  );
-  res.send("Open Your Email");
-  // user.password = await bcrypt.hash(user.password, salt);
-  // await user.save();
+  user.password = await bcrypt.hash(user.password, salt);
+  user.confirmationCode = generateID();
+  await user.save();
   // const token = user.generateAuthToken();
   // res.cookie("x-auth-token", token, {
   //   secure: process.env.NODE_ENV !== "development",
@@ -59,6 +37,11 @@ router.post("/", async (req, res) => {
   //   // expires: dayjs().add(30, "days").toDate(),
   // });
   // res.send(_.pick(user, ["name", "email", "carts"]));
+  confirmation(
+    req.body.email,
+    `Open http://localhost:5000/api/users/confirmation/${user.confirmationCode}/${user._id}`
+  );
+  res.send("Open Your Email");
 });
 
 // user logins in
@@ -134,29 +117,22 @@ router.delete("/clearCartItem", auth, async (req, res) => {
   res.send("success");
 });
 
-router.get("/confirmation/:id", async (req, res) => {
-  let confirmationUser = req.cookies["x-user-registration"];
+router.get("/confirmation/:id/:userID", async (req, res) => {
+  const user = await User.findById(req.params.userID);
+  if (user.confirmationCode === req.params.id) {
+    user.status = "Active";
+    await user.save();
+    const token = user.generateAuthToken();
+    res.cookie("x-auth-token", token, {
+      secure: process.env.NODE_ENV !== "development",
+      httpOnly: true,
+      //   expires: dayjs().add(30, "days").toDate(),
+    });
 
-  confirmationUser = JSON.parse(confirmationUser);
-
-  if (confirmationUser.confirmationID !== req.params.id) {
-    res.status(400).send("Invalid Confirmation ID");
+    res.send(_.pick(user, ["_id", "name", "email", "carts"]));
+  } else {
+    res.status(400).send("Your confirmation code is invalid");
   }
-
-  const user = new User(
-    _.pick(confirmationUser, ["name", "email", "password", "carts"])
-  );
-
-  // const salt = await bcrypt.genSalt(10);
-  // user.password = await bcrypt.hash(user.password, salt);
-  await user.save();
-  const token = user.generateAuthToken();
-  res.cookie("x-auth-token", token, {
-    secure: process.env.NODE_ENV !== "development",
-    httpOnly: true,
-    //   expires: dayjs().add(30, "days").toDate(),
-  });
-  res.send(_.pick(user, ["name", "email", "carts"]));
 });
 
 //Generate Confirmation ID

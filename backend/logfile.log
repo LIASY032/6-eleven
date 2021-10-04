@@ -61,3 +61,38 @@
 {"level":"info","message":"Connected to MongoDB..."}
 {"level":"info","message":"Listening on port 5000..."}
 {"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"error","message":"Unexpected token u in JSON at position 0 Unexpected token u in JSON at position 0","stack":"SyntaxError: Unexpected token u in JSON at position 0\n    at JSON.parse (<anonymous>)\n    at /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:140:27\n    at newFn (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/route.js:137:13)\n    at Route.dispatch (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/route.js:112:3)\n    at newFn (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/layer.js:95:5)\n    at /Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/index.js:281:22\n    at param (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/index.js:354:14)"}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"error","message":"Unexpected token u in JSON at position 0 Unexpected token u in JSON at position 0","stack":"SyntaxError: Unexpected token u in JSON at position 0\n    at JSON.parse (<anonymous>)\n    at /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:140:27\n    at newFn (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/route.js:137:13)\n    at Route.dispatch (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/route.js:112:3)\n    at newFn (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/layer.js:95:5)\n    at /Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/index.js:281:22\n    at param (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/index.js:354:14)"}
+{"level":"error","message":"Unexpected token u in JSON at position 0 Unexpected token u in JSON at position 0","stack":"SyntaxError: Unexpected token u in JSON at position 0\n    at JSON.parse (<anonymous>)\n    at /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:140:27\n    at newFn (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/route.js:137:13)\n    at Route.dispatch (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/route.js:112:3)\n    at newFn (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/layer.js:95:5)\n    at /Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/index.js:281:22\n    at param (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/index.js:354:14)"}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"error","message":"Unexpected token u in JSON at position 0 Unexpected token u in JSON at position 0","stack":"SyntaxError: Unexpected token u in JSON at position 0\n    at JSON.parse (<anonymous>)\n    at /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:143:27\n    at newFn (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/layer.js:95:5)\n    at next (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/route.js:137:13)\n    at Route.dispatch (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/route.js:112:3)\n    at newFn (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express-async-errors/index.js:16:20)\n    at Layer.handle [as handle_request] (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/layer.js:95:5)\n    at /Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/index.js:281:22\n    at param (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/router/index.js:354:14)"}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
