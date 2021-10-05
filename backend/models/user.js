@@ -44,6 +44,7 @@ const userSchema = new mongoose.Schema({
     default: "Pending",
   },
   confirmationCode: String,
+  changePasswordCode: String, //need to change
 });
 
 //the methods must places on model head

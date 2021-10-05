@@ -11,6 +11,7 @@ const checkPending = require("../services/checkPending");
 //for security reason
 router.put("/me", async (req, res) => {
   const user = await User.findById(req.body._id).select("-password"); //don't want to show the password
+  if (!user) return res.status(404).send("User not found");
 
   // console.log(req.cookies);
   res.send(user);
@@ -22,6 +23,7 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   let user = await User.findOne({ email: req.body.email });
+
   if (user) return res.status(400).send("User already registered.");
 
   user = new User(_.pick(req.body, ["name", "email", "password", "carts"]));
@@ -30,6 +32,7 @@ router.post("/", async (req, res) => {
 
   user.password = await bcrypt.hash(user.password, salt);
   user.confirmationCode = generateID();
+
   await user.save();
 
   confirmation(
@@ -40,9 +43,11 @@ router.post("/", async (req, res) => {
 });
 
 // user logins in
-router.put("/:email", async (req, res) => {
+router.put("/login/:email", async (req, res) => {
   const email = req.params.email;
   const user = await User.findOne({ email });
+  if (!user) return res.status(404).send("User Not Found");
+
   if (!checkPending(user, res)) {
     bcrypt.compare(
       req.body.password,
@@ -124,7 +129,7 @@ router.delete("/clearCartItem", auth, async (req, res) => {
 
 router.get("/confirmation/:id/:userID", async (req, res) => {
   const user = await User.findById(req.params.userID);
-  if (!user) return res.status(400).send("User not found");
+  if (!user) return res.status(404).send("User not found");
   if (user.confirmationCode === req.params.id) {
     user.status = "Active";
     await user.save();
@@ -139,6 +144,38 @@ router.get("/confirmation/:id/:userID", async (req, res) => {
   } else {
     res.status(400).send("Your confirmation code is invalid");
   }
+});
+
+// forgot password
+router.put("/forgot", async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+
+  if (!user) {
+    return res.status(404).send("User not found");
+  }
+  user.changePasswordCode = generateID();
+
+  await user.save();
+
+  confirmation(
+    req.body.email,
+    `Your code is ${user.changePasswordCode}. `,
+    "Your user information"
+  );
+  res.send("Open your email to get your code");
+});
+
+router.put("/forgot/:codeID", async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) return res.status(404).send("User not found");
+  if (user.changePasswordCode === req.params.codeID) {
+    const salt = await bcrypt.genSalt(10);
+
+    user.password = await bcrypt.hash(req.body.password, salt);
+    await user.save();
+    return res.send("Your password has been changed");
+  }
+  res.status(400).send("Invalid confirmation code");
 });
 
 //Generate Confirmation ID
