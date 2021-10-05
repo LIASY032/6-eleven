@@ -2,11 +2,12 @@ const auth = require("../middleware/auth");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
-// const mongoose = require("mongoose");
+
 const express = require("express");
 const router = express.Router();
 
-const confirmation = require("../service/emailConfirmation");
+const confirmation = require("../services/emailConfirmation");
+const checkPending = require("../services/checkPending");
 //for security reason
 router.put("/me", async (req, res) => {
   const user = await User.findById(req.body._id).select("-password"); //don't want to show the password
@@ -30,13 +31,7 @@ router.post("/", async (req, res) => {
   user.password = await bcrypt.hash(user.password, salt);
   user.confirmationCode = generateID();
   await user.save();
-  // const token = user.generateAuthToken();
-  // res.cookie("x-auth-token", token, {
-  //   secure: process.env.NODE_ENV !== "development",
-  //   httpOnly: true,
-  //   // expires: dayjs().add(30, "days").toDate(),
-  // });
-  // res.send(_.pick(user, ["name", "email", "carts"]));
+
   confirmation(
     req.body.email,
     `Open http://localhost:5000/api/users/confirmation/${user.confirmationCode}/${user._id}`
@@ -48,77 +43,88 @@ router.post("/", async (req, res) => {
 router.put("/:email", async (req, res) => {
   const email = req.params.email;
   const user = await User.findOne({ email });
+  if (!checkPending(user, res)) {
+    bcrypt.compare(
+      req.body.password,
+      user.password,
+      async function (error, result) {
+        if (result) {
+          if (req.body.carts) {
+            let newCarts = [];
 
-  bcrypt.compare(
-    req.body.password,
-    user.password,
-    async function (error, result) {
-      if (result) {
-        if (req.body.carts) {
-          let newCarts = [];
-
-          req.body.carts.forEach((item) => {
-            let isExist = false;
-            user.carts.forEach((userCartItem) => {
-              if (item._id === userCartItem._id) {
-                userCartItem.count = item.count + userCartItem.count;
-                newCarts.push(userCartItem);
-                isExist = true;
+            req.body.carts.forEach((item) => {
+              let isExist = false;
+              user.carts.forEach((userCartItem) => {
+                if (item._id === userCartItem._id) {
+                  userCartItem.count = item.count + userCartItem.count;
+                  newCarts.push(userCartItem);
+                  isExist = true;
+                }
+              });
+              if (!isExist) {
+                newCarts.push(item);
               }
             });
-            if (!isExist) {
-              newCarts.push(item);
-            }
+            user.carts = newCarts;
+
+            await user.save();
+          }
+          const token = user.generateAuthToken();
+          res.cookie("x-auth-token", token, {
+            secure: process.env.NODE_ENV !== "development",
+            httpOnly: true,
+            //   expires: dayjs().add(30, "days").toDate(),
           });
-          user.carts = newCarts;
 
-          await user.save();
+          res.send(_.pick(user, ["_id", "name", "email", "carts"]));
+        } else {
+          res.status(404).send("User Not Found");
         }
-        const token = user.generateAuthToken();
-        res.cookie("x-auth-token", token, {
-          secure: process.env.NODE_ENV !== "development",
-          httpOnly: true,
-          //   expires: dayjs().add(30, "days").toDate(),
-        });
-
-        res.send(_.pick(user, ["_id", "name", "email", "carts"]));
-      } else {
-        res.status(404).send("User Not Found");
       }
-    }
-  );
+    );
+  }
 });
 
 // user adds a shopping cart item
 router.put("/addItem", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
-  const newItems = [];
-  user.carts.forEach((item) => {
-    if (item._id === req.body._id) {
-      item.count += req.body.count;
-    }
-    newItems.push(item);
-  });
-  user.carts = newItems;
-  await user.save();
-  res.send("success");
+  if (!user) return res.status(404).send("User Not Found");
+  if (!checkPending(user, res)) {
+    const newItems = [];
+    user.carts.forEach((item) => {
+      if (item._id === req.body._id) {
+        item.count += req.body.count;
+      }
+      newItems.push(item);
+    });
+    user.carts = newItems;
+    await user.save();
+    res.send("success");
+  }
 });
 
 router.get("/userInfo", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
-  res.send(user.carts);
+  if (!user) return res.status(404).send("User Not Found");
+  if (!checkPending(user, res)) {
+    res.send(user.carts);
+  }
 });
 
 router.delete("/clearCartItem", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
-  user.carts = [];
-  await user.save();
-  //need to change the return message
-  res.send("success");
+  if (!user) return res.status(404).send("User Not Found");
+  if (!checkPending(user, res)) {
+    user.carts = [];
+    await user.save();
+    //need to change the return message
+    res.send("success");
+  }
 });
 
 router.get("/confirmation/:id/:userID", async (req, res) => {
   const user = await User.findById(req.params.userID);
+  if (!user) return res.status(400).send("User not found");
   if (user.confirmationCode === req.params.id) {
     user.status = "Active";
     await user.save();

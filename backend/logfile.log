@@ -96,3 +96,32 @@
 {"level":"info","message":"Connected to MongoDB..."}
 {"level":"info","message":"Listening on port 5000..."}
 {"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"error","message":"Cannot read property 'status' of null Cannot read property 'status' of null","stack":"TypeError: Cannot read property 'status' of null\n    at check (/Users/fanliang/Desktop/6-eleven/backend/services/checkPending.js:2:12)\n    at /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:46:3\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"}
+{"level":"error","message":"Cannot read property 'status' of null Cannot read property 'status' of null","stack":"TypeError: Cannot read property 'status' of null\n    at check (/Users/fanliang/Desktop/6-eleven/backend/services/checkPending.js:2:12)\n    at /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:46:3\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"error","message":"Cannot read property 'password' of null Cannot read property 'password' of null","stack":"TypeError: Cannot read property 'password' of null\n    at /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:50:10\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"error","message":"Cannot read property 'status' of null Cannot read property 'status' of null","stack":"TypeError: Cannot read property 'status' of null\n    at check (/Users/fanliang/Desktop/6-eleven/backend/services/checkPending.js:3:12)\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)\n    at async /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:49:3"}
+{"level":"error","message":"Cannot read property 'status' of null Cannot read property 'status' of null","stack":"TypeError: Cannot read property 'status' of null\n    at check (/Users/fanliang/Desktop/6-eleven/backend/services/checkPending.js:3:12)\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)\n    at async /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:49:3"}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"error","message":"Cannot read property 'status' of null Cannot read property 'status' of null","stack":"TypeError: Cannot read property 'status' of null\n    at check (/Users/fanliang/Desktop/6-eleven/backend/services/checkPending.js:3:12)\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)\n    at async /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:49:3"}
+{"level":"error","message":"Cannot read property 'status' of null Cannot read property 'status' of null","stack":"TypeError: Cannot read property 'status' of null\n    at check (/Users/fanliang/Desktop/6-eleven/backend/services/checkPending.js:3:12)\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)\n    at async /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:49:3"}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
