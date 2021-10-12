@@ -178,3 +178,7 @@
 {"code":"ERR_HTTP_HEADERS_SENT","level":"error","message":"Cannot set headers after they are sent to the client Cannot set headers after they are sent to the client","stack":"Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client\n    at ServerResponse.setHeader (_http_outgoing.js:558:11)\n    at ServerResponse.header (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/response.js:771:10)\n    at ServerResponse.send (/Users/fanliang/Desktop/6-eleven/backend/node_modules/express/lib/response.js:170:12)\n    at /Users/fanliang/Desktop/6-eleven/backend/routes/users.js:178:19\n    at processTicksAndRejections (internal/process/task_queues.js:93:5)"}
 {"level":"info","message":"Listening on port 5000..."}
 {"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}
+{"level":"info","message":"Listening on port 5000..."}
+{"level":"info","message":"Connected to MongoDB..."}

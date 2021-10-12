@@ -11,6 +11,7 @@ export const userLogin = async (email, password, carts, dispatch) => {
   } else {
     dispatch({
       type: USER_LOGIN_ERROR,
+      payload: data,
     });
   }
 };

@@ -3,7 +3,7 @@ import { convertCarts } from "./shoppingCart";
 
 export async function signIn(email, password, carts = []) {
   try {
-    const { data } = await axios.put(`/users/${email}`, {
+    const { data } = await axios.put(`/users/login/${email}`, {
       password,
       carts: convertCarts(carts),
     });
