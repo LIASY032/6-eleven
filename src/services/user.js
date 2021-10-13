@@ -8,13 +8,16 @@ export async function signIn(email, password, carts = []) {
       carts: convertCarts(carts),
     });
 
-    //need a fix for security
-    // localStorage.setItem("x-auth-token", headers("x-auth-token"));
     alert("success");
 
     return data;
+
+    //need a fix for security
+    // localStorage.setItem("x-auth-token", headers("x-auth-token"));
   } catch (ex) {
-    console.log(ex);
+    if (ex.response.status === 401) {
+      alert(ex.response.data);
+    }
   }
 }
 
