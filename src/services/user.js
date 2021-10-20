@@ -8,7 +8,7 @@ export async function signIn(email, password, carts = []) {
       carts: convertCarts(carts),
     });
 
-    alert("success");
+    alert(`${data.name} login successfully `);
 
     return data;
 

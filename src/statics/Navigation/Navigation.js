@@ -12,6 +12,7 @@ import { PersonCircle, Search, Shop } from "react-bootstrap-icons";
 import { useIsLogin } from "../../contexts/LoginContext";
 import ShoppingCartLogo from "../ShoppingCartLogo";
 import { useSelector } from "react-redux";
+import { LeftOffCanvas } from "../UserProfile";
 
 function Navigation() {
   const { setIsChange } = useIsLogin();
@@ -35,7 +36,7 @@ function Navigation() {
               <Nav.Link href="/about">About</Nav.Link>
             </Nav.Item>
             <Nav.Item>
-              <Nav.Link href="/contace">Contact</Nav.Link>
+              <Nav.Link href="/contact">Contact</Nav.Link>
             </Nav.Item>
           </Nav>
           <Form className="d-flex">
@@ -56,14 +57,18 @@ function Navigation() {
               <ShoppingCartLogo></ShoppingCartLogo>
             </Nav.Link>
           </Nav.Item>
-          <Button
-            onClick={function () {
-              setIsChange(1);
-            }}
-          >
-            <PersonCircle size={20}></PersonCircle>{" "}
-            {user.name ? user.name : "Login in"}
-          </Button>
+
+          {user.name ? (
+            <LeftOffCanvas />
+          ) : (
+            <Button
+              onClick={function () {
+                setIsChange(1);
+              }}
+            >
+              <PersonCircle size={20}></PersonCircle> Login
+            </Button>
+          )}
         </Navbar.Collapse>
       </Navbar>
     </>
