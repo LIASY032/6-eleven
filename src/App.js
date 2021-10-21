@@ -13,10 +13,11 @@ import { useItemDetails } from "./contexts";
 import { ItemDetails, Logging, Registeration } from "./statics/Modal";
 
 import { useDispatch } from "react-redux";
-import { fetchItems } from "./store/actions";
+import { fetchItems, getUserInfo } from "./store/actions";
 function App() {
   const dispatch = useDispatch();
   fetchItems(dispatch);
+  getUserInfo(dispatch);
 
   const { isOpenModal, handleCloseModal } = useItemDetails();
   return (

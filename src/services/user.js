@@ -17,6 +17,8 @@ export async function signIn(email, password, carts = []) {
   } catch (ex) {
     if (ex.response.status === 401) {
       alert(ex.response.data);
+    } else {
+      alert(ex.response.message);
     }
   }
 }
@@ -50,6 +52,10 @@ export async function userInfo() {
     const { data } = await axios.get(`/users/userInfo`);
     return data;
   } catch (ex) {
-    console.log(ex);
+    if (ex.response.status === 401) {
+      console.log(ex.response.data);
+    } else {
+      console.log(ex.response);
+    }
   }
 }

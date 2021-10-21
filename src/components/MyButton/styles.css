@@ -30,11 +30,11 @@ display: block;
 
 .bootstrapButton{
 
-    background-color: #385F4B;
+    background-color: #385F4B !important;
     width: 100%;
 }
 
 .bootstrapButton:hover{
-     background-color: #385F4B;
+   
      opacity: 0.5;
 }

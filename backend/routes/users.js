@@ -110,9 +110,10 @@ router.put("/addItem", auth, async (req, res) => {
 
 router.get("/userInfo", auth, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
+
   if (!user) return res.status(404).send("User Not Found");
   if (!checkPending(user, res)) {
-    res.send(user.carts);
+    res.send(user);
   }
 });
 

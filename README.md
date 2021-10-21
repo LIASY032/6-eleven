@@ -22,4 +22,4 @@ You will also see any lint errors in the console.
 
 Runs the server in [http://localhost:5000](http://localhost:5000)
 
-export sixeleven_jwtPrivateKey="privateKey"
+export sixeleven_sixelevenPrivateKey="privateKey"
