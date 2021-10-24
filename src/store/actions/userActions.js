@@ -1,4 +1,9 @@
-import { USER_LOGIN, USER_LOGIN_ERROR } from "../../constants";
+import {
+  USER_LOGIN,
+  USER_LOGIN_ERROR,
+  USER_DOES_NOT_HAVE_TOKEN,
+  USER_LOGOUT,
+} from "../../constants";
 import { signIn, userInfo } from "../../services";
 
 export const userLogin = async (email, password, carts, dispatch) => {
@@ -25,8 +30,14 @@ export const getUserInfo = async (dispatch) => {
     });
   } else {
     dispatch({
-      type: USER_LOGIN_ERROR,
+      type: USER_DOES_NOT_HAVE_TOKEN,
       payload: data,
     });
   }
+};
+
+export const logOut = (dispatch) => {
+  dispatch({
+    type: USER_LOGOUT,
+  });
 };

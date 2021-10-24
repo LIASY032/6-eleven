@@ -10,7 +10,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navigation from "./statics/Navigation/Navigation";
 
 import { useItemDetails } from "./contexts";
-import { ItemDetails, Logging, Registeration } from "./statics/Modal";
+import { ItemDetails, Logging, Registration } from "./statics/Modal";
 
 import { useDispatch } from "react-redux";
 import { fetchItems, getUserInfo } from "./store/actions";
@@ -24,7 +24,7 @@ function App() {
     <div className="App">
       <Navigation></Navigation>
       <Logging></Logging>
-      <Registeration></Registeration>
+      <Registration></Registration>
 
       <Router>
         <Switch>

@@ -8,8 +8,10 @@ export const FETCH_ITEMS = "FETCH_ITEMS";
 export const FETCH_ITEMS_ERROR = "FETCH_ITEMS_ERROR";
 
 export const USER_LOGIN = "USER_LOGIN";
+export const USER_LOGOUT = "USER_LOGOUT";
 export const USER_ADD_ITEM = "USER_ADD_ITEM";
 export const USER_LOGIN_ERROR = "USER_LOGIN_ERROR";
+export const USER_DOES_NOT_HAVE_TOKEN = "USER_DOES_NOT_HAVE_TOKEN";
 export const CREATE_ORDER = "CREATE_ORDER";
 export const CLEAR_ORDER = "CLEAR_ORDER";
 export const CLEAR_CART = "CLEAR_CART";

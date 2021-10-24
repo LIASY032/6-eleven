@@ -1,6 +1,10 @@
 import React from "react";
-import { Button, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, ListGroup, Row } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { logOut } from "../../store/actions";
+
 function LeftOffCanvas() {
+  const dispatch = useDispatch();
   return (
     <>
       {/* <Button variant="primary" onClick={handleShow}>
@@ -39,7 +43,15 @@ function LeftOffCanvas() {
             </ListGroup>
           </Row>
           <Row>
-            <Button>Log out</Button>
+            <Button
+              data-bs-dismiss="offcanvas"
+              aria-label="Close"
+              onClick={() => {
+                logOut(dispatch);
+              }}
+            >
+              Log out
+            </Button>
           </Row>
         </div>
       </div>

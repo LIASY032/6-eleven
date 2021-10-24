@@ -4,16 +4,16 @@ import { BootstrapInput } from "../../components/Input";
 import { BootstrapButton } from "../../components/MyButton";
 import { useResigeration } from "../../contexts";
 
-function Registeration() {
-  const { isRegisteration, setIsRegisteration } = useResigeration();
+function Registration() {
+  const { isRegistration, setIsRegistration } = useResigeration();
   function handleClose() {
-    setIsRegisteration(0);
+    setIsRegistration(0);
   }
   return (
     <>
-      <Modal show={isRegisteration === 1 ? true : false} onHide={handleClose}>
+      <Modal show={isRegistration === 1 ? true : false} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>REGISTERATION</Modal.Title>
+          <Modal.Title>REGISTRATION</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -36,4 +36,4 @@ function Registeration() {
   );
 }
 
-export default Registeration;
+export default Registration;
