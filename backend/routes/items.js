@@ -4,10 +4,28 @@ const express = require("express");
 const router = express.Router();
 const _ = require("lodash");
 
+const Redis = require("redis");
+const redisClient = Redis.createClient();
+const DEFAULT_EXPIRATION = 3600;
+
 router.get("/", async (req, res) => {
   // throw new Error("CCCCCCC");
-  const items = await Item.find().sort("title");
-  res.send(items);
+
+  redisClient.get("items", async (error, items) => {
+    if (error) throw new Error(error);
+    if (items != null) {
+      res.send(JSON.parse(items));
+    } else {
+      const storeItems = await Item.find().sort("title");
+
+      redisClient.setex(
+        "items",
+        DEFAULT_EXPIRATION,
+        JSON.stringify(storeItems)
+      );
+      res.send(storeItems);
+    }
+  });
 });
 
 router.post("/", async (req, res) => {
