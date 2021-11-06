@@ -5,14 +5,16 @@ const router = express.Router();
 const _ = require("lodash");
 
 const Redis = require("redis");
+const reportError = require("../services/reportError");
 const redisClient = Redis.createClient();
-const DEFAULT_EXPIRATION = 3600;
+const DEFAULT_EXPIRATION = 86400000;
 
 router.get("/", async (req, res) => {
   // throw new Error("CCCCCCC");
 
   redisClient.get("items", async (error, items) => {
-    if (error) throw new Error(error);
+    if (error)
+      reportError("Redis server doest not set up or something error", error);
     if (items != null) {
       res.send(JSON.parse(items));
     } else {
