@@ -1,4 +1,5 @@
 const { Item, validate } = require("../models/item");
+const auth = require("../middleware/auth");
 
 const express = require("express");
 const router = express.Router();
@@ -9,6 +10,7 @@ const reportError = require("../services/reportError");
 const redisClient = Redis.createClient();
 const DEFAULT_EXPIRATION = 86400000;
 
+// get all items in the database
 router.get("/", async (req, res) => {
   // throw new Error("CCCCCCC");
 
@@ -30,7 +32,8 @@ router.get("/", async (req, res) => {
   });
 });
 
-router.post("/", async (req, res) => {
+// add the item, only auth person
+router.post("/", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -42,7 +45,8 @@ router.post("/", async (req, res) => {
   res.send(item);
 });
 
-router.put("/:id", async (req, res) => {
+// update the item, only auth person
+router.put("/:id", auth, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -60,7 +64,8 @@ router.put("/:id", async (req, res) => {
   res.send(item);
 });
 
-router.delete("/:id", async (req, res) => {
+// delete the item, only auth person
+router.delete("/:id", auth, async (req, res) => {
   const item = await Item.findByIdAndRemove(req.params.id);
 
   if (!item)
@@ -69,6 +74,7 @@ router.delete("/:id", async (req, res) => {
   res.send(item);
 });
 
+// according the item id to find the item
 router.get("/:id", async (req, res) => {
   const item = await Item.findById(req.params.id);
 

@@ -4,7 +4,6 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-   
     "start": "nodemon server.js",
     "test": "jest --watchAll --verbose"
   },
@@ -21,6 +20,7 @@
     "mongoose": "^6.0.7",
     "nodemailer": "^6.6.5",
     "redis": "^3.1.2",
+    "supertest": "^6.1.6",
     "winston": "^3.3.3",
     "winston-mongodb": "^5.0.7"
   },
