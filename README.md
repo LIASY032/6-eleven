@@ -24,7 +24,7 @@ Runs the server in [http://localhost:5000](http://localhost:5000)
 
 export sixeleven_sixelevenPrivateKey="privateKey"
 
-# Fresh Food
+# 6-Eleven
 
 
 6-Eleven is a MERN stack e-commerce web application

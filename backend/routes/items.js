@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
 
   redisClient.get("items", async (error, items) => {
     if (error)
-      reportError("Redis server doest not set up or something error", error);
+      reportError("Redis server doesn't not set up or something error", error);
     if (items != null) {
       res.send(JSON.parse(items));
     } else {

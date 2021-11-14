@@ -4,18 +4,18 @@ import useLocalStorage from "../hooks/useLocalStorage";
 
 const AccountProvider = React.createContext();
 
-export function useResigeration() {
+export function useRegistration() {
   return useContext(AccountProvider);
 }
 
-export function RegisterationContext({ children }) {
-  const [isRegisteration, setIsRegisteration] = useLocalStorage(isRegister, 0);
+export function RegistrationContext({ children }) {
+  const [isRegistration, setIsRegistration] = useLocalStorage(isRegister, 0);
 
   return (
-    <AccountProvider.Provider value={{ isRegisteration, setIsRegisteration }}>
+    <AccountProvider.Provider value={{ isRegistration, setIsRegistration }}>
       {children}
     </AccountProvider.Provider>
   );
 }
 
-export default RegisterationContext;
+export default RegistrationContext;

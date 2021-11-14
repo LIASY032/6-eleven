@@ -4,7 +4,7 @@ import { Form, Button, Modal } from "react-bootstrap";
 import { useCart } from "../../contexts";
 import { BootstrapInput } from "../../components/Input";
 import { BootstrapButton } from "../../components/MyButton";
-import { useResigeration } from "../../contexts";
+import { useRegistration } from "../../contexts";
 import { useIsLogin } from "../../contexts/LoginContext";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/actions";
@@ -14,7 +14,7 @@ function Logging() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { islogin, setIsChange } = useIsLogin();
-  const { setIsRegisteration } = useResigeration();
+  const { setIsRegistration } = useRegistration();
   const dispatch = useDispatch();
   function handleClose() {
     setIsChange(0);
@@ -66,8 +66,8 @@ function Logging() {
           <Button
             variant="warning"
             onClick={() => {
+              setIsRegistration(1);
               handleClose();
-              setIsRegisteration(1);
             }}
             style={{ width: "100%" }}
           >

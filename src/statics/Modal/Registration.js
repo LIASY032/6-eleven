@@ -2,10 +2,10 @@ import React from "react";
 import { Form, Modal } from "react-bootstrap";
 import { BootstrapInput } from "../../components/Input";
 import { BootstrapButton } from "../../components/MyButton";
-import { useResigeration } from "../../contexts";
+import { useRegistration } from "../../contexts";
 
 function Registration() {
-  const { isRegistration, setIsRegistration } = useResigeration();
+  const { isRegistration, setIsRegistration } = useRegistration();
   function handleClose() {
     setIsRegistration(0);
   }
