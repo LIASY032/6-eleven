@@ -14,6 +14,8 @@ import { ItemDetails, Logging, Registration } from "./statics/Modal";
 
 import { useDispatch } from "react-redux";
 import { fetchItems, getUserInfo } from "./store/actions";
+
+import Chat from "./components/Chat";
 function App() {
   const dispatch = useDispatch();
   fetchItems(dispatch);
@@ -37,6 +39,7 @@ function App() {
         handleClose={handleCloseModal}
         item={isOpenModal.item}
       ></ItemDetails>
+      <Chat />
       <Footer></Footer>
     </div>
   );
