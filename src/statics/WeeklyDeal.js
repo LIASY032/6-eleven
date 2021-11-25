@@ -1,14 +1,24 @@
 import React from "react";
 import { Container, Row } from "react-bootstrap";
-
-function WeeklyDeal() {
+import Carousel from "react-elastic-carousel";
+import Item from "../components/Item/Item";
+function WeeklyDeal({ items }) {
   return (
     <>
       <Container className="bottom-gap common-container extra-padding-bottom">
         <Row>
           <h1>Weekly Deals</h1>
         </Row>
-        <Row>updating</Row>
+        <Row>
+          <Carousel itemsToShow={3}>
+            {items &&
+              items.map(function (item, i) {
+                if (item.weeklyDeal) {
+                  return <Item key={i} item={item}></Item>;
+                }
+              })}
+          </Carousel>
+        </Row>
       </Container>
     </>
   );

@@ -72,5 +72,9 @@
   "engines": {
     "node": "12.4.0",
     "npm": "6.9.0"
+  },
+  "devDependencies": {
+    "@lifarl/react-scroll-snap-slider": "^2.0.5",
+    "react-elastic-carousel": "^0.11.5"
   }
 }

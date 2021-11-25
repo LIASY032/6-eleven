@@ -5,24 +5,19 @@ import { Bag, ExclamationCircle } from "react-bootstrap-icons";
 import { Fade } from "react-reveal";
 import WeeklyDeal from "../statics/WeeklyDeal";
 import SlideShow from "../components/MyCarousel";
+import { useSelector } from "react-redux";
 
 function Home() {
+  const items = useSelector((state) => state.items.items);
   return (
     <>
       <Fade top>
-        <Container
-          className="margin-top"
-          onScroll={(e) => {
-            console.log("====================================");
-            console.log(e);
-            console.log("====================================");
-          }}
-        >
+        <Container className="margin-top">
           <SlideShow></SlideShow>
         </Container>
       </Fade>
 
-      <WeeklyDeal></WeeklyDeal>
+      <WeeklyDeal items={items}></WeeklyDeal>
 
       {/* <Container
         className="margin-top common-container"

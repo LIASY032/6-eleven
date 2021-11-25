@@ -27,7 +27,7 @@ function Item({ item }) {
               <Button
                 onClick={() => {
                   if (count > 1) {
-                    setCount((count) => count - 1);
+                    setCount(count - 1);
                     setAmount(item, count - 1);
                   }
                 }}
@@ -38,17 +38,20 @@ function Item({ item }) {
             </InputGroup.Text>
             <FormControl
               value={count}
-              onChange={() => {
-                if (count > 0) {
-                  setCount(count);
-                  setAmount(item, count);
+              onChange={(e) => {
+                let value = e.target.value;
+
+                setCount(value);
+
+                if (value > 0) {
+                  setAmount(item, value);
                 }
               }}
             />
             <InputGroup.Text>
               <Button
                 onClick={() => {
-                  setCount((count) => count + 1);
+                  setCount(count + 1);
 
                   setAmount(item, count + 1);
                 }}

@@ -16,6 +16,11 @@ const itemSchema = new mongoose.Schema({
   price: Number,
   info: String,
   collectionType: { type: String, require: true },
+  weeklyDeal: {
+    type: Boolean,
+    require: false,
+    default: false,
+  },
 });
 
 const Item = mongoose.model("Item", itemSchema);
