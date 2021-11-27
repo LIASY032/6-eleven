@@ -7,6 +7,7 @@ import { TwoSideContainer } from "../../components/MyContainer";
 
 function ItemDetails({ isShow, handleClose, item }) {
   const { addItem, removeItem } = useCart();
+
   return (
     <>
       <Modal show={isShow} onHide={handleClose} dialogClassName="modal-xl">

@@ -4,21 +4,18 @@ import { Form, Button, Modal } from "react-bootstrap";
 import { useCart } from "../../contexts";
 import { BootstrapInput } from "../../components/Input";
 import { BootstrapButton } from "../../components/MyButton";
-import { useRegistration } from "../../contexts";
-import { useIsLogin } from "../../contexts/LoginContext";
+// import { useRegistration } from "../../contexts";
+// import { useIsLogin } from "../../contexts/LoginContext";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/actions";
 
-function Logging() {
+function Logging({ handleClose, isShow, moveToRegistration }) {
   const { carts } = useCart();
   const emailRef = useRef();
   const passwordRef = useRef();
-  const { islogin, setIsChange } = useIsLogin();
-  const { setIsRegistration } = useRegistration();
+  // const { islogin, setIsChange } = useIsLogin();
+  // const { setIsRegistration } = useRegistration();
   const dispatch = useDispatch();
-  function handleClose() {
-    setIsChange(0);
-  }
 
   function handleLogin(e) {
     e.preventDefault();
@@ -37,7 +34,7 @@ function Logging() {
 
   return (
     <>
-      <Modal show={islogin === 1 ? true : false} onHide={handleClose}>
+      <Modal show={isShow} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>LOGIN</Modal.Title>
         </Modal.Header>
@@ -66,8 +63,7 @@ function Logging() {
           <Button
             variant="warning"
             onClick={() => {
-              setIsRegistration(1);
-              handleClose();
+              moveToRegistration();
             }}
             style={{ width: "100%" }}
           >

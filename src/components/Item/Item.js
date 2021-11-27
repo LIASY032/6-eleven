@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { Card, Button, InputGroup, FormControl } from "react-bootstrap";
 import { useCart } from "../../contexts/CartContainerContext";
-import { useItemDetails } from "../../contexts/ItemDetailsContext";
+// import { useItemDetails } from "../../contexts/ItemDetailsContext";
+import { useDispatch } from "react-redux";
+import { openItemDetails } from "../../store/actions";
 
 function Item({ item }) {
+  const dispatch = useDispatch();
+
   const [count, setCount] = useState(1);
-  const { handleOpenModal } = useItemDetails();
+  // const { handleOpenModal } = useItemDetails();
+
+  function handleOpenModal() {
+    openItemDetails(item, dispatch);
+  }
+
   const { addItem, setAmount } = useCart();
   return (
     <>

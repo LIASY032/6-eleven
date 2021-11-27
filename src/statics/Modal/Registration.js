@@ -2,16 +2,14 @@ import React from "react";
 import { Form, Modal } from "react-bootstrap";
 import { BootstrapInput } from "../../components/Input";
 import { BootstrapButton } from "../../components/MyButton";
-import { useRegistration } from "../../contexts";
+// import { useRegistration } from "../../contexts";
 
-function Registration() {
-  const { isRegistration, setIsRegistration } = useRegistration();
-  function handleClose() {
-    setIsRegistration(0);
-  }
+function Registration({ isShow, handleClose }) {
+  // const { isRegistration, setIsRegistration } = useRegistration();
+
   return (
     <>
-      <Modal show={isRegistration === 1 ? true : false} onHide={handleClose}>
+      <Modal show={isShow} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>REGISTRATION</Modal.Title>
         </Modal.Header>

@@ -9,24 +9,49 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
 import Navigation from "./statics/Navigation/Navigation";
 
-import { useItemDetails } from "./contexts";
 import { ItemDetails, Logging, Registration } from "./statics/Modal";
 
 import { useDispatch } from "react-redux";
-import { fetchItems, getUserInfo } from "./store/actions";
-
+import {
+  fetchItems,
+  getUserInfo,
+  closeAllModels,
+  isLogin,
+  isRegistration,
+} from "./store/actions";
+import { useSelector } from "react-redux";
 import Chat from "./components/Chat";
 function App() {
   const dispatch = useDispatch();
-  fetchItems(dispatch);
-  getUserInfo(dispatch);
+  React.useEffect(() => {
+    //Once the App running, fetch data and check the user login
+    fetchItems(dispatch);
+    getUserInfo(dispatch);
+  }, []);
 
-  const { isOpenModal, handleCloseModal } = useItemDetails();
+  const handleCloseModal = () => {
+    closeAllModels(dispatch);
+  };
+  const modelController = useSelector((state) => state.modelController);
+  const openLogin = () => {
+    isLogin(dispatch);
+  };
+  const openRegistration = () => {
+    isRegistration(dispatch);
+  };
+
   return (
     <div className="App">
-      <Navigation></Navigation>
-      <Logging></Logging>
-      <Registration></Registration>
+      <Navigation userLoginFunction={openLogin}></Navigation>
+      <Logging
+        handleClose={handleCloseModal}
+        isShow={modelController.isLogin}
+        moveToRegistration={openRegistration}
+      ></Logging>
+      <Registration
+        isShow={modelController.isRegistration}
+        handleClose={handleCloseModal}
+      ></Registration>
 
       <Router>
         <Switch>
@@ -34,11 +59,14 @@ function App() {
           <Route path="/shop" component={ShopPage}></Route>
         </Switch>
       </Router>
-      <ItemDetails
-        isShow={isOpenModal.isOpen}
-        handleClose={handleCloseModal}
-        item={isOpenModal.item}
-      ></ItemDetails>
+      {modelController.itemDetails.item && (
+        <ItemDetails
+          isShow={modelController.itemDetails.isShow}
+          handleClose={handleCloseModal}
+          item={modelController.itemDetails.item}
+        ></ItemDetails>
+      )}
+
       <Chat />
       <Footer></Footer>
     </div>

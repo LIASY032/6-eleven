@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Row } from "react-bootstrap";
 import Carousel from "react-elastic-carousel";
 import Item from "../components/Item/Item";
-function WeeklyDeal({ items }) {
+function WeeklyDeal({ items, children }) {
   return (
     <>
       <Container className="bottom-gap common-container extra-padding-bottom">

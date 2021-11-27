@@ -16,5 +16,11 @@ export const CREATE_ORDER = "CREATE_ORDER";
 export const CLEAR_ORDER = "CLEAR_ORDER";
 export const CLEAR_CART = "CLEAR_CART";
 export const FETCH_ORDERS = "FETCH_ORDERS";
+
+//model
+export const IS_LOGIN = "IS_LOGIN";
+export const IS_REGISTRATION = "IS_REGISTRATION";
+export const CLOSE_ALL_MODELS = "CLOSE_ALL_MODELS";
+export const ITEM_DETAILS = "ITEM_DETAILS";
 export * from "./types";
 export * from "./localStorageType";

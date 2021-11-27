@@ -3,6 +3,7 @@ import {
   USER_LOGIN_ERROR,
   USER_DOES_NOT_HAVE_TOKEN,
   USER_LOGOUT,
+  USER_ADD_ITEM,
 } from "../../constants";
 import { signIn, userInfo } from "../../services";
 
@@ -39,5 +40,12 @@ export const getUserInfo = async (dispatch) => {
 export const logOut = (dispatch) => {
   dispatch({
     type: USER_LOGOUT,
+  });
+};
+
+export const userAddItem = (item, dispatch) => {
+  dispatch({
+    type: USER_ADD_ITEM,
+    payload: item,
   });
 };

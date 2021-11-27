@@ -9,13 +9,12 @@ import {
 } from "react-bootstrap";
 import { PersonCircle, Search, Shop } from "react-bootstrap-icons";
 
-import { useIsLogin } from "../../contexts/LoginContext";
+// import { useIsLogin } from "../../contexts/LoginContext";
 import ShoppingCartLogo from "../ShoppingCartLogo";
 import { useSelector } from "react-redux";
 import { LeftOffCanvas } from "../UserProfile";
 
-function Navigation() {
-  const { setIsChange } = useIsLogin();
+function Navigation({ userLoginFunction }) {
   const user = useSelector((state) => state.user);
   return (
     <>
@@ -63,7 +62,7 @@ function Navigation() {
           ) : (
             <Button
               onClick={function () {
-                setIsChange(1);
+                userLoginFunction();
               }}
             >
               <PersonCircle size={20}></PersonCircle> Login
