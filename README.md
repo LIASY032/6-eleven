@@ -88,9 +88,10 @@ npm install
 - Run the following commands to start the applications:
 
 ```bash
-cd api
-npm run dev # to start the backend
-cd ../client
+npm run redis
+cd backend
+npm start # to start the backend
+cd ../
 npm start # to start the frontend
 ```
 
