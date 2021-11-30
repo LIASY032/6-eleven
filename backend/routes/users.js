@@ -35,6 +35,7 @@ router.post("/", async (req, res) => {
 
   await user.save();
 
+  // TODO: modify this in production level
   confirmation(
     req.body.email,
     `Open http://localhost:5000/api/users/confirmation/${user.confirmationCode}/${user._id}`
@@ -54,8 +55,9 @@ router.put("/login/:email", async (req, res) => {
       user.password,
       async function (error, result) {
         if (result) {
+          // if the user login has shopping cart items
           if (req.body.carts) {
-            let newCarts = [];
+            const newCarts = [];
 
             req.body.carts.forEach((item) => {
               let isExist = false;

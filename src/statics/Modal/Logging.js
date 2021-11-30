@@ -4,17 +4,16 @@ import { Form, Button, Modal } from "react-bootstrap";
 import { useCart } from "../../contexts";
 import { BootstrapInput } from "../../components/Input";
 import { BootstrapButton } from "../../components/MyButton";
-// import { useRegistration } from "../../contexts";
-// import { useIsLogin } from "../../contexts/LoginContext";
+
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/actions";
 
+// TODO: Refactor
 function Logging({ handleClose, isShow, moveToRegistration }) {
   const { carts } = useCart();
   const emailRef = useRef();
   const passwordRef = useRef();
-  // const { islogin, setIsChange } = useIsLogin();
-  // const { setIsRegistration } = useRegistration();
+
   const dispatch = useDispatch();
 
   function handleLogin(e) {

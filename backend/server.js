@@ -18,6 +18,8 @@ app.use(cookieParser());
 //   res.header("Access-Control-Allow-Headers", "*");
 // });
 
+// app.use(cors({credentials: true, origin: "http://localhost:3000"}))
+
 require("./startup/logging")();
 require("./startup/db")();
 require("./startup/routes")(app);

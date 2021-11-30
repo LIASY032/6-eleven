@@ -10,7 +10,7 @@ export async function addToCart(item) {
 }
 
 export function convertCarts(carts) {
-  const newCarts = carts.forEach((item) => {
+  const newCarts = carts.map((item) => {
     return {
       _id: item._id,
       title: item.title,

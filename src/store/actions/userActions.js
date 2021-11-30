@@ -9,6 +9,7 @@ import { signIn, userInfo } from "../../services";
 
 export const userLogin = async (email, password, carts, dispatch) => {
   const data = await signIn(email, password, carts);
+
   if (data !== undefined && data != null && data !== "") {
     dispatch({
       type: USER_LOGIN,
@@ -43,6 +44,7 @@ export const logOut = (dispatch) => {
   });
 };
 
+// TODO: delete item, update item
 export const userAddItem = (item, dispatch) => {
   dispatch({
     type: USER_ADD_ITEM,
