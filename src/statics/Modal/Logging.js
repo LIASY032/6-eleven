@@ -7,7 +7,7 @@ import { BootstrapButton } from "../../components/MyButton";
 
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/actions";
-
+import GoogleLogin from "react-google-login";
 // TODO: Refactor
 function Logging({ handleClose, isShow, moveToRegistration }) {
   const { carts } = useCart();
@@ -30,7 +30,9 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
       );
     }
   }
-
+  const responseGoogle = (response) => {
+    console.log(response);
+  };
   return (
     <>
       <Modal show={isShow} onHide={handleClose}>
@@ -68,6 +70,13 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
           >
             Create Account
           </Button>
+          <GoogleLogin
+            clientId="582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com"
+            buttonText="Login"
+            onSuccess={responseGoogle}
+            onFailure={responseGoogle}
+            cookiePolicy={"single_host_origin"}
+          />
         </Modal.Footer>
       </Modal>
     </>
