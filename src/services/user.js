@@ -59,3 +59,11 @@ export async function userInfo() {
     }
   }
 }
+export const googleSignIn = (tokenId) => {
+  return axios({
+    method: "post",
+    url: `/users/auth/google`,
+    withCredentials: true,
+    data: { token: tokenId },
+  });
+};

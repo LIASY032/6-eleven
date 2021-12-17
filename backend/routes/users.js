@@ -8,6 +8,13 @@ const router = express.Router();
 
 const confirmation = require("../services/emailConfirmation");
 const checkPending = require("../services/checkPending");
+const { OAuth2Client } = require("google-auth-library");
+
+// TODO: remove client id
+const client = new OAuth2Client(
+  "582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com"
+);
+
 //for security reason
 router.put("/me", async (req, res) => {
   const user = await User.findById(req.body._id).select("-password"); //don't want to show the password
@@ -168,6 +175,22 @@ router.put("/forgot", async (req, res) => {
   res.send("Open your email to get your code");
 });
 
+//google login
+router.post("/auth/google", async (req, res) => {
+  const { token } = req.body;
+  console.log("ksabdfjbajsbvfj");
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience:
+      "582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com",
+  });
+  const { name, email, picture } = ticket.getPayload();
+  console.log("====================================");
+  console.log(name);
+  console.log("====================================");
+  res.status(201);
+  res.send("successfully login google");
+});
 router.put("/forgot/:codeID", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(404).send("User not found");
@@ -199,4 +222,5 @@ function generateID() {
     return key[a];
   });
 }
+
 module.exports = router;

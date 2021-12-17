@@ -8,6 +8,7 @@ import { BootstrapButton } from "../../components/MyButton";
 import { useDispatch } from "react-redux";
 import { userLogin } from "../../store/actions";
 import GoogleLogin from "react-google-login";
+import { googleSignIn } from "../../services";
 // TODO: Refactor
 function Logging({ handleClose, isShow, moveToRegistration }) {
   const { carts } = useCart();
@@ -30,7 +31,10 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
       );
     }
   }
+
+  // TODO: send to backend
   const responseGoogle = (response) => {
+    googleSignIn(response.tokenId);
     console.log(response);
   };
   return (
@@ -70,6 +74,8 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
           >
             Create Account
           </Button>
+
+          {/* TODO */}
           <GoogleLogin
             clientId="582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com"
             buttonText="Login"
