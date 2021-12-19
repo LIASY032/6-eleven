@@ -87,6 +87,7 @@ router.put("/login/:email", async (req, res) => {
           res.cookie("x-auth-token", token, {
             secure: process.env.NODE_ENV !== "development",
             httpOnly: true,
+            expires: 3000,
             //   expires: dayjs().add(30, "days").toDate(),
           });
 
@@ -175,22 +176,6 @@ router.put("/forgot", async (req, res) => {
   res.send("Open your email to get your code");
 });
 
-//google login
-router.post("/auth/google", async (req, res) => {
-  const { token } = req.body;
-  console.log("ksabdfjbajsbvfj");
-  const ticket = await client.verifyIdToken({
-    idToken: token,
-    audience:
-      "582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com",
-  });
-  const { name, email, picture } = ticket.getPayload();
-  console.log("====================================");
-  console.log(name);
-  console.log("====================================");
-  res.status(201);
-  res.send("successfully login google");
-});
 router.put("/forgot/:codeID", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(404).send("User not found");
@@ -204,6 +189,22 @@ router.put("/forgot/:codeID", async (req, res) => {
   res.status(400).send("Invalid confirmation code");
 });
 
+//google login
+router.post("/auth/google", async (req, res) => {
+  const { token } = req.body;
+
+  const ticket = await client.verifyIdToken({
+    idToken: token,
+    audience:
+      "582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com",
+  });
+  const { name, email, picture } = ticket.getPayload();
+  console.log("====================================");
+  console.log(name);
+  console.log("====================================");
+  res.status(201);
+  res.send("successfully login google");
+});
 //Generate Confirmation ID
 function generateID() {
   var key = {
