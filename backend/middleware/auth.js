@@ -1,6 +1,10 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const localStorage = require("localStorage");
+const {
+  refreshTokens,
+  generateAccessToken,
+  generateRefreshToken,
+} = require("../services/token");
 
 function auth(req, res, next) {
   const token = req.cookies["x-auth-token"];
@@ -17,26 +21,15 @@ function auth(req, res, next) {
 
 // access and refresh tokens
 function authToken(req, res, next) {
-  const refreshToken = req.body.token;
-
-  // TODO: refresh token
-  const refreshTokens = JSON.parse(localStorage.getItem("x-refresh-token"));
+  const refreshToken = req.cookies["x-refresh-token"];
   if (refreshToken == null) return res.sendStatus(401);
   if (!refreshTokens.includes(refreshToken)) return res.sendStatus(403);
-  jwt.verify(refreshToken, config.get("sixelevenPrivateKey"), (err, user) => {
-    err && console.log(err);
-    refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
-
-    const newAccessToken = generateAccessToken(user);
-    const newRefreshToken = generateRefreshToken(user);
-
-    refreshTokens.push(newRefreshToken);
-
-    res.status(200).json({
-      accessToken: newAccessToken,
-      refreshToken: newRefreshToken,
-    });
+  jwt.verify(refreshToken, config.get("refreshTokenKey"), (err, user) => {
+    if (err) return res.sendStatus(403);
+    req.user = user;
+    generateAccessToken(user, res);
+    next();
   });
 }
 
-module.exports = auth;
+module.exports = { auth, authToken };

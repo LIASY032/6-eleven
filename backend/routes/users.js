@@ -1,4 +1,4 @@
-const auth = require("../middleware/auth");
+const {auth, authToken}= require("../middleware/auth");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
@@ -199,6 +199,12 @@ router.post("/auth/google", async (req, res) => {
       "582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com",
   });
   const { name, email, picture } = ticket.getPayload();
+  const user = await User.findOne({ email });
+  // if the user is not existing in database
+   if (!user) {
+      user = new User({name, email});
+
+   }
   console.log("====================================");
   console.log(name);
   console.log("====================================");

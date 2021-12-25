@@ -1,11 +1,12 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
-const localStorage = require("localStorage");
+
 // default x-refresh-token is []
-localStorage.setItem("x-refresh-token", JSON.stringify([]));
+let refreshTokens = [];
+
 const generateAccessToken = (user, res) => {
   const token = jwt.sign(
-    { _id: this._id, isAdmin: this.isAdmin },
+    user,
     config.get("accessTokenKey"),
     // TODO: modify the time
     { expiresIn: "300s" }
@@ -18,18 +19,28 @@ const generateAccessToken = (user, res) => {
 
 const generateRefreshToken = (user, res) => {
   const token = jwt.sign(
-    { _id: this._id, isAdmin: this.isAdmin },
+    user,
     config.get("refreshTokenKey"),
     // TODO: modify the time
     { expiresIn: "3600s" }
   );
-
   // TODO: find another place to store
-  localStorage.setItem("x-refresh-token", token);
+  res.cookie("x-refresh-token", token, {
+    secure: process.env.NODE_ENV !== "development",
+    httpOnly: true,
+  });
+  refreshTokens.push(token);
 };
 
-const deleteRefreshToken = (req, res) => {
-  const token = req.cookies["x-auth-token"];
-  refreshTokens = refreshTokens.filter((token1) => token1 !== token);
+const deleteRefreshToken = (req, res, token) => {
+  const refreshToken = req.cookies["x-refresh-token"];
+  refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
   res.sendStatus(204);
+};
+
+module.exports = {
+  refreshTokens,
+  deleteRefreshToken,
+  generateRefreshToken,
+  generateAccessToken,
 };
