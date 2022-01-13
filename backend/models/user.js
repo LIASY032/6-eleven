@@ -59,6 +59,10 @@ userSchema.methods.generateAuthToken = function () {
   return token;
 };
 
+userSchema.methods.generateAuthTokenData = function () {
+  return {_id: this._id, isAdmin: this.isAdmin}
+};
+
 const User = mongoose.model("User", userSchema);
 
 function validateUser(user) {

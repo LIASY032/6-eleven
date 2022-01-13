@@ -1,7 +1,12 @@
-const {auth, authToken}= require("../middleware/auth");
+const { auth, authToken } = require("../middleware/auth");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
+
+const {
+  generateAccessToken,
+  generateRefreshToken,
+} = require("../services/token");
 
 const express = require("express");
 const router = express.Router();
@@ -199,15 +204,17 @@ router.post("/auth/google", async (req, res) => {
       "582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com",
   });
   const { name, email, picture } = ticket.getPayload();
-  const user = await User.findOne({ email });
+  let user = await User.findOne({ email });
   // if the user is not existing in database
-   if (!user) {
-      user = new User({name, email});
-
-   }
-  console.log("====================================");
-  console.log(name);
-  console.log("====================================");
+  if (!user) {
+    user = new User({ name, email, password: "1234567890abcdef" });
+  }
+  // set active with google login
+  user.status = "Active";
+  await user.save();
+  const tokenUser = user.generateAccessTokenData();
+  generateAccessToken(tokenUser, res);
+  generateRefreshToken(tokenUser, res);
   res.status(201);
   res.send("successfully login google");
 });
@@ -229,5 +236,9 @@ function generateID() {
     return key[a];
   });
 }
-
+router.get("/auth/test", authToken, function (req, res) {
+  console.log("====================================");
+  console.log(req.user);
+  console.log("====================================");
+});
 module.exports = router;

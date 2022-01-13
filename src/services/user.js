@@ -67,3 +67,7 @@ export const googleSignIn = (tokenId) => {
     data: { token: tokenId },
   });
 };
+
+export const testToken = () => {
+  axios.get("/users/auth/test");
+};
