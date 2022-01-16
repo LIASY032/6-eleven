@@ -48,19 +48,19 @@ const userSchema = new mongoose.Schema({
 });
 
 //the methods must places on model head
-userSchema.methods.generateAuthToken = function () {
-  const token = jwt.sign(
-    { _id: this._id, isAdmin: this.isAdmin },
-    config.get("sixelevenPrivateKey"),
-    // TODO: modify the time
-    { expiresIn: "300s" }
-  );
+// userSchema.methods.generateAuthToken = function () {
+//   const token = jwt.sign(
+//     { _id: this._id, isAdmin: this.isAdmin },
+//     config.get("sixelevenPrivateKey"),
+//     // TODO: modify the time
+//     { expiresIn: "300s" }
+//   );
 
-  return token;
-};
+//   return token;
+// };
 
 userSchema.methods.generateAuthTokenData = function () {
-  return {_id: this._id, isAdmin: this.isAdmin}
+  return { _id: this._id, isAdmin: this.isAdmin };
 };
 
 const User = mongoose.model("User", userSchema);

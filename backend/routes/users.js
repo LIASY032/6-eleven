@@ -12,7 +12,7 @@ const express = require("express");
 const router = express.Router();
 
 const confirmation = require("../services/emailConfirmation");
-const checkPending = require("../services/checkPending");
+const { checkPending, userItemAddToDB } = require("../services/user");
 const { OAuth2Client } = require("google-auth-library");
 
 // TODO: remove client id
@@ -50,7 +50,7 @@ router.post("/", async (req, res) => {
   // TODO: modify this in production level
   confirmation(
     req.body.email,
-    `Open http://localhost:5000/api/users/confirmation/${user.confirmationCode}/${user._id}`
+    `Open http://localhost:6000/api/users/confirmation/${user.confirmationCode}/${user._id}`
   );
   res.send("Open Your Email");
 });
@@ -68,34 +68,10 @@ router.put("/login/:email", async (req, res) => {
       async function (error, result) {
         if (result) {
           // if the user login has shopping cart items
-          if (req.body.carts) {
-            const newCarts = [];
-
-            req.body.carts.forEach((item) => {
-              let isExist = false;
-              user.carts.forEach((userCartItem) => {
-                if (item._id === userCartItem._id) {
-                  userCartItem.count = item.count + userCartItem.count;
-                  newCarts.push(userCartItem);
-                  isExist = true;
-                }
-              });
-              if (!isExist) {
-                newCarts.push(item);
-              }
-            });
-            user.carts = newCarts;
-
-            await user.save();
-          }
-          const token = user.generateAuthToken();
-          res.cookie("x-auth-token", token, {
-            secure: process.env.NODE_ENV !== "development",
-            httpOnly: true,
-            expires: 3000,
-            //   expires: dayjs().add(30, "days").toDate(),
-          });
-
+          userItemAddToDB(req.body.carts, user);
+          // generate tokens
+          generateAccessToken(user.generateAccessTokenData, res);
+          generateRefreshToken(user.generateAccessTokenData, res);
           res.send(_.pick(user, ["_id", "name", "email", "carts"]));
         } else {
           res.status(404).send("User Not Found");
@@ -106,7 +82,7 @@ router.put("/login/:email", async (req, res) => {
 });
 
 // user adds a shopping cart item
-router.put("/addItem", auth, async (req, res) => {
+router.put("/addItem", authToken, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   if (!user) return res.status(404).send("User Not Found");
   if (!checkPending(user, res)) {
@@ -123,7 +99,7 @@ router.put("/addItem", auth, async (req, res) => {
   }
 });
 
-router.get("/userInfo", auth, async (req, res) => {
+router.get("/userInfo", authToken, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
 
   if (!user) return res.status(404).send("User Not Found");
@@ -132,7 +108,7 @@ router.get("/userInfo", auth, async (req, res) => {
   }
 });
 
-router.delete("/clearCartItem", auth, async (req, res) => {
+router.delete("/clearCartItem", authToken, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   if (!user) return res.status(404).send("User Not Found");
   if (!checkPending(user, res)) {
@@ -149,13 +125,7 @@ router.get("/confirmation/:id/:userID", async (req, res) => {
   if (user.confirmationCode === req.params.id) {
     user.status = "Active";
     await user.save();
-    const token = user.generateAuthToken();
-    res.cookie("x-auth-token", token, {
-      secure: process.env.NODE_ENV !== "development",
-      httpOnly: true,
-      //   expires: dayjs().add(30, "days").toDate(),
-    });
-
+   
     res.send(_.pick(user, ["_id", "name", "email", "carts"]));
   } else {
     res.status(400).send("Your confirmation code is invalid");
@@ -212,6 +182,9 @@ router.post("/auth/google", async (req, res) => {
   // set active with google login
   user.status = "Active";
   await user.save();
+
+  // add carts items
+  userItemAddToDB(req.body.carts, user)
   const tokenUser = user.generateAccessTokenData();
   generateAccessToken(tokenUser, res);
   generateRefreshToken(tokenUser, res);

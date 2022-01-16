@@ -15,6 +15,7 @@ const generateAccessToken = (user, res) => {
     secure: process.env.NODE_ENV !== "development",
     httpOnly: true,
   });
+  return token;
 };
 
 const generateRefreshToken = (user, res) => {
@@ -30,6 +31,8 @@ const generateRefreshToken = (user, res) => {
     secure: process.env.NODE_ENV !== "development",
     httpOnly: true,
   });
+
+  return token
 };
 
 const deleteRefreshToken = (req, res) => {
