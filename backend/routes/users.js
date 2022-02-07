@@ -85,20 +85,14 @@ router.put("/login/:email", async (req, res) => {
 router.put("/addItem", authToken, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   if (!user) return res.status(404).send("User Not Found");
+
+  // if the user is pending, he cannot do anything;
   if (!checkPending(user, res)) {
-    const newItems = [];
-    user.carts.forEach((item) => {
-      if (item._id === req.body._id) {
-        item.count += req.body.count;
-      }
-      newItems.push(item);
-    });
-    user.carts = newItems;
-    await user.save();
+    userItemAddToDB(req.body._id, user, req.body.count);
     res.send("success");
   }
 });
-
+// get the user information
 router.get("/userInfo", authToken, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
 
@@ -107,10 +101,12 @@ router.get("/userInfo", authToken, async (req, res) => {
     res.send(user);
   }
 });
-
+// clear the shopping cart item
 router.delete("/clearCartItem", authToken, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
   if (!user) return res.status(404).send("User Not Found");
+
+  // if the user is pending, he cannot do anything
   if (!checkPending(user, res)) {
     user.carts = [];
     await user.save();
@@ -118,14 +114,16 @@ router.delete("/clearCartItem", authToken, async (req, res) => {
     res.send("success");
   }
 });
-
+// confirm the user exist
 router.get("/confirmation/:id/:userID", async (req, res) => {
   const user = await User.findById(req.params.userID);
   if (!user) return res.status(404).send("User not found");
+
+  // if the user exist, user status change to active
   if (user.confirmationCode === req.params.id) {
     user.status = "Active";
     await user.save();
-   
+
     res.send(_.pick(user, ["_id", "name", "email", "carts"]));
   } else {
     res.status(400).send("Your confirmation code is invalid");
@@ -139,10 +137,13 @@ router.put("/forgot", async (req, res) => {
   if (!user) {
     return res.status(404).send("User not found");
   }
+
+  // generate confirmation code to user account
   user.changePasswordCode = generateID();
 
   await user.save();
 
+  // send an email to user
   confirmation(
     req.body.email,
     `Your code is ${user.changePasswordCode}. `,
@@ -150,11 +151,17 @@ router.put("/forgot", async (req, res) => {
   );
   res.send("Open your email to get your code");
 });
-
+// solving user change the new password
 router.put("/forgot/:codeID", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(404).send("User not found");
+
+  //  Check the comfirmation code
   if (user.changePasswordCode === req.params.codeID) {
+    // clean change password code in attempt to prevent change the password with same comfirmation ID
+    user.changePasswordCode = "";
+
+    // renew the password
     const salt = await bcrypt.genSalt(10);
 
     user.password = await bcrypt.hash(req.body.password, salt);
@@ -184,13 +191,16 @@ router.post("/auth/google", async (req, res) => {
   await user.save();
 
   // add carts items
-  userItemAddToDB(req.body.carts, user)
+  userItemAddToDB(req.body.carts, user);
   const tokenUser = user.generateAccessTokenData();
+
+  // generate token
   generateAccessToken(tokenUser, res);
   generateRefreshToken(tokenUser, res);
   res.status(201);
   res.send("successfully login google");
 });
+
 //Generate Confirmation ID
 function generateID() {
   var key = {
@@ -209,9 +219,5 @@ function generateID() {
     return key[a];
   });
 }
-router.get("/auth/test", authToken, function (req, res) {
-  console.log("====================================");
-  console.log(req.user);
-  console.log("====================================");
-});
+
 module.exports = router;
