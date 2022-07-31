@@ -5,6 +5,8 @@ export default function useLocalStorage(key, initialValue) {
     const jsonValue = localStorage.getItem(key);
     if (jsonValue === "[]") return [];
     if (jsonValue != null) return JSON.parse(jsonValue);
+
+    // if the initialValue is function
     if (typeof initialValue === "function") {
       return initialValue();
     } else {

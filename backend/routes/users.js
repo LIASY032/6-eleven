@@ -3,10 +3,7 @@ const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
 
-const {
-  generateAccessToken,
-  generateRefreshToken,
-} = require("../services/token");
+const { generateRefreshToken } = require("../services/token");
 
 const express = require("express");
 const router = express.Router();
@@ -70,7 +67,6 @@ router.put("/login/:email", async (req, res) => {
           // if the user login has shopping cart items
           userItemAddToDB(req.body.carts, user);
           // generate tokens
-          generateAccessToken(user.generateAccessTokenData, res);
           generateRefreshToken(user.generateAccessTokenData, res);
           res.send(_.pick(user, ["_id", "name", "email", "carts"]));
         } else {
@@ -195,7 +191,6 @@ router.post("/auth/google", async (req, res) => {
   const tokenUser = user.generateAccessTokenData();
 
   // generate token
-  generateAccessToken(tokenUser, res);
   generateRefreshToken(tokenUser, res);
   res.status(201);
   res.send("successfully login google");
