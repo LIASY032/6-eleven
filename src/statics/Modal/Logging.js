@@ -52,7 +52,6 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
               type="email"
               name="email"
               required
-              textMuted="We'll never share your email with anyone else."
             ></BootstrapInput>
             <BootstrapInput
               ref={passwordRef}

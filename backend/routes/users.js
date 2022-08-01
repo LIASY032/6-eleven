@@ -3,7 +3,10 @@ const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
 
-const { generateRefreshToken } = require("../services/token");
+const {
+  generateRefreshToken,
+  generateAccessToken,
+} = require("../services/token");
 
 const express = require("express");
 const router = express.Router();
@@ -67,8 +70,11 @@ router.put("/login/:email", async (req, res) => {
           // if the user login has shopping cart items
           userItemAddToDB(req.body.carts, user);
           // generate tokens
-          generateRefreshToken(user.generateAccessTokenData, res);
-          res.send(_.pick(user, ["_id", "name", "email", "carts"]));
+          const token = generateAccessToken(user.generateAuthTokenData());
+
+          generateRefreshToken(user.generateAuthTokenData(), res);
+          const result = _.pick(user, ["_id", "name", "email", "carts"]);
+          res.send(result);
         } else {
           res.status(404).send("User Not Found");
         }
@@ -188,12 +194,13 @@ router.post("/auth/google", async (req, res) => {
 
   // add carts items
   userItemAddToDB(req.body.carts, user);
-  const tokenUser = user.generateAccessTokenData();
+  const tokenUser = user.generateAuthTokenData();
 
   // generate token
+  const access_token = generateAccessToken(tokenUser);
   generateRefreshToken(tokenUser, res);
   res.status(201);
-  res.send("successfully login google");
+  res.send(access_token);
 });
 
 //Generate Confirmation ID

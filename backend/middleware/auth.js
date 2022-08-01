@@ -17,7 +17,7 @@ function auth(req, res, next) {
 
 // access and refresh tokens
 function authToken(req, res, next) {
-  let token = req.cookies["x-access-token"];
+  let token = req.body.token;
 
   if (!token) {
     return res.status(401).send("Access denied.");

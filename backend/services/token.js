@@ -3,20 +3,16 @@ const config = require("config");
 
 // default x-refresh-token is []
 let refreshTokens = [];
-// const generateAccessToken = (user, res) => {
-//   const token = jwt.sign(
-//     user,
-//     config.get("accessTokenKey"),
-//     // TODO: modify the time
-//     { expiresIn: "5m" }
-//   );
+const generateAccessToken = (user) => {
+  const token = jwt.sign(
+    user,
+    config.get("accessTokenKey"),
+    // TODO: modify the time
+    { expiresIn: "5m" }
+  );
 
-//   res.cookie("x-access-token", token, {
-//     secure: process.env.NODE_ENV !== "development",
-//     httpOnly: true,
-//   });
-//   return token;
-// };
+  return token;
+};
 
 const generateRefreshToken = (user, res) => {
   const token = jwt.sign(
@@ -60,4 +56,5 @@ module.exports = {
   deleteRefreshToken,
   generateRefreshToken,
   checkRefreshToken,
+  generateAccessToken,
 };
