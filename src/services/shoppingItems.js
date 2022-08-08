@@ -3,7 +3,6 @@ export async function shoppingItems() {
   try {
     const response = await axios.get("/items", {
       //need a fix
-      // headers: { "Access-Control-Allow-Origin": "*" },
       Accept: "application/json",
       "Content-Type": "application/json",
     });

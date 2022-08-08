@@ -9,6 +9,7 @@ export async function signIn(email, password, carts = []) {
     });
 
     alert(`${data.name} login successfully `);
+    console.log(data);
 
     return data;
 
@@ -59,13 +60,21 @@ export async function userInfo() {
     }
   }
 }
-export const googleSignIn = (tokenId) => {
-  return axios({
-    method: "post",
-    url: `/users/auth/google`,
-    withCredentials: true,
-    data: { token: tokenId },
-  });
+export const googleSignIn = async (tokenId, carts) => {
+  try {
+    const { data } = await axios({
+      method: "post",
+      url: `/users/auth/google`,
+      withCredentials: true,
+      data: { token: tokenId, carts },
+    });
+    console.log(data);
+
+    alert(`${data.name} login successfully `);
+    return data;
+  } catch (error) {
+    console.log(error.response);
+  }
 };
 
 export const testToken = () => {

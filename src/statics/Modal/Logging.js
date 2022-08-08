@@ -34,9 +34,7 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
 
   // TODO: send to backend
   const responseGoogle = async (response) => {
-    await googleSignIn(response.tokenId);
-
-    console.log(response);
+    await googleSignIn(response.tokenId, carts);
   };
   return (
     <>

@@ -15,10 +15,9 @@ const confirmation = require("../services/emailConfirmation");
 const { checkPending, userItemAddToDB } = require("../services/user");
 const { OAuth2Client } = require("google-auth-library");
 
+const config = require("config");
 // TODO: remove client id
-const client = new OAuth2Client(
-  "582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com"
-);
+const client = new OAuth2Client(config.get("google"));
 
 //for security reason
 router.put("/me", async (req, res) => {
@@ -74,6 +73,7 @@ router.put("/login/:email", async (req, res) => {
 
           generateRefreshToken(user.generateAuthTokenData(), res);
           const result = _.pick(user, ["_id", "name", "email", "carts"]);
+          result.token = token;
           res.send(result);
         } else {
           res.status(404).send("User Not Found");
@@ -175,12 +175,11 @@ router.put("/forgot/:codeID", async (req, res) => {
 
 //google login
 router.post("/auth/google", async (req, res) => {
-  const { token } = req.body;
+  const { token, carts } = req.body;
 
   const ticket = await client.verifyIdToken({
     idToken: token,
-    audience:
-      "582665885689-tnatv6co4tksh30md29u6844o2spioun.apps.googleusercontent.com",
+    audience: config.get("google"),
   });
   const { name, email, picture } = ticket.getPayload();
   let user = await User.findOne({ email });
@@ -193,14 +192,22 @@ router.post("/auth/google", async (req, res) => {
   await user.save();
 
   // add carts items
-  userItemAddToDB(req.body.carts, user);
+
+  userItemAddToDB(carts, user);
   const tokenUser = user.generateAuthTokenData();
 
   // generate token
-  const access_token = generateAccessToken(tokenUser);
   generateRefreshToken(tokenUser, res);
+
+  const access_token = generateAccessToken(tokenUser);
+  const result = {
+    name: name,
+    email: email,
+    picture: picture,
+    token: access_token,
+  };
   res.status(201);
-  res.send(access_token);
+  res.send(result);
 });
 
 //Generate Confirmation ID
