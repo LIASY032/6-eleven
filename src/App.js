@@ -23,11 +23,17 @@ import { useSelector } from "react-redux";
 import Chat from "./components/Chat";
 function App() {
   const dispatch = useDispatch();
-  React.useEffect(() => {
+
+  React.useMemo(() => {
     //Once the App running, fetch data and check the user login
     fetchItems(dispatch);
     getUserInfo(dispatch);
-  }, []);
+  }, [dispatch]);
+  // React.useEffect(() => {
+  //   //Once the App running, fetch data and check the user login
+  //   fetchItems(dispatch);
+  //   getUserInfo(dispatch);
+  // }, []);
 
   const handleCloseModal = () => {
     closeAllModels(dispatch);
