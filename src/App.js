@@ -49,6 +49,7 @@ function App() {
   return (
     <div className="App">
       <Navigation userLoginFunction={openLogin}></Navigation>
+      {/* User parts */}
       <Logging
         handleClose={handleCloseModal}
         isShow={modelController.isLogin}
@@ -58,7 +59,6 @@ function App() {
         isShow={modelController.isRegistration}
         handleClose={handleCloseModal}
       ></Registration>
-
       <Router>
         <Switch>
           <Route path="/" exact component={Home}></Route>
@@ -72,7 +72,6 @@ function App() {
           item={modelController.itemDetails.item}
         ></ItemDetails>
       )}
-
       <Chat />
       <Footer></Footer>
     </div>

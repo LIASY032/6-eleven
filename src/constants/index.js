@@ -16,7 +16,7 @@ export const CREATE_ORDER = "CREATE_ORDER";
 export const CLEAR_ORDER = "CLEAR_ORDER";
 export const CLEAR_CART = "CLEAR_CART";
 export const FETCH_ORDERS = "FETCH_ORDERS";
-
+export const GOOGLE_LOGIN_ERROR = "GOOGLE_LOGIN_ERROR";
 //model
 export const IS_LOGIN = "IS_LOGIN";
 export const IS_REGISTRATION = "IS_REGISTRATION";

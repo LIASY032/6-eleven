@@ -6,9 +6,9 @@ import { BootstrapInput } from "../../components/Input";
 import { BootstrapButton } from "../../components/MyButton";
 
 import { useDispatch } from "react-redux";
-import { userLogin } from "../../store/actions";
+import { googleLogin, userLogin } from "../../store/actions";
 import GoogleLogin from "react-google-login";
-import { googleSignIn, testToken } from "../../services";
+import { testToken } from "../../services";
 // TODO: Refactor
 function Logging({ handleClose, isShow, moveToRegistration }) {
   const { carts } = useCart();
@@ -34,7 +34,8 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
 
   // TODO: send to backend
   const responseGoogle = async (response) => {
-    await googleSignIn(response.tokenId, carts);
+    handleClose();
+    await googleLogin(response.tokenId, carts, dispatch);
   };
   return (
     <>
@@ -48,14 +49,12 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
               ref={emailRef}
               childrenlabel="Email address"
               type="email"
-              name="email"
               required
             ></BootstrapInput>
             <BootstrapInput
               ref={passwordRef}
               childrenlabel="Password"
               type="password"
-              name="password"
               required
             ></BootstrapInput>
 

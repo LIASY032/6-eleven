@@ -4,8 +4,9 @@ import {
   USER_DOES_NOT_HAVE_TOKEN,
   USER_LOGOUT,
   USER_ADD_ITEM,
+  GOOGLE_LOGIN_ERROR,
 } from "../../constants";
-import { signIn, userInfo } from "../../services";
+import { googleSignIn, signIn, userInfo } from "../../services";
 
 export const userLogin = async (email, password, carts, dispatch) => {
   const data = await signIn(email, password, carts);
@@ -50,4 +51,22 @@ export const userAddItem = (item, dispatch) => {
     type: USER_ADD_ITEM,
     payload: item,
   });
+};
+
+// Google login
+
+export const googleLogin = async (tokenId, carts, dispatch) => {
+  const data = await googleSignIn(tokenId, carts);
+
+  if (data) {
+    dispatch({
+      type: USER_LOGIN,
+      payload: data,
+    });
+  } else {
+    dispatch({
+      type: GOOGLE_LOGIN_ERROR,
+      payload: data,
+    });
+  }
 };
