@@ -1,3 +1,4 @@
+import { actionExceptionHandler } from ".";
 import {
   USER_LOGIN,
   USER_LOGIN_ERROR,
@@ -11,32 +12,13 @@ import { googleSignIn, signIn, userInfo } from "../../services";
 export const userLogin = async (email, password, carts, dispatch) => {
   const data = await signIn(email, password, carts);
 
-  if (data !== undefined && data != null && data !== "") {
-    dispatch({
-      type: USER_LOGIN,
-      payload: data,
-    });
-  } else {
-    dispatch({
-      type: USER_LOGIN_ERROR,
-      payload: data,
-    });
-  }
+  actionExceptionHandler(data, USER_LOGIN, USER_LOGIN_ERROR, dispatch);
 };
 
 export const getUserInfo = async (dispatch) => {
   const data = await userInfo();
-  if (data !== undefined && data != null && data !== "") {
-    dispatch({
-      type: USER_LOGIN,
-      payload: data,
-    });
-  } else {
-    dispatch({
-      type: USER_DOES_NOT_HAVE_TOKEN,
-      payload: data,
-    });
-  }
+
+  actionExceptionHandler(data, USER_LOGIN, USER_DOES_NOT_HAVE_TOKEN, dispatch);
 };
 
 export const logOut = (dispatch) => {
@@ -58,15 +40,5 @@ export const userAddItem = (item, dispatch) => {
 export const googleLogin = async (tokenId, carts, dispatch) => {
   const data = await googleSignIn(tokenId, carts);
 
-  if (data) {
-    dispatch({
-      type: USER_LOGIN,
-      payload: data,
-    });
-  } else {
-    dispatch({
-      type: GOOGLE_LOGIN_ERROR,
-      payload: data,
-    });
-  }
+  actionExceptionHandler(data, USER_LOGIN, GOOGLE_LOGIN_ERROR, dispatch);
 };
