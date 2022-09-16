@@ -196,6 +196,11 @@ router.post("/auth/google", async (req, res) => {
   userItemAddToDB(carts, user);
   const tokenUser = user.generateAuthTokenData();
 
+  let returnCarts = [];
+  if (user.carts) {
+    returnCarts = user.carts;
+  }
+
   // generate token
   generateRefreshToken(tokenUser, res);
 
@@ -205,6 +210,7 @@ router.post("/auth/google", async (req, res) => {
     email: email,
     picture: picture,
     token: access_token,
+    carts: returnCarts,
   };
   res.status(201);
   res.send(result);

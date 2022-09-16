@@ -4,6 +4,7 @@ export const ORDERS = "ORDERS";
 export const USER = "USER";
 export const ADD_TO_CART = "ADD_TO_CART";
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const IMPORT_CART_DATA = "IMPORT_CART_DATA";
 export const FETCH_ITEMS = "FETCH_ITEMS";
 export const FETCH_ITEMS_ERROR = "FETCH_ITEMS_ERROR";
 

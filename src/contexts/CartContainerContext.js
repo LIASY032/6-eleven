@@ -10,6 +10,10 @@ export function useCart() {
 function CartContainerContext({ children }) {
   const [carts, setCarts] = useLocalStorage(cartsType, []);
 
+  function importDataIntoContext(carts) {
+    setCarts(carts);
+  }
+
   // add an item in the cart
   function addItem(item, amount) {
     const isExist = checkExist(item._id);
@@ -57,7 +61,7 @@ function CartContainerContext({ children }) {
 
   return (
     <CartContainerProvider.Provider
-      value={{ removeItem, addItem, carts, setAmount }}
+      value={{ removeItem, addItem, carts, setAmount, importDataIntoContext }}
     >
       {children}
     </CartContainerProvider.Provider>

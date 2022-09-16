@@ -11,7 +11,7 @@ import GoogleLogin from "react-google-login";
 import { testToken } from "../../services";
 // TODO: Refactor
 function Logging({ handleClose, isShow, moveToRegistration }) {
-  const { carts } = useCart();
+  const { carts, importDataIntoContext } = useCart();
   const emailRef = useRef();
   const passwordRef = useRef();
 
@@ -27,7 +27,8 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
         emailRef.current.value.replace(/\s+/g, ""),
         passwordRef.current.value,
         carts,
-        dispatch
+        dispatch,
+        importDataIntoContext
       );
     }
   }
@@ -35,7 +36,7 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
   // TODO: send to backend
   const responseGoogle = async (response) => {
     handleClose();
-    await googleLogin(response.tokenId, carts, dispatch);
+    await googleLogin(response.tokenId, carts, dispatch, importDataIntoContext);
   };
   return (
     <>

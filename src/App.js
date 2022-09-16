@@ -25,15 +25,13 @@ function App() {
   const dispatch = useDispatch();
 
   React.useMemo(() => {
-    //Once the App running, fetch data and check the user login
+    //Once the App running, fetch data  (one time)
     fetchItems(dispatch);
-    getUserInfo(dispatch);
   }, [dispatch]);
-  // React.useEffect(() => {
-  //   //Once the App running, fetch data and check the user login
-  //   fetchItems(dispatch);
-  //   getUserInfo(dispatch);
-  // }, []);
+  React.useEffect(() => {
+    //check the user login (When App component updated)
+    getUserInfo(dispatch);
+  }, []);
 
   const handleCloseModal = () => {
     closeAllModels(dispatch);
