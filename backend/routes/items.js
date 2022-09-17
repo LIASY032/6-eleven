@@ -1,5 +1,5 @@
 const { Item, validate } = require("../models/item");
-const { auth } = require("../middleware/auth");
+const { authToken } = require("../middleware/auth");
 
 const express = require("express");
 const router = express.Router();
@@ -34,7 +34,7 @@ router.get("/", async (req, res) => {
 });
 
 // add the item, only auth person
-router.post("/", auth, async (req, res) => {
+router.post("/", authToken, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -47,7 +47,7 @@ router.post("/", auth, async (req, res) => {
 });
 
 // update the item, only auth person
-router.put("/:id", auth, async (req, res) => {
+router.put("/:id", authToken, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -66,7 +66,7 @@ router.put("/:id", auth, async (req, res) => {
 });
 
 // delete the item, only auth person
-router.delete("/:id", auth, async (req, res) => {
+router.delete("/:id", authToken, async (req, res) => {
   const item = await Item.findByIdAndRemove(req.params.id);
 
   if (!item)

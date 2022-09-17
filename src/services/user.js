@@ -50,7 +50,9 @@ export async function userAddCartItem() {
 export async function userInfo() {
   try {
     //need to add a token header
-    const { data } = await axios.get(`/users/userInfo`);
+    const { data } = await axios.put(`/users/userInfo`, {
+      token: localStorage.getItem("token"),
+    });
     return data;
   } catch (ex) {
     if (ex.response.status === 401) {

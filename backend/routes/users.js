@@ -1,4 +1,4 @@
-const { auth, authToken } = require("../middleware/auth");
+const { authToken } = require("../middleware/auth");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
@@ -95,7 +95,7 @@ router.put("/addItem", authToken, async (req, res) => {
   }
 });
 // get the user information
-router.get("/userInfo", authToken, async (req, res) => {
+router.put("/userInfo", authToken, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
 
   if (!user) return res.status(404).send("User Not Found");

@@ -25,6 +25,8 @@ export const userLogin = async (
     dispatch,
     function (data) {
       importCartData(data.carts);
+
+      localStorage.setItem("token", data.token);
     }
   );
 };
@@ -36,6 +38,7 @@ export const getUserInfo = async (dispatch) => {
 };
 
 export const logOut = (dispatch) => {
+  localStorage.setItem("token", "");
   dispatch({
     type: USER_LOGOUT,
   });
@@ -61,6 +64,8 @@ export const googleLogin = async (tokenId, carts, dispatch, importCartData) => {
     dispatch,
     function (data) {
       importCartData(data.carts);
+
+      localStorage.setItem("token", data.token);
     }
   );
 };
