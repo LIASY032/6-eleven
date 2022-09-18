@@ -4,32 +4,14 @@ const { authToken } = require("../middleware/auth");
 const express = require("express");
 const router = express.Router();
 const _ = require("lodash");
-
-const Redis = require("redis");
-const reportError = require("../services/reportError");
-const redisClient = Redis.createClient();
-const DEFAULT_EXPIRATION = 86400000;
+const { itemsOnRedis } = require("../services/item");
 
 // get all items in the database
 router.get("/", async (req, res) => {
   // try to get items from redis
-  redisClient.get("items", async (error, items) => {
-    if (error)
-      reportError("Redis server doesn't not set up or something error", error);
-    if (items != null) {
-      res.send(JSON.parse(items));
-    } else {
-      // if redis does not have items, items will be found in database.
-      const storeItems = await Item.find().sort("title");
 
-      // set items in redis
-      redisClient.setex(
-        "items",
-        DEFAULT_EXPIRATION,
-        JSON.stringify(storeItems)
-      );
-      res.send(storeItems);
-    }
+  itemsOnRedis(function (items) {
+    res.send(items);
   });
 });
 

@@ -16,6 +16,7 @@ const { checkPending, userItemAddToDB } = require("../services/user");
 const { OAuth2Client } = require("google-auth-library");
 
 const config = require("config");
+const { findItemsByUser } = require("../services/item");
 // TODO: remove client id
 const client = new OAuth2Client(config.get("google"));
 
@@ -158,7 +159,7 @@ router.put("/forgot/:codeID", async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (!user) return res.status(404).send("User not found");
 
-  //  Check the comfirmation code
+  //  Check the confirmation code
   if (user.changePasswordCode === req.params.codeID) {
     // clean change password code in attempt to prevent change the password with same comfirmation ID
     user.changePasswordCode = "";
@@ -212,8 +213,13 @@ router.post("/auth/google", async (req, res) => {
     token: access_token,
     carts: returnCarts,
   };
-  res.status(201);
-  res.send(result);
+
+  await findItemsByUser(result, function (item) {
+    result.carts = item;
+
+    res.status(201);
+    res.send(result);
+  });
 });
 
 //Generate Confirmation ID

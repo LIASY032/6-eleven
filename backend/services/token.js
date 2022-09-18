@@ -41,6 +41,10 @@ const checkRefreshToken = function (req, res, next) {
       return res.sendStatus(403);
     } else {
       req.user = user;
+
+      // regenerate the access token
+      req.token = generateAccessToken(user);
+
       next();
     }
   });
