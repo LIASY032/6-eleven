@@ -1,6 +1,8 @@
 import axios from "axios";
-export async function shoppingItems() {
-  try {
+
+import { exceptionHandler } from ".";
+export function shoppingItems() {
+  return exceptionHandler(async () => {
     const response = await axios.get("/items", {
       //need a fix
       Accept: "application/json",
@@ -10,9 +12,7 @@ export async function shoppingItems() {
     const data = await response.data;
 
     return data;
-  } catch (ex) {
-    console.log(ex);
-  }
+  });
 }
 
 export function findItemById(items, id) {

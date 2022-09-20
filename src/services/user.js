@@ -1,8 +1,8 @@
 import axios from "axios";
 import { convertCarts } from "./shoppingCart";
 import { exceptionHandler } from ".";
-export function signIn(email, password, carts = []) {
-  return exceptionHandler(
+export async function signIn(email, password, carts = []) {
+  return await exceptionHandler(
     async function () {
       const { data } = await axios.put(`/users/login/${email}`, {
         password,
@@ -21,21 +21,10 @@ export function signIn(email, password, carts = []) {
       }
     }
   );
-  // try {
-
-  //   //need a fix for security
-  //   // localStorage.setItem("x-auth-token", headers("x-auth-token"));
-  // } catch (ex) {
-  //   if (ex.response.status === 401) {
-  //     alert(ex.response.data);
-  //   } else {
-  //     alert(ex.response.message);
-  //   }
-  // }
 }
 
 export async function register(name, email, password, carts = []) {
-  try {
+  return exceptionHandler(async () => {
     const { data } = await axios.post(`/users`, {
       name,
       email,
@@ -43,11 +32,7 @@ export async function register(name, email, password, carts = []) {
       carts,
     });
     return data;
-  } catch (ex) {
-    console.log("====================================");
-    console.log(ex);
-    console.log("====================================");
-  }
+  });
 }
 
 export async function userAddCartItem() {
@@ -58,22 +43,25 @@ export async function userAddCartItem() {
 }
 
 export async function userInfo() {
-  try {
-    //need to add a token header
-    const { data } = await axios.put(`/users/userInfo`, {
-      token: localStorage.getItem("token"),
-    });
-    return data;
-  } catch (ex) {
-    if (ex.response.status === 401) {
-      console.log(ex.response.data);
-    } else {
-      console.log(ex.response);
+  return await exceptionHandler(
+    async function () {
+      //need to add a token header
+      const { data } = await axios.put(`/users/userInfo`, {
+        token: localStorage.getItem("token"),
+      });
+      return data;
+    },
+    function (error) {
+      if (error.response.status === 401) {
+        alert(error.response.data);
+      } else {
+        alert(error.response.message);
+      }
     }
-  }
+  );
 }
 export const googleSignIn = async (tokenId, carts) => {
-  try {
+  return await exceptionHandler(async () => {
     const { data } = await axios({
       method: "post",
       url: `/users/auth/google`,
@@ -84,9 +72,7 @@ export const googleSignIn = async (tokenId, carts) => {
 
     alert(`${data.name} login successfully `);
     return data;
-  } catch (error) {
-    console.log(error.response);
-  }
+  });
 };
 
 export const testToken = () => {
