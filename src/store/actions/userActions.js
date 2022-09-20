@@ -54,8 +54,8 @@ export const userAddItem = (item, dispatch) => {
 
 // Google login
 
-export const googleLogin = async (tokenId, carts, dispatch, importCartData) => {
-  const data = await googleSignIn(tokenId, carts);
+export const googleLogin = (tokenId, carts, dispatch, importCartData) => {
+  const data = googleSignIn(tokenId, carts);
 
   actionExceptionHandler(
     data,

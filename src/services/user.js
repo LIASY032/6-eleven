@@ -1,27 +1,37 @@
 import axios from "axios";
 import { convertCarts } from "./shoppingCart";
+import { exceptionHandler } from ".";
+export function signIn(email, password, carts = []) {
+  return exceptionHandler(
+    async function () {
+      const { data } = await axios.put(`/users/login/${email}`, {
+        password,
+        carts: convertCarts(carts),
+      });
 
-export async function signIn(email, password, carts = []) {
-  try {
-    const { data } = await axios.put(`/users/login/${email}`, {
-      password,
-      carts: convertCarts(carts),
-    });
+      alert(`${data.name} login successfully `);
 
-    alert(`${data.name} login successfully `);
-    console.log(data);
-
-    return data;
-
-    //need a fix for security
-    // localStorage.setItem("x-auth-token", headers("x-auth-token"));
-  } catch (ex) {
-    if (ex.response.status === 401) {
-      alert(ex.response.data);
-    } else {
-      alert(ex.response.message);
+      return data;
+    },
+    function (error) {
+      if (error.response.status === 401) {
+        alert(error.response.data);
+      } else {
+        alert(error.response.message);
+      }
     }
-  }
+  );
+  // try {
+
+  //   //need a fix for security
+  //   // localStorage.setItem("x-auth-token", headers("x-auth-token"));
+  // } catch (ex) {
+  //   if (ex.response.status === 401) {
+  //     alert(ex.response.data);
+  //   } else {
+  //     alert(ex.response.message);
+  //   }
+  // }
 }
 
 export async function register(name, email, password, carts = []) {

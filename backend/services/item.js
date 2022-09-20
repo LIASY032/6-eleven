@@ -12,6 +12,7 @@ const findItemsByUser = async (user, callback) => {
     carts.forEach((cart) => {
       items.forEach((item) => {
         if (cart._id === item._id) {
+          item.count = cart.count;
           results.push(item);
         }
       });

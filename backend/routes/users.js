@@ -75,7 +75,11 @@ router.put("/login/:email", async (req, res) => {
           generateRefreshToken(user.generateAuthTokenData(), res);
           const result = _.pick(user, ["_id", "name", "email", "carts"]);
           result.token = token;
-          res.send(result);
+          await findItemsByUser(result, function (item) {
+            result.carts = item;
+
+            res.send(result);
+          });
         } else {
           res.status(404).send("User Not Found");
         }

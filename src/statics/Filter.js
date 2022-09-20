@@ -18,9 +18,9 @@ function Filter() {
             </Card.Header>
             <Accordion.Collapse eventKey="0">
               <Card.Body>
-                {sortingList.map(function (item) {
+                {sortingList.map(function (item, index) {
                   return (
-                    <p>
+                    <p key={index}>
                       {item}
                       <br />
                     </p>

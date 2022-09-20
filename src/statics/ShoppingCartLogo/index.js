@@ -28,7 +28,7 @@ function ShoppingCartLogo() {
             <ColumnContainer>
               <Fade left cascade>
                 <>
-                  {carts.length > 0
+                  {carts && carts.length > 0
                     ? carts.map((item) => (
                         <TwoSideContainer key={item._id}>
                           <TwoSideContainer.Left>
