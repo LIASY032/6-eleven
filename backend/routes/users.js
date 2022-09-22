@@ -31,7 +31,14 @@ router.put("/me", async (req, res) => {
 
 // user registers
 router.post("/", async (req, res) => {
+  let cartsList = [];
+
+  req.body.carts.forEach(function (item) {
+    cartsList.push(_.pick(req.body.carts, ["_id", "title", "price", "count"]));
+  });
+  req.body.carts = cartsList;
   const { error } = validate(req.body);
+
   if (error) return res.status(400).send(error.details[0].message);
 
   let user = await User.findOne({ email: req.body.email });

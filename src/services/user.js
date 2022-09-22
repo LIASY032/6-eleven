@@ -24,7 +24,7 @@ export async function signIn(email, password, carts = []) {
 }
 
 export async function register(name, email, password, carts = []) {
-  return exceptionHandler(async () => {
+  return await exceptionHandler(async () => {
     const { data } = await axios.post(`/users`, {
       name,
       email,

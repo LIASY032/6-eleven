@@ -6,8 +6,10 @@ import {
   USER_LOGOUT,
   USER_ADD_ITEM,
   GOOGLE_LOGIN_ERROR,
+  USER_REGISTRATION,
+  USER_REGISTRATION_ERROR,
 } from "../../constants";
-import { googleSignIn, signIn, userInfo } from "../../services";
+import { googleSignIn, signIn, userInfo, register } from "../../services";
 
 export const userLogin = async (
   email,
@@ -28,6 +30,23 @@ export const userLogin = async (
 
       localStorage.setItem("token", data.token);
     }
+  );
+};
+
+export const userRegistration = async (
+  name,
+  email,
+  password,
+  carts,
+  dispatch
+) => {
+  const data = await register(name, email, password, carts);
+
+  actionExceptionHandler(
+    data,
+    USER_REGISTRATION,
+    USER_REGISTRATION_ERROR,
+    dispatch
   );
 };
 

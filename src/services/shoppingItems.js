@@ -4,7 +4,7 @@ import { exceptionHandler } from ".";
 export function shoppingItems() {
   return exceptionHandler(async () => {
     const response = await axios.get("/items", {
-      //need a fix
+      //TODO: need a fix
       Accept: "application/json",
       "Content-Type": "application/json",
     });
