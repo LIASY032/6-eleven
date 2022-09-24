@@ -2,7 +2,8 @@ const { authToken } = require("../middleware/auth");
 const _ = require("lodash");
 const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
-
+const mapper = require("automapper-js");
+const { UserCart } = require("../DTO/user");
 const {
   generateRefreshToken,
   generateAccessToken,
@@ -34,7 +35,8 @@ router.post("/", async (req, res) => {
   let cartsList = [];
 
   req.body.carts.forEach(function (item) {
-    cartsList.push(_.pick(req.body.carts, ["_id", "title", "price", "count"]));
+    cartsList.push(mapper(UserCart, item));
+    // cartsList.push(_.pick(req.body.carts, ["_id", "title", "price", "count"]));
   });
   req.body.carts = cartsList;
   const { error } = validate(req.body);
