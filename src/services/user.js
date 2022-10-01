@@ -75,6 +75,6 @@ export const googleSignIn = async (tokenId, carts) => {
   });
 };
 
-export const testToken = () => {
-  axios.get("/users/auth/test");
-};
+// export const testToken = () => {
+//   axios.get("/users/auth/test");
+// };

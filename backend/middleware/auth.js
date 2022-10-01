@@ -18,7 +18,6 @@ const { checkRefreshToken } = require("../services/token");
 // access and refresh tokens
 function authToken(req, res, next) {
   let token = req.body.token;
-
   if (!token) {
     return res.status(401).send("Access denied.");
   }

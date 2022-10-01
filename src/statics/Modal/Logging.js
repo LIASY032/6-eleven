@@ -8,7 +8,6 @@ import { BootstrapButton } from "../../components/MyButton";
 import { useDispatch } from "react-redux";
 import { googleLogin, userLogin } from "../../store/actions";
 import GoogleLogin from "react-google-login";
-import { testToken } from "../../services";
 // TODO: Refactor
 function Logging({ handleClose, isShow, moveToRegistration }) {
   const { carts, importDataIntoContext } = useCart();
@@ -81,13 +80,6 @@ function Logging({ handleClose, isShow, moveToRegistration }) {
             onFailure={responseGoogle}
             cookiePolicy={"single_host_origin"}
           />
-          <Button
-            onClick={async () => {
-              await testToken();
-            }}
-          >
-            sdassda
-          </Button>
         </Modal.Footer>
       </Modal>
     </>
