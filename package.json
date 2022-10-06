@@ -12,6 +12,7 @@
     "bootstrap": "^4.6.0",
     "bootstrap-icons": "^1.5.0",
     "cookie-parser": "^1.4.5",
+    "device-detector-js": "^3.0.3",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
     "lodash": "^4.17.21",

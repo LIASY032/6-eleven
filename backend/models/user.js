@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema({
     require: false,
     default: [],
   },
+  devices: {
+    type: [],
+    default: [],
+  },
   status: {
     type: String,
     enum: ["Pending", "Active"],
