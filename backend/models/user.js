@@ -39,7 +39,7 @@ const userSchema = new mongoose.Schema({
     default: [],
   },
   devices: {
-    type: [],
+    type: [String],
     default: [],
   },
   status: {

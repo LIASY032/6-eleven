@@ -4,10 +4,7 @@ const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
 const mapper = require("automapper-js");
 const { UserCart } = require("../DTO/user");
-const {
-  generateRefreshToken,
-  generateAccessToken,
-} = require("../services/token");
+const { generateRefreshToken } = require("../services/token");
 
 const express = require("express");
 const router = express.Router();
@@ -64,11 +61,35 @@ router.post("/", async (req, res) => {
   res.send("Open Your Email");
 });
 
+router.get("/newDevice/:code/:userId/:device", async (req, res) => {
+  // TODO: modify this in production level
+  const user = await User.findById(req.params.userId);
+  if (user.confirmationCode == req.params.code) {
+    user.devices.push(req.params.device);
+    await user.save();
+    return res.send("New device added");
+  }
+
+  return res.status(404).send("Fail to add the device");
+});
+
 // user logins in
 router.put("/login/:email", async (req, res) => {
   const email = req.params.email;
   const user = await User.findOne({ email });
   if (!user) return res.status(404).send("User Not Found");
+
+  if (!user.devices.includes(req.body.device)) {
+    // TODO: modify this in production level
+    user.confirmationCode = generateID();
+    confirmation(
+      req.body.email,
+      `Open http://localhost:6000/api/users/newDevice/${user.confirmationCode}/${user._id}/${req.body.device}`
+    );
+    return res
+      .status(404)
+      .send(`A new device ${req.body.device} want to login your account`);
+  }
 
   if (!checkPending(user, res)) {
     bcrypt.compare(
@@ -79,11 +100,9 @@ router.put("/login/:email", async (req, res) => {
           // if the user login has shopping cart items
           userItemAddToDB(req.body.carts, user);
           // generate tokens
-          const token = generateAccessToken(user.generateAuthTokenData());
 
           generateRefreshToken(user.generateAuthTokenData(), res);
           const result = _.pick(user, ["_id", "name", "email", "carts"]);
-          result.token = token;
           await findItemsByUser(result, function (item) {
             result.carts = item;
 
@@ -218,12 +237,10 @@ router.post("/auth/google", async (req, res) => {
   // generate token
   generateRefreshToken(tokenUser, res);
 
-  const access_token = generateAccessToken(tokenUser);
   const result = {
     name: name,
     email: email,
     picture: picture,
-    token: access_token,
     carts: returnCarts,
   };
 
