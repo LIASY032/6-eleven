@@ -1,12 +1,13 @@
 import axios from "axios";
 import { convertCarts } from "./shoppingCart";
-import { exceptionHandler } from ".";
+import { exceptionHandler, deviceString } from ".";
 export async function signIn(email, password, carts = []) {
   return await exceptionHandler(
     async function () {
       const { data } = await axios.put(`/users/login/${email}`, {
         password,
         carts: convertCarts(carts),
+        device: deviceString,
       });
 
       alert(`${data.name} login successfully `);
@@ -30,6 +31,7 @@ export async function register(name, email, password, carts = []) {
       email,
       password,
       carts,
+      device: deviceString,
     });
     return data;
   });
@@ -47,7 +49,7 @@ export async function userInfo() {
     async function () {
       //need to add a token header
       const { data } = await axios.put(`/users/userInfo`, {
-        token: localStorage.getItem("token"),
+        device: deviceString,
       });
       return data;
     },
@@ -60,13 +62,18 @@ export async function userInfo() {
     }
   );
 }
+
+export async function userLogout() {
+  const { data } = await axios.get(`/users/logout/`);
+  return data;
+}
 export const googleSignIn = async (tokenId, carts) => {
   return await exceptionHandler(async () => {
     const { data } = await axios({
       method: "post",
       url: `/users/auth/google`,
       withCredentials: true,
-      data: { token: tokenId, carts },
+      data: { token: tokenId, carts, device: deviceString },
     });
     console.log(data);
 

@@ -4,7 +4,10 @@ const bcrypt = require("bcrypt");
 const { User, validate } = require("../models/user");
 const mapper = require("automapper-js");
 const { UserCart } = require("../DTO/user");
-const { generateRefreshToken } = require("../services/token");
+const {
+  generateRefreshToken,
+  deleteRefreshToken,
+} = require("../services/token");
 
 const express = require("express");
 const router = express.Router();
@@ -45,7 +48,7 @@ router.post("/", async (req, res) => {
   if (user) return res.status(400).send("User already registered.");
 
   user = new User(_.pick(req.body, ["name", "email", "password", "carts"]));
-
+  user.devices.push(req.body.device);
   const salt = await bcrypt.genSalt(10);
 
   user.password = await bcrypt.hash(user.password, salt);
@@ -64,13 +67,13 @@ router.post("/", async (req, res) => {
 router.get("/newDevice/:code/:userId/:device", async (req, res) => {
   // TODO: modify this in production level
   const user = await User.findById(req.params.userId);
+
   if (user.confirmationCode == req.params.code) {
     user.devices.push(req.params.device);
     await user.save();
-    return res.send("New device added");
+    return res.send("A new device added");
   }
-
-  return res.status(404).send("Fail to add the device");
+  res.status(400).send("FAIL");
 });
 
 // user logins in
@@ -82,8 +85,9 @@ router.put("/login/:email", async (req, res) => {
   if (!user.devices.includes(req.body.device)) {
     // TODO: modify this in production level
     user.confirmationCode = generateID();
+    await user.save();
     confirmation(
-      req.body.email,
+      user.email,
       `Open http://localhost:6000/api/users/newDevice/${user.confirmationCode}/${user._id}/${req.body.device}`
     );
     return res
@@ -101,7 +105,10 @@ router.put("/login/:email", async (req, res) => {
           userItemAddToDB(req.body.carts, user);
           // generate tokens
 
-          generateRefreshToken(user.generateAuthTokenData(), res);
+          generateRefreshToken(
+            user.generateAuthTokenData(req.body.device),
+            res
+          );
           const result = _.pick(user, ["_id", "name", "email", "carts"]);
           await findItemsByUser(result, function (item) {
             result.carts = item;
@@ -109,11 +116,16 @@ router.put("/login/:email", async (req, res) => {
             res.send(result);
           });
         } else {
-          res.status(404).send("User Not Found");
+          res.status(404).send("Invalid Password");
         }
       }
     );
   }
+});
+
+router.get("/logout", function (req, res) {
+  deleteRefreshToken(req, res);
+  res.send("User logged out");
 });
 
 // user adds a shopping cart item
@@ -130,11 +142,12 @@ router.put("/addItem", authToken, async (req, res) => {
 // get the user information
 router.put("/userInfo", authToken, async (req, res) => {
   const user = await User.findById(req.user._id).select("-password");
-
   if (!user) return res.status(404).send("User Not Found");
   if (!checkPending(user, res)) {
+    generateRefreshToken(user.generateAuthTokenData(req.user.device), res);
     res.send(user);
   }
+  // regenerate refresh token
 });
 // clear the shopping cart item
 router.delete("/clearCartItem", authToken, async (req, res) => {
@@ -227,6 +240,8 @@ router.post("/auth/google", async (req, res) => {
   // add carts items
 
   userItemAddToDB(carts, user);
+
+  // TODO:
   const tokenUser = user.generateAuthTokenData();
 
   let returnCarts = [];

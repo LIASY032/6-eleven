@@ -25,12 +25,10 @@ function authToken(req, res, next) {
   if (!token || !device) return res.status(401).send("Access denied.");
   try {
     const decoded = jwt.verify(token, config.get("refreshTokenKey"));
-    if (device !== decoded.device) {
+
+    if (device != decoded.device) {
       return res.status(401).send("Not original Device.");
     }
-    // regenerate refresh token
-    generateRefreshToken(decoded, res);
-
     req.user = decoded;
 
     next();

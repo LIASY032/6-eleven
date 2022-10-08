@@ -19,7 +19,7 @@ const generateRefreshToken = (user, res) => {
     // TODO: modify the time
     { expiresIn: "7d" }
   );
-  // TODO: find another place to store
+
   res.cookie("x-refresh-token", token, {
     secure: process.env.NODE_ENV !== "development",
     httpOnly: true,
@@ -29,7 +29,7 @@ const generateRefreshToken = (user, res) => {
 };
 
 const deleteRefreshToken = (req, res) => {
-  req.clearCookie("x-refresh-token");
+  res.clearCookie("x-refresh-token");
   res.sendStatus(204);
 };
 

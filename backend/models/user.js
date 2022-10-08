@@ -63,8 +63,8 @@ const userSchema = new mongoose.Schema({
 //   return token;
 // };
 
-userSchema.methods.generateAuthTokenData = function () {
-  return { _id: this._id, isAdmin: this.isAdmin };
+userSchema.methods.generateAuthTokenData = function (device) {
+  return { _id: this._id, isAdmin: this.isAdmin, device };
 };
 
 const User = mongoose.model("User", userSchema);
@@ -85,6 +85,7 @@ function validateUser(user) {
         })
       )
       .optional(),
+    device: Joi.string().optional(),
   });
 
   return schema.validate(user);

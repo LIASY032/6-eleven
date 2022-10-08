@@ -1,3 +1,5 @@
+import DeviceDetector from "device-detector-js";
+
 export * from "./shoppingItems";
 export * from "./user";
 
@@ -15,3 +17,8 @@ export function exceptionHandler(callback, errorCallback) {
     }
   }
 }
+
+const ua = navigator.userAgent;
+const deviceDetector = new DeviceDetector();
+const device = deviceDetector.parse(ua);
+export const deviceString = `${device.device.type} ${device.device.brand} ${device.os.name} ${device.os.version}`;

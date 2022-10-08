@@ -9,7 +9,13 @@ import {
   USER_REGISTRATION,
   USER_REGISTRATION_ERROR,
 } from "../../constants";
-import { googleSignIn, signIn, userInfo, register } from "../../services";
+import {
+  googleSignIn,
+  signIn,
+  userInfo,
+  register,
+  userLogout,
+} from "../../services";
 
 export const userLogin = async (
   email,
@@ -57,7 +63,11 @@ export const getUserInfo = async (dispatch) => {
 };
 
 export const logOut = (dispatch) => {
-  localStorage.setItem("token", "");
+  async function asyncFuntion() {
+    userLogout();
+  }
+  asyncFuntion();
+
   dispatch({
     type: USER_LOGOUT,
   });
