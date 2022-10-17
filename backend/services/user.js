@@ -6,7 +6,7 @@ function checkPending(user, res) {
   return false;
 }
 
-async function userItemAddToDB(carts, user, count) {
+async function userItemAddToDB(carts, user, count, save = true) {
   const newCarts = [];
 
   // if carts is an array
@@ -36,8 +36,9 @@ async function userItemAddToDB(carts, user, count) {
     });
   }
   user.carts = newCarts;
-
-  await user.save();
+  if (save) {
+    await user.save();
+  }
 }
 
 module.exports = { checkPending, userItemAddToDB };

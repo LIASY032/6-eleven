@@ -51,7 +51,7 @@ function ShoppingCartLogo() {
       >
         <div className="cart-logo-container">
           <div className="cart-logo-label">
-            {carts.length > 10 ? "9+" : carts.length}
+            {carts && carts.length > 10 ? "9+" : carts.length}
           </div>
           <CartFill size={30} style={{ color: "#FF9900" }}></CartFill>
         </div>

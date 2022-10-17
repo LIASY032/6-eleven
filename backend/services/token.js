@@ -30,7 +30,7 @@ const generateRefreshToken = (user, res) => {
 
 const deleteRefreshToken = (req, res) => {
   res.clearCookie("x-refresh-token");
-  res.sendStatus(204);
+  res.status(204);
 };
 
 const checkRefreshToken = function (req, res, next) {

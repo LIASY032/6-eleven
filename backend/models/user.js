@@ -67,6 +67,20 @@ userSchema.methods.generateAuthTokenData = function (device) {
   return { _id: this._id, isAdmin: this.isAdmin, device };
 };
 
+userSchema.methods.addDevice = function (device) {
+  if (!this.checkDeviceExisting(device)) {
+    this.devices.push(device);
+  }
+};
+
+userSchema.methods.checkDeviceExisting = function (device) {
+  // if device is not existing
+  if (!this.devices.includes(device)) {
+    return false;
+  }
+  return true;
+};
+
 const User = mongoose.model("User", userSchema);
 
 function validateUser(user) {

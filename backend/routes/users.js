@@ -18,7 +18,6 @@ const { OAuth2Client } = require("google-auth-library");
 
 const config = require("config");
 const { findItemsByUser } = require("../services/item");
-// TODO: remove client id
 const client = new OAuth2Client(config.get("google"));
 
 //for security reason
@@ -48,7 +47,7 @@ router.post("/", async (req, res) => {
   if (user) return res.status(400).send("User already registered.");
 
   user = new User(_.pick(req.body, ["name", "email", "password", "carts"]));
-  user.devices.push(req.body.device);
+  user.addDevice(req.body.device);
   const salt = await bcrypt.genSalt(10);
 
   user.password = await bcrypt.hash(user.password, salt);
@@ -69,7 +68,8 @@ router.get("/newDevice/:code/:userId/:device", async (req, res) => {
   const user = await User.findById(req.params.userId);
 
   if (user.confirmationCode == req.params.code) {
-    user.devices.push(req.params.device);
+    user.addDevice(req.params.device);
+
     await user.save();
     return res.send("A new device added");
   }
@@ -82,7 +82,7 @@ router.put("/login/:email", async (req, res) => {
   const user = await User.findOne({ email });
   if (!user) return res.status(404).send("User Not Found");
 
-  if (!user.devices.includes(req.body.device)) {
+  if (!user.checkDeviceExisting(req.body.device)) {
     // TODO: modify this in production level
     user.confirmationCode = generateID();
     await user.save();
@@ -221,7 +221,7 @@ router.put("/forgot/:codeID", async (req, res) => {
 
 //google login
 router.post("/auth/google", async (req, res) => {
-  const { token, carts } = req.body;
+  const { token, carts, device } = req.body;
 
   const ticket = await client.verifyIdToken({
     idToken: token,
@@ -232,17 +232,18 @@ router.post("/auth/google", async (req, res) => {
   // if the user is not existing in database
   if (!user) {
     user = new User({ name, email, password: "1234567890abcdef" });
+    user.addDevice(device);
   }
   // set active with google login
   user.status = "Active";
+
   await user.save();
 
   // add carts items
 
   userItemAddToDB(carts, user);
 
-  // TODO:
-  const tokenUser = user.generateAuthTokenData();
+  const tokenUser = user.generateAuthTokenData(device);
 
   let returnCarts = [];
   if (user.carts) {
