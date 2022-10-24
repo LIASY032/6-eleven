@@ -24,12 +24,14 @@ import Chat from "./components/Chat";
 function App() {
   const dispatch = useDispatch();
 
-  React.useMemo(() => {
-    //Once the App running, fetch data  (one time)
-    fetchItems(dispatch);
-  }, [dispatch]);
+  // React.useMemo(() => {
+  //   //Once the App running, fetch data  (one time)
+  //   fetchItems(dispatch);
+  //   getUserInfo(dispatch);
+  // }, [dispatch]);
   React.useEffect(() => {
     //check the user login (When App component updated)
+    fetchItems(dispatch);
     getUserInfo(dispatch);
   }, []);
 

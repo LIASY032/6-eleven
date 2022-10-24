@@ -14,7 +14,7 @@ function ShoppingCartLogo() {
   const { carts, addItem } = useCart();
   const items = useSelector((state) => state.items.items);
   const user = useSelector((state) => state.user);
-  if (user.carts) {
+  if (user && user.carts) {
     user.carts.forEach((item) => {
       addItem(findItemById(items, item._id), item.count);
     });
