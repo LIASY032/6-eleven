@@ -5,6 +5,7 @@ const express = require("express");
 const router = express.Router();
 const _ = require("lodash");
 const { itemsOnRedis } = require("../services/item");
+const admin = require("../middleware/admin");
 
 // get all items in the database
 router.get("/", async (req, res) => {
@@ -16,7 +17,7 @@ router.get("/", async (req, res) => {
 });
 
 // add the item, only auth person
-router.post("/", authToken, async (req, res) => {
+router.post("/", authToken, admin, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -29,7 +30,7 @@ router.post("/", authToken, async (req, res) => {
 });
 
 // update the item, only auth person
-router.put("/:id", authToken, async (req, res) => {
+router.put("/:id", authToken, admin, async (req, res) => {
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
@@ -48,7 +49,7 @@ router.put("/:id", authToken, async (req, res) => {
 });
 
 // delete the item, only auth person
-router.delete("/:id", authToken, async (req, res) => {
+router.delete("/:id", authToken, admin, async (req, res) => {
   const item = await Item.findByIdAndRemove(req.params.id);
 
   if (!item)
