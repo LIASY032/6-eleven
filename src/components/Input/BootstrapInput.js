@@ -18,4 +18,4 @@ const BootstrapInput = React.forwardRef((props, ref) => {
     </Form.Group>
   );
 });
-export default BootstrapInput;
+export default React.memo(BootstrapInput);

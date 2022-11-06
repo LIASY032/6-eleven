@@ -28,7 +28,7 @@ function ShoppingCartLogo() {
             <ColumnContainer>
               <Fade left cascade>
                 <>
-                  {carts && carts.length > 0
+                  {carts != undefined && carts.length > 0
                     ? carts.map((item) => (
                         <TwoSideContainer key={item._id}>
                           <TwoSideContainer.Left>
@@ -51,7 +51,7 @@ function ShoppingCartLogo() {
       >
         <div className="cart-logo-container">
           <div className="cart-logo-label">
-            {carts && carts.length > 10 ? "9+" : carts.length}
+            {carts !== undefined && carts.length > 10 ? "9+" : carts.length}
           </div>
           <CartFill size={30} style={{ color: "#FF9900" }}></CartFill>
         </div>

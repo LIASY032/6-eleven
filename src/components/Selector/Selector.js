@@ -12,4 +12,4 @@ function Selector({ children, value, onChange, ...rest }) {
   );
 }
 
-export default Selector;
+export default React.memo(Selector);

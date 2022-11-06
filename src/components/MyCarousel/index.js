@@ -35,4 +35,4 @@ function SlideShow({ showItems }) {
   );
 }
 
-export default SlideShow;
+export default React.memo(SlideShow);

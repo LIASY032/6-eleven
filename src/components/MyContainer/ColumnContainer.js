@@ -19,4 +19,4 @@ function ColumnContainer({ children, className, ...rest }) {
 
 ColumnContainer.Item = ColumnItem;
 
-export default ColumnContainer;
+export default React.memo(ColumnContainer);
